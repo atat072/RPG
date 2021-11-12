@@ -9,7 +9,7 @@ public class DesktopLauncher {
 		Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
 		config.setTitle("Geschichten aus Oradrin");
 		config.useVsync(true);
-		config.setResizable(true);
+		config.setResizable(false);
 		config.setWindowedMode(960, 540);
 		//config.setFullscreenMode();
 		new Lwjgl3Application(new RPG(), config);
