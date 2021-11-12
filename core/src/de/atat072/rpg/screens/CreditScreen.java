@@ -5,10 +5,9 @@ import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.*;
+
+import static de.atat072.rpg.RPG.INSTANCE;
 
 public class CreditScreen extends ScreenAdapter {
 
@@ -17,6 +16,7 @@ public class CreditScreen extends ScreenAdapter {
     Label development, gui, guiSkin, story, voiceActors;
     Stage stage;
     Table tableMain,table;
+    Button back;
     SpriteBatch batch;
 
     public CreditScreen(){
@@ -28,11 +28,12 @@ public class CreditScreen extends ScreenAdapter {
         batch = new SpriteBatch();
         stage = new Stage();
         table = new Table(skin);
+        table.background("window");
         table.setFillParent(true);
         scrollPane = new ScrollPane(null, skin);
-        scrollPane.setFillParent(true);
         tableMain = new Table();
         tableMain.setFillParent(true);
+        back = new TextButton("Zurueck",skin);
         development = new Label("Development by Lennard Stubbe and Paul Henke",skin);
         gui = new Label("GUI design by Paul Henke", skin);
         guiSkin = new Label("GUI-skin by Raymond \"Raeleus\" Buckley", skin);
@@ -43,7 +44,7 @@ public class CreditScreen extends ScreenAdapter {
     private void setLayout(){
         stage.addActor(table);
         Gdx.input.setInputProcessor(stage);
-        table.add(scrollPane);
+        table.add(scrollPane).expand().fill();
         scrollPane.setActor(tableMain);
         tableMain.add(development).expandX().fillX().pad(10);
         tableMain.row();
@@ -54,10 +55,13 @@ public class CreditScreen extends ScreenAdapter {
         tableMain.add(story).expandX().fillX().pad(10);
         tableMain.row();
         tableMain.add(voiceActors).expandX().fillX().pad(10);
+        tableMain.row();
+        tableMain.add(back).expandX().fillX().pad(10);
     }
 
     @Override
     public void render(float delta){
+        back();
         Gdx.gl.glClearColor(66,66,231,1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         stage.act(delta);
@@ -70,5 +74,12 @@ public class CreditScreen extends ScreenAdapter {
         batch.dispose();
         stage.dispose();
         skin.dispose();
+    }
+
+    private void back(){
+        if(back.isChecked()){
+            INSTANCE.setScreen(new MainScreen());
+            this.dispose();
+        }
     }
 }
