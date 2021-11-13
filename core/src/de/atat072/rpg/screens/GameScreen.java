@@ -1,6 +1,7 @@
 package de.atat072.rpg.screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -9,6 +10,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import java.util.ArrayList;
+
+import static de.atat072.rpg.RPG.INSTANCE;
 
 public class GameScreen extends ScreenAdapter {
 
@@ -19,8 +22,10 @@ public class GameScreen extends ScreenAdapter {
     private ScrollPane scrollText;
     private ArrayList<Label> text;
     private ArrayList<Label> options;
+    private String name;
 
-    public GameScreen(){
+    public GameScreen(String name){
+        this.name = name;
         initialise();
         setLayout();
     }
@@ -63,6 +68,7 @@ public class GameScreen extends ScreenAdapter {
 
     @Override
     public void render(float delta){
+        goToIngameMenu();
         stage.act(delta);
         setLayout();
         batch.begin();
@@ -86,5 +92,15 @@ public class GameScreen extends ScreenAdapter {
         for(String s: newOptions){
             options.add(new Label(s,skin));
         }
+    }
+
+    private void goToIngameMenu(){
+        if(Gdx.input.isKeyPressed(Input.Keys.ESCAPE)){
+            INSTANCE.setScreen(new MenuScreen(this));
+        }
+    }
+
+    public String getName(){
+        return this.name;
     }
 }

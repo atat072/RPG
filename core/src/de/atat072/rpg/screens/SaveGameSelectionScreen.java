@@ -103,7 +103,7 @@ public class SaveGameSelectionScreen extends ScreenAdapter {
     }
     private void load(){
         if(load.isChecked()){
-            INSTANCE.setScreen(new GameScreen());
+            //INSTANCE.setScreen(new GameScreen());
             this.dispose();
         }
     }
