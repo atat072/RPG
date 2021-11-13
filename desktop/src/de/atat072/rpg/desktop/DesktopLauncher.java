@@ -1,18 +1,17 @@
 package de.atat072.rpg.desktop;
 
-import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
-import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
+import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
+import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
 import de.atat072.rpg.RPG;
 
 public class DesktopLauncher {
 	public static void main (String[] arg) {
-		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-		config.title = "Geschichten aus Oradrin";
-		config.vSyncEnabled = true;
-		config.resizable = false;
-		config.height = 540;
-		config.width = 960;
-		//config.fullscreen = true;
-		new LwjglApplication(new RPG(), config);
+		Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
+		config.setTitle("Geschichten aus Oradrin");
+		config.useVsync(true);
+		config.setResizable(false);
+		config.setWindowedMode(960, 540);
+		//config.setFullscreenMode();
+		new Lwjgl3Application(new RPG(), config);
 	}
 }

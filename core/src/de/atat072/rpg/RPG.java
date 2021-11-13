@@ -1,6 +1,7 @@
 package de.atat072.rpg;
 
 import com.badlogic.gdx.Game;
+import de.atat072.rpg.screens.CreditScreen;
 import de.atat072.rpg.screens.MainScreen;
 
 public class RPG extends Game {
