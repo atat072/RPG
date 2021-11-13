@@ -90,6 +90,7 @@ public class SaveGameSelectionScreen extends ScreenAdapter {
     }
 
     private ArrayList<String> getSaveGames(){
+        //TODO Saving the Game
         ArrayList<String> temp = new ArrayList<>();
         temp.add("not yet implemented");
         return temp;
@@ -101,6 +102,7 @@ public class SaveGameSelectionScreen extends ScreenAdapter {
             this.dispose();
         }
     }
+
     private void load(){
         if(load.isChecked()){
             //INSTANCE.setScreen(new GameScreen());

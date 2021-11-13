@@ -72,10 +72,10 @@ public class CreateScreen extends ScreenAdapter {
 
     private void createGame(){
         if(start.isChecked()&& !Objects.equals(gameName.getText(), "") && !Objects.equals(charName.getText(), "")){
-            Preferences prefs = Gdx.app.getPreferences(gameName.getText());
+            Preferences prefs = Gdx.app.getPreferences("oradrin_"+gameName.getText());
             prefs.putString("name", charName.getText());
             prefs.flush();
-            INSTANCE.setScreen(new GameScreen(gameName.getText()));
+            INSTANCE.setScreen(new GameScreen("oradrin_"+gameName.getText()));
             this.dispose();
         }
     }

@@ -1,7 +1,6 @@
 package de.atat072.rpg.screens;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -74,9 +73,7 @@ public class MenuScreen extends ScreenAdapter {
     }
 
     private void save(){
-        Preferences prefs = Gdx.app.getPreferences(gameScreen.getName());
-        //TODO implement saving https://github.com/libgdx/libgdx/wiki/Preferences
-        prefs.flush();
+        gameScreen.flushPrefs();
     }
 
     private void saveButton(){
