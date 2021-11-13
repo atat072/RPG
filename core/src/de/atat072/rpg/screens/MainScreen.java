@@ -68,7 +68,7 @@ public class MainScreen extends ScreenAdapter {
 
     private void startGame(){
         if(newGame.isChecked()) {
-            INSTANCE.setScreen(new GameScreen("test"));
+            INSTANCE.setScreen(new CreateScreen());
             this.dispose();
         }
     }
