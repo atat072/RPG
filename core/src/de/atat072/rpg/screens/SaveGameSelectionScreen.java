@@ -13,16 +13,16 @@ import static de.atat072.rpg.RPG.INSTANCE;
 
 public class SaveGameSelectionScreen extends ScreenAdapter {
 
-    Skin skin = new Skin(Gdx.files.internal("gdx-skins-master/commodore64/skin/uiskin.json"));
-    Stage stage;
-    Table tableOut;
-    Table tableIn;
-    SpriteBatch batch;
-    ScrollPane scrollPane;
-    Label select;
-    ArrayList<CheckBox> saveGames;
-    Button back, load;
-    ButtonGroup saveGameSelector;
+    private Skin skin = new Skin(Gdx.files.internal("gdx-skins-master/commodore64/skin/uiskin.json"));
+    private Stage stage;
+    private Table tableOut;
+    private Table tableIn;
+    private SpriteBatch batch;
+    private ScrollPane scrollPane;
+    private Label select;
+    private ArrayList<CheckBox> saveGames;
+    private Button back, load;
+    private ButtonGroup saveGameSelector;
 
     public SaveGameSelectionScreen(){
         initialise();

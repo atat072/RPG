@@ -11,13 +11,13 @@ import static de.atat072.rpg.RPG.INSTANCE;
 
 public class CreditScreen extends ScreenAdapter {
 
-    Skin skin = new Skin(Gdx.files.internal("gdx-skins-master/commodore64/skin/uiskin.json"));
-    ScrollPane scrollPane;
-    Label development, gui, guiSkin, story, voiceActors;
-    Stage stage;
-    Table tableMain,table;
-    Button back;
-    SpriteBatch batch;
+    private Skin skin = new Skin(Gdx.files.internal("gdx-skins-master/commodore64/skin/uiskin.json"));
+    private ScrollPane scrollPane;
+    private Label development, gui, guiSkin, story, voiceActors;
+    private Stage stage;
+    private Table tableMain,table;
+    private Button back;
+    private SpriteBatch batch;
 
     public CreditScreen(){
         initialise();

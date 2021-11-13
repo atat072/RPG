@@ -11,12 +11,12 @@ import static de.atat072.rpg.RPG.INSTANCE;
 
 public class MainScreen extends ScreenAdapter {
 
-    Skin skin = new Skin(Gdx.files.internal("gdx-skins-master/commodore64/skin/uiskin.json"));
-    Label welcome;
-    Button newGame, loadGame, quit;
-    Stage stage;
-    Table table;
-    SpriteBatch batch;
+    private Skin skin = new Skin(Gdx.files.internal("gdx-skins-master/commodore64/skin/uiskin.json"));
+    private Label welcome;
+    private Button newGame, loadGame, quit;
+    private Stage stage;
+    private Table table;
+    private SpriteBatch batch;
 
     public MainScreen(){
         initialise();
