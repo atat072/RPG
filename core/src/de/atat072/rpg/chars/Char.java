@@ -1,0 +1,81 @@
+package de.atat072.rpg.chars;
+
+public abstract class Char {
+
+    private String name;
+    private int hp,MAXHP,ac,str,con,dex,ent,wis,chr,armor;
+
+    public Char(String name, int hp, int MAXHP, int str, int con, int dex, int ent, int wis, int chr, int armor) {
+        this.name = name;
+        this.hp = hp;
+        this.MAXHP = MAXHP;
+        this.str = str;
+        this.con = con;
+        this.dex = dex;
+        this.ent = ent;
+        this.wis = wis;
+        this.chr = chr;
+        this.armor = armor;
+        setAC();
+    }
+
+    private void setAC(){
+        ac = Math.max(str + armor, dex + armor);
+    }
+
+    public void takeDmg(int dmg){
+        hp -= dmg;
+    }
+
+    public boolean isDead(){
+        return hp<=0;
+    }
+
+    public void heal(int healing){
+        if(hp+healing<=MAXHP){
+            hp += healing;
+        }else{
+            hp = MAXHP;
+        }
+    }
+
+    public void rest(){
+        hp = MAXHP;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getHp() {
+        return hp;
+    }
+
+    public int getAc() {
+        return ac;
+    }
+
+    public int getStr() {
+        return str;
+    }
+
+    public int getCon() {
+        return con;
+    }
+
+    public int getDex() {
+        return dex;
+    }
+
+    public int getEnt() {
+        return ent;
+    }
+
+    public int getWis() {
+        return wis;
+    }
+
+    public int getChr() {
+        return chr;
+    }
+}
