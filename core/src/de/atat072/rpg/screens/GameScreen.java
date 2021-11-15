@@ -6,11 +6,11 @@ import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.*;
+
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import static de.atat072.rpg.RPG.INSTANCE;
 
@@ -64,8 +64,8 @@ public class GameScreen extends ScreenAdapter {
         table.row();
         table.add(tableOptions).expand().fill().pad(10);
         for(Label l:options){
-            tableText.add(l).expandX().fillX().pad(10);
-            tableText.row();
+            tableOptions.add(l).expandX().fillX().pad(10);
+            tableOptions.row();
         }
     }
 
@@ -73,7 +73,7 @@ public class GameScreen extends ScreenAdapter {
     public void render(float delta){
         goToIngameMenu();
         stage.act(delta);
-        setLayout();
+        Update();
         batch.begin();
         stage.draw();
         batch.end();
@@ -84,6 +84,19 @@ public class GameScreen extends ScreenAdapter {
         skin.dispose();
         stage.dispose();
         batch.dispose();
+    }
+
+    private void Update() {
+        tableText.clear();
+        for(Label l:text){
+            tableText.add(l).expandX().fillX().pad(10);
+            tableText.row();
+        }
+        tableOptions.clear();
+        for(Label l:options){
+            tableOptions.add(l).expandX().fillX().pad(10);
+            tableOptions.row();
+        }
     }
 
     public void setText(String newText){
@@ -138,4 +151,5 @@ public class GameScreen extends ScreenAdapter {
     public void flushPrefs(){
         prefs.flush();
     }
+
 }
