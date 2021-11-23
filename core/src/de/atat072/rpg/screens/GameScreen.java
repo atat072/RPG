@@ -2,15 +2,11 @@ package de.atat072.rpg.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import static de.atat072.rpg.RPG.INSTANCE;
 
@@ -24,11 +20,9 @@ public class GameScreen extends ScreenAdapter {
     private ArrayList<Label> text;
     private ArrayList<Label> options;
     private String name;
-    private Preferences prefs;
 
     public GameScreen(String name){
         this.name = name;
-        prefs = Gdx.app.getPreferences(name);
         initialise();
         setLayout();
     }
@@ -118,38 +112,6 @@ public class GameScreen extends ScreenAdapter {
 
     public String getName(){
         return this.name;
-    }
-
-    public Preferences getPrefs(){
-        return prefs;
-    }
-
-    public void setPrefsInt(String key, int n){
-        if(key!=null&& !key.equals("")) {
-            prefs.putInteger(key, n);
-        }
-    }
-
-    public void setPrefsString(String key, String s){
-        if(key!=null&& !key.equals("")) {
-            prefs.putString(key, s);
-        }
-    }
-
-    public void setPrefsBoolean(String key, boolean b){
-        if(key!=null&& !key.equals("")) {
-            prefs.putBoolean(key, b);
-        }
-    }
-
-    public void setPrefsFloat(String key, float f){
-        if(key!=null&& !key.equals("")) {
-            prefs.putFloat(key, f);
-        }
-    }
-
-    public void flushPrefs(){
-        prefs.flush();
     }
 
 }

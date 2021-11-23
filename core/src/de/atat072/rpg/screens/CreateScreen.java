@@ -1,14 +1,14 @@
 package de.atat072.rpg.screens;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
+import de.atat072.rpg.Save;
 
 import java.util.Objects;
-
+import static de.atat072.rpg.RPG.SAVE;
 import static de.atat072.rpg.RPG.INSTANCE;
 
 public class CreateScreen extends ScreenAdapter {
@@ -72,9 +72,7 @@ public class CreateScreen extends ScreenAdapter {
 
     private void createGame(){
         if(start.isChecked()&& !Objects.equals(gameName.getText(), "") && !Objects.equals(charName.getText(), "")){
-            Preferences prefs = Gdx.app.getPreferences("oradrin_"+gameName.getText());
-            prefs.putString("name", charName.getText());
-            prefs.flush();
+            SAVE = new Save(gameName.getText());
             INSTANCE.setScreen(new GameScreen("oradrin_"+gameName.getText()));
             this.dispose();
         }
