@@ -1,14 +1,15 @@
 package de.atat072.rpg.chars;
 
-public abstract class Char {
+import java.io.Serializable;
+
+public abstract class Char implements Serializable {
 
     private String name;
     private int hp,MAXHP,ac,str,con,dex,ent,wis,chr,armor;
 
-    public Char(String name, int hp, int MAXHP, int str, int con, int dex, int ent, int wis, int chr, int armor) {
+    public Char(String name, int hp, int str, int con, int dex, int ent, int wis, int chr, int armor) {
         this.name = name;
         this.hp = hp;
-        this.MAXHP = MAXHP;
         this.str = str;
         this.con = con;
         this.dex = dex;
@@ -17,10 +18,15 @@ public abstract class Char {
         this.chr = chr;
         this.armor = armor;
         setAC();
+        setMAXHP();
     }
 
     private void setAC(){
         ac = Math.max(str + armor, dex + armor);
+    }
+    
+    private void setMAXHP(){
+        MAXHP = 50+(con/2);
     }
 
     public void takeDmg(int dmg){
