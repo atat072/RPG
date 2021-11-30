@@ -10,6 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 
 import static de.atat072.rpg.RPG.INSTANCE;
+import static de.atat072.rpg.RPG.SAVE;
 
 public class MenuScreen extends ScreenAdapter {
 
@@ -73,7 +74,7 @@ public class MenuScreen extends ScreenAdapter {
     }
 
     private void save(){
-        gameScreen.flushPrefs();
+        SAVE.save();
     }
 
     private void saveButton(){

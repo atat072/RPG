@@ -2,14 +2,14 @@ package de.atat072.rpg.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
-
 import java.util.ArrayList;
-
 import static de.atat072.rpg.RPG.INSTANCE;
+import static de.atat072.rpg.Save.loadGame;
 
 public class SaveGameSelectionScreen extends ScreenAdapter {
 
@@ -45,7 +45,9 @@ public class SaveGameSelectionScreen extends ScreenAdapter {
         saveGameSelector.setMinCheckCount(1);
         saveGames = new ArrayList<>();
         for(String g: getSaveGames()){
-            saveGames.add(new CheckBox( g,skin));
+            CheckBox b = new CheckBox(g,skin);
+            b.setName(g);
+            saveGames.add(b);
         }
         for(CheckBox b: saveGames) {
             saveGameSelector.add(b);
@@ -90,9 +92,12 @@ public class SaveGameSelectionScreen extends ScreenAdapter {
     }
 
     private ArrayList<String> getSaveGames(){
-        //TODO Saving the Game
         ArrayList<String> temp = new ArrayList<>();
-        temp.add("not yet implemented");
+        FileHandle dirHandle;
+        dirHandle = Gdx.files.local("saveGames");
+        for(FileHandle entry: dirHandle.list()){
+            temp.add(entry.name());
+        }
         return temp;
     }
 
@@ -105,7 +110,14 @@ public class SaveGameSelectionScreen extends ScreenAdapter {
 
     private void load(){
         if(load.isChecked()){
-            //INSTANCE.setScreen(new GameScreen());
+            String temp = null;
+            for(CheckBox b: saveGames){
+                if(b.isChecked()){
+                    temp = b.getName();
+                }
+            }
+            loadGame(temp);
+            INSTANCE.setScreen(new GameScreen(temp));
             this.dispose();
         }
     }

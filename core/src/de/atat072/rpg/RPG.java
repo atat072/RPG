@@ -6,6 +6,7 @@ import de.atat072.rpg.screens.MainScreen;
 
 public class RPG extends Game {
 	public static RPG INSTANCE;
+	public static Save SAVE;
 	public RPG (){
 		INSTANCE = this;
 	}

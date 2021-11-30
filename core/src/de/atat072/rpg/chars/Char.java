@@ -7,9 +7,8 @@ public abstract class Char implements Serializable {
     private String name;
     private int hp,MAXHP,ac,str,con,dex,ent,wis,chr,armor;
 
-    public Char(String name, int hp, int str, int con, int dex, int ent, int wis, int chr, int armor) {
+    public Char(String name, int str, int con, int dex, int ent, int wis, int chr, int armor) {
         this.name = name;
-        this.hp = hp;
         this.str = str;
         this.con = con;
         this.dex = dex;
@@ -27,6 +26,7 @@ public abstract class Char implements Serializable {
     
     private void setMAXHP(){
         MAXHP = 50+(con/2);
+        hp = MAXHP;
     }
 
     public void takeDmg(int dmg){
