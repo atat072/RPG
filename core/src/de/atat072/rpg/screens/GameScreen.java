@@ -39,6 +39,7 @@ public class GameScreen extends ScreenAdapter implements Serializable {
         setLayout();
     }
 
+    //creates all UI Elements
     private void initialise(){
         batch = new SpriteBatch();
         stage = new Stage();
@@ -66,6 +67,7 @@ public class GameScreen extends ScreenAdapter implements Serializable {
         //storyHandler = new StoryHandler(this, "Baeckerei");
     }
 
+    //brings the UI Elements on the Screen with the desired layout
     private void setLayout(){
         stage.addActor(table);
         table.add(scrollPaneText).expand().fill().pad(10);
@@ -86,6 +88,7 @@ public class GameScreen extends ScreenAdapter implements Serializable {
         tableOptions.row();
     }
 
+    //looped method to allow the screen to act and change appearance
     @Override
     public void render(float delta){
         goToIngameMenu();
@@ -96,6 +99,7 @@ public class GameScreen extends ScreenAdapter implements Serializable {
         batch.end();
     }
 
+    //disposes the UI Elements when the screen gets closed to reduce ram usage
     @Override
     public void dispose(){
         skin.dispose();
@@ -103,6 +107,7 @@ public class GameScreen extends ScreenAdapter implements Serializable {
         batch.dispose();
     }
 
+    //Updates the Content of the Screen
     private void Update() {
         tableText.clear();
         for(Label l: storyText){
@@ -112,6 +117,7 @@ public class GameScreen extends ScreenAdapter implements Serializable {
 
     }
 
+    //allows getting to the inGameMenu via Escape to save and exit the Game
     private void goToIngameMenu(){
         if(Gdx.input.isKeyPressed(Input.Keys.ESCAPE)){
             INSTANCE.setScreen(new MenuScreen(this));
@@ -148,10 +154,6 @@ public class GameScreen extends ScreenAdapter implements Serializable {
         if(key!=null&& !key.equals("")) {
             prefs.putFloat(key, f);
         }
-    }
-
-    public void flushPrefs(){
-        prefs.flush();
     }
 
     public static void addStoryText(String newStoryText) {
