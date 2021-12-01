@@ -2,14 +2,14 @@ package de.atat072.rpg.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
-
 import java.util.ArrayList;
-
 import static de.atat072.rpg.RPG.INSTANCE;
+import static de.atat072.rpg.Save.loadGame;
 
 public class SaveGameSelectionScreen extends ScreenAdapter {
 
@@ -29,6 +29,7 @@ public class SaveGameSelectionScreen extends ScreenAdapter {
         setLayout();
     }
 
+    //creates all UI Elements
     private void initialise(){
         batch = new SpriteBatch();
         stage = new Stage();
@@ -45,7 +46,9 @@ public class SaveGameSelectionScreen extends ScreenAdapter {
         saveGameSelector.setMinCheckCount(1);
         saveGames = new ArrayList<>();
         for(String g: getSaveGames()){
-            saveGames.add(new CheckBox( g,skin));
+            CheckBox b = new CheckBox(g,skin);
+            b.setName(g);
+            saveGames.add(b);
         }
         for(CheckBox b: saveGames) {
             saveGameSelector.add(b);
@@ -55,6 +58,7 @@ public class SaveGameSelectionScreen extends ScreenAdapter {
         load = new TextButton("Spielsatnd laden", skin);
     }
 
+    //brings the UI Elements on the Screen with the desired layout
     private void setLayout(){
         stage.addActor(tableOut);
         tableOut.add(select).colspan(2).expandX().fillX().pad(10);
@@ -70,6 +74,7 @@ public class SaveGameSelectionScreen extends ScreenAdapter {
         tableOut.add(load).fillX().expandX().pad(10);
     }
 
+    //looped method to allow the screen to act and change appearance
     @Override
     public void render(float delta){
         back();
@@ -82,6 +87,7 @@ public class SaveGameSelectionScreen extends ScreenAdapter {
         batch.end();
     }
 
+    //disposes the UI Elements when the screen gets closed to reduce ram usage
     @Override
     public void dispose(){
         batch.dispose();
@@ -89,13 +95,18 @@ public class SaveGameSelectionScreen extends ScreenAdapter {
         skin.dispose();
     }
 
+    //returns all files in the saveGame directory
     private ArrayList<String> getSaveGames(){
-        //TODO Saving the Game
         ArrayList<String> temp = new ArrayList<>();
-        temp.add("not yet implemented");
+        FileHandle dirHandle;
+        dirHandle = Gdx.files.local("saveGames");
+        for(FileHandle entry: dirHandle.list()){
+            temp.add(entry.name());
+        }
         return temp;
     }
 
+    //returns you to the MainScreen
     private void back(){
         if(back.isChecked()){
             INSTANCE.setScreen(new MainScreen());
@@ -103,9 +114,17 @@ public class SaveGameSelectionScreen extends ScreenAdapter {
         }
     }
 
+    //loads the SaveGame and opens the GameScreen
     private void load(){
         if(load.isChecked()){
-            //INSTANCE.setScreen(new GameScreen());
+            String temp = null;
+            for(CheckBox b: saveGames){
+                if(b.isChecked()){
+                    temp = b.getName();
+                }
+            }
+            loadGame(temp);
+            INSTANCE.setScreen(new GameScreen(temp));
             this.dispose();
         }
     }

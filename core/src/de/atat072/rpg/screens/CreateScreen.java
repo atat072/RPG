@@ -1,15 +1,14 @@
 package de.atat072.rpg.screens;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
+import de.atat072.rpg.Save;
 
-import java.io.IOException;
 import java.util.Objects;
-
+import static de.atat072.rpg.RPG.SAVE;
 import static de.atat072.rpg.RPG.INSTANCE;
 
 public class CreateScreen extends ScreenAdapter {
@@ -27,6 +26,7 @@ public class CreateScreen extends ScreenAdapter {
         setLayout();
     }
 
+    //creates all UI Elements
     private void initialise(){
         batch = new SpriteBatch();
         stage = new Stage();
@@ -42,6 +42,7 @@ public class CreateScreen extends ScreenAdapter {
         back = new TextButton("Zurueck",skin);
     }
 
+    //brings the UI Elements on the Screen with the desired layout
     private void setLayout(){
         stage.addActor(table);
         table.add(nameGame).expandX().fillX().pad(10);
@@ -54,6 +55,7 @@ public class CreateScreen extends ScreenAdapter {
         table.add(start).expandX().fillX().pad(10);
     }
 
+    //looped method to allow the screen to act and change appearance
     @Override
     public void render(float delta){
         createGame();
@@ -64,6 +66,7 @@ public class CreateScreen extends ScreenAdapter {
         batch.end();
     }
 
+    //disposes the UI Elements when the screen gets closed to reduce ram usage
     @Override
     public void dispose(){
         skin.dispose();
@@ -71,16 +74,16 @@ public class CreateScreen extends ScreenAdapter {
         batch.dispose();
     }
 
-    private void createGame() {
+    //create the save Object and starts the Game
+    private void createGame(){
         if(start.isChecked()&& !Objects.equals(gameName.getText(), "") && !Objects.equals(charName.getText(), "")){
-            Preferences prefs = Gdx.app.getPreferences("oradrin_"+gameName.getText());
-            prefs.putString("name", charName.getText());
-            prefs.flush();
+            SAVE = new Save(gameName.getText());
             INSTANCE.setScreen(new GameScreen("oradrin_"+gameName.getText()));
             this.dispose();
         }
     }
 
+    //leads back to mainScreen when the back button is pressed
     private void back(){
         if(back.isChecked()){
             INSTANCE.setScreen(new MainScreen());

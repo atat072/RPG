@@ -24,6 +24,7 @@ public class CreditScreen extends ScreenAdapter {
         setLayout();
     }
 
+    //creates UI elements
     private void initialise(){
         batch = new SpriteBatch();
         stage = new Stage();
@@ -41,6 +42,7 @@ public class CreditScreen extends ScreenAdapter {
         voiceActors = new Label("placeholder",skin);
     }
 
+    //put the UI Elements on the Screen and set the Layout
     private void setLayout(){
         stage.addActor(table);
         Gdx.input.setInputProcessor(stage);
@@ -59,6 +61,7 @@ public class CreditScreen extends ScreenAdapter {
         tableMain.add(back).expandX().fillX().pad(10);
     }
 
+    //looped method to allow the screen to act and change appearance
     @Override
     public void render(float delta){
         back();
@@ -69,6 +72,8 @@ public class CreditScreen extends ScreenAdapter {
         stage.draw();
         batch.end();
     }
+
+    //disposes the UI Elements when the screen gets closed to reduce ram usage
     @Override
     public void dispose() {
         batch.dispose();
@@ -76,6 +81,7 @@ public class CreditScreen extends ScreenAdapter {
         skin.dispose();
     }
 
+    //leads back to mainScreen when the back button is pressed
     private void back(){
         if(back.isChecked()){
             INSTANCE.setScreen(new MainScreen());

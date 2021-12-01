@@ -23,6 +23,7 @@ public class MainScreen extends ScreenAdapter {
         setLayout();
     }
 
+    //creates all UI Elements
     private void initialise(){
         batch = new SpriteBatch();
         stage = new Stage();
@@ -36,6 +37,7 @@ public class MainScreen extends ScreenAdapter {
         quit = new TextButton("Beenden",skin,"default");
     }
 
+    //brings the UI Elements on the Screen with the desired layout
     private void setLayout(){
         stage.addActor(table);
         table.add(welcome).fillX().expandX().pad(10);
@@ -47,6 +49,7 @@ public class MainScreen extends ScreenAdapter {
         table.add(quit).fillX().expandX().pad(10);
     }
 
+    //looped method to allow the screen to act and change appearance
     @Override
     public void render(float delta) {
         startGame();
@@ -59,6 +62,8 @@ public class MainScreen extends ScreenAdapter {
         stage.draw();
         batch.end();
     }
+
+    //disposes the UI Elements when the screen gets closed to reduce ram usage
     @Override
     public void dispose() {
         batch.dispose();
@@ -66,6 +71,7 @@ public class MainScreen extends ScreenAdapter {
         skin.dispose();
     }
 
+    //brings you to the CreateScreen
     private void startGame(){
         if(newGame.isChecked()) {
             INSTANCE.setScreen(new CreateScreen());
@@ -73,6 +79,7 @@ public class MainScreen extends ScreenAdapter {
         }
     }
 
+    //brings you to the SaveGameSelectionScreen
     private void openSaves(){
         if(loadGame.isChecked()){
             INSTANCE.setScreen(new SaveGameSelectionScreen());
@@ -80,6 +87,7 @@ public class MainScreen extends ScreenAdapter {
         }
     }
 
+    //close the Game
     private void quitGame(){
         if(quit.isChecked()){
             Gdx.app.exit();

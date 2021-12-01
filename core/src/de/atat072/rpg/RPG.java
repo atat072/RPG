@@ -11,11 +11,13 @@ import java.util.Arrays;
 
 public class RPG extends Game {
 	public static RPG INSTANCE;
+	public static Save SAVE;
 	public RPG (){
 		INSTANCE = this;
 	}
 
 
+	// starts the Game ín the MainScreen
 	@Override
 	public void create(){
 		setScreen(new MainScreen());

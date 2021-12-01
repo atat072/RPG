@@ -10,6 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 
 import static de.atat072.rpg.RPG.INSTANCE;
+import static de.atat072.rpg.RPG.SAVE;
 
 public class MenuScreen extends ScreenAdapter {
 
@@ -26,6 +27,7 @@ public class MenuScreen extends ScreenAdapter {
         setLayout();
     }
 
+    //creates all UI Elements
     private void initialise(){
         batch = new SpriteBatch();
         stage = new Stage();
@@ -38,6 +40,7 @@ public class MenuScreen extends ScreenAdapter {
         saveAndExit = new TextButton("Speichern und Beenden",skin);
     }
 
+    //brings the UI Elements on the Screen with the desired layout
     private void setLayout(){
         stage.addActor(table);
         table.add(back).expandX().fillX().pad(10);
@@ -47,6 +50,7 @@ public class MenuScreen extends ScreenAdapter {
         table.add(saveAndExit).expandX().fillX().pad(10);
     }
 
+    //looped method to allow the screen to act and change appearance
     @Override
     public void render(float delta){
         backToGame();
@@ -58,6 +62,7 @@ public class MenuScreen extends ScreenAdapter {
         batch.end();
     }
 
+    //disposes the UI Elements when the screen gets closed to reduce ram usage
     @Override
     public void dispose(){
         skin.dispose();
@@ -65,6 +70,7 @@ public class MenuScreen extends ScreenAdapter {
         batch.dispose();
     }
 
+    //go back to the GameScreen
     private void backToGame(){
         if(back.isChecked()){
             INSTANCE.setScreen(gameScreen);
@@ -72,10 +78,12 @@ public class MenuScreen extends ScreenAdapter {
         }
     }
 
+    //saves the Game
     private void save(){
-        gameScreen.flushPrefs();
+        SAVE.save();
     }
 
+    //saves the Game and returns to the GameScreen
     private void saveButton(){
         if(save.isChecked()) {
             save();
@@ -84,6 +92,7 @@ public class MenuScreen extends ScreenAdapter {
         }
     }
 
+    //saves the Game and returns to the MainScreen
     private void saveAndExit(){
         if(saveAndExit.isChecked()) {
             save();
