@@ -12,6 +12,7 @@ public class RPG extends Game {
 	}
 
 
+	// starts the Game ín the MainScreen
 	@Override
 	public void create(){
 		setScreen(new MainScreen());

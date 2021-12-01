@@ -6,6 +6,10 @@ import com.badlogic.gdx.audio.Sound;
 
 public abstract class SoundHandler {
 
+    /*
+    The Methods to play sound from the assets
+    You have to give the filename with filetype like .mp3
+     */
     public static void playSound(String file){
         Sound sound = Gdx.audio.newSound(Gdx.files.internal("Audio/Sound/"+file));
         sound.play();

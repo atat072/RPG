@@ -29,6 +29,7 @@ public class SaveGameSelectionScreen extends ScreenAdapter {
         setLayout();
     }
 
+    //creates all UI Elements
     private void initialise(){
         batch = new SpriteBatch();
         stage = new Stage();
@@ -57,6 +58,7 @@ public class SaveGameSelectionScreen extends ScreenAdapter {
         load = new TextButton("Spielsatnd laden", skin);
     }
 
+    //brings the UI Elements on the Screen with the desired layout
     private void setLayout(){
         stage.addActor(tableOut);
         tableOut.add(select).colspan(2).expandX().fillX().pad(10);
@@ -72,6 +74,7 @@ public class SaveGameSelectionScreen extends ScreenAdapter {
         tableOut.add(load).fillX().expandX().pad(10);
     }
 
+    //looped method to allow the screen to act and change appearance
     @Override
     public void render(float delta){
         back();
@@ -84,6 +87,7 @@ public class SaveGameSelectionScreen extends ScreenAdapter {
         batch.end();
     }
 
+    //disposes the UI Elements when the screen gets closed to reduce ram usage
     @Override
     public void dispose(){
         batch.dispose();
@@ -91,6 +95,7 @@ public class SaveGameSelectionScreen extends ScreenAdapter {
         skin.dispose();
     }
 
+    //returns all files in the saveGame directory
     private ArrayList<String> getSaveGames(){
         ArrayList<String> temp = new ArrayList<>();
         FileHandle dirHandle;
@@ -101,6 +106,7 @@ public class SaveGameSelectionScreen extends ScreenAdapter {
         return temp;
     }
 
+    //returns you to the MainScreen
     private void back(){
         if(back.isChecked()){
             INSTANCE.setScreen(new MainScreen());
@@ -108,6 +114,7 @@ public class SaveGameSelectionScreen extends ScreenAdapter {
         }
     }
 
+    //loads the SaveGame and opens the GameScreen
     private void load(){
         if(load.isChecked()){
             String temp = null;

@@ -21,13 +21,19 @@ public class Save implements Serializable {
         mission2 = false;
     }
 
+    /*
+    Creates the Player and NPC when a new Game is created
+     */
     private void createChars(){
         chars.add(new Player(name,33,34,33,33,33,34,4,0));
         //todo add all NPC when story is finished
     }
 
-    //Todo create getter and setter for all Variables when finished
+    //Todo create getter and setter for all Variables when story is finished
 
+    /*
+    This method serializes the Save class and saves it in the saveGame directory
+     */
     public void save() {
         try {
             FileOutputStream fileOutputStream = new FileOutputStream(String.valueOf(Gdx.files.local("saveGames/" + name + ".ser")));
@@ -40,6 +46,7 @@ public class Save implements Serializable {
         }
     }
 
+    // Used to load the serialized Save class
     public static void loadGame(String name){
         try {
             FileInputStream fileInputStream = new FileInputStream(String.valueOf(Gdx.files.local("saveGames/" + name + ".ser")));

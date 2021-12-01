@@ -27,6 +27,7 @@ public class GameScreen extends ScreenAdapter {
         setLayout();
     }
 
+    //creates all UI Elements
     private void initialise(){
         batch = new SpriteBatch();
         stage = new Stage();
@@ -47,6 +48,7 @@ public class GameScreen extends ScreenAdapter {
         options = new ArrayList<>();
     }
 
+    //brings the UI Elements on the Screen with the desired layout
     private void setLayout(){
         stage.addActor(table);
         table.add(scrollText).expand().fill().pad(10);
@@ -63,16 +65,18 @@ public class GameScreen extends ScreenAdapter {
         }
     }
 
+    //looped method to allow the screen to act and change appearance
     @Override
     public void render(float delta){
         goToIngameMenu();
         stage.act(delta);
-        Update();
+        update();
         batch.begin();
         stage.draw();
         batch.end();
     }
 
+    //disposes the UI Elements when the screen gets closed to reduce ram usage
     @Override
     public void dispose(){
         skin.dispose();
@@ -80,7 +84,8 @@ public class GameScreen extends ScreenAdapter {
         batch.dispose();
     }
 
-    private void Update() {
+    //Updates the Content of the Screen
+    private void update() {
         tableText.clear();
         for(Label l:text){
             tableText.add(l).expandX().fillX().pad(10);
@@ -93,10 +98,12 @@ public class GameScreen extends ScreenAdapter {
         }
     }
 
+    //Method to give the GameScreen the Text
     public void setText(String newText){
         text.add(new Label(newText, skin));
     }
 
+    //Method to set the Options for the Player
     public void setOption(ArrayList<String> newOptions){
         options.clear();
         for(String s: newOptions){
@@ -104,6 +111,7 @@ public class GameScreen extends ScreenAdapter {
         }
     }
 
+    //allows getting to the inGameMenu via Escape to save and exit the Game
     private void goToIngameMenu(){
         if(Gdx.input.isKeyPressed(Input.Keys.ESCAPE)){
             INSTANCE.setScreen(new MenuScreen(this));

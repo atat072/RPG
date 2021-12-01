@@ -7,6 +7,7 @@ public abstract class Char implements Serializable {
     private String name;
     private int hp,MAXHP,ac,str,con,dex,ent,wis,chr,armor;
 
+    //sets all Scores for the Char
     public Char(String name, int str, int con, int dex, int ent, int wis, int chr, int armor) {
         this.name = name;
         this.str = str;
@@ -20,23 +21,33 @@ public abstract class Char implements Serializable {
         setMAXHP();
     }
 
+    /*
+    calculates the ac
+    the AC is the STR score + armor or the DEX score + armor
+    you take which ever is higher
+     */
     private void setAC(){
         ac = Math.max(str + armor, dex + armor);
     }
-    
+
+    //sets the MAXHP and hp
     private void setMAXHP(){
         MAXHP = 50+(con/2);
         hp = MAXHP;
     }
 
-    public void takeDmg(int dmg){
+    //reduces the hp by the dmg and returns if the Char is dead
+    public boolean takeDmg(int dmg){
         hp -= dmg;
+        return isDead();
     }
 
-    public boolean isDead(){
+    //checks if the hp is below 0
+    private boolean isDead(){
         return hp<=0;
     }
 
+    // you get heald by the amount given up to your MAXHP
     public void heal(int healing){
         if(hp+healing<=MAXHP){
             hp += healing;
@@ -45,6 +56,7 @@ public abstract class Char implements Serializable {
         }
     }
 
+    // execute this when the Char takes a long rest
     public void rest(){
         hp = MAXHP;
     }

@@ -26,6 +26,7 @@ public class CreateScreen extends ScreenAdapter {
         setLayout();
     }
 
+    //creates all UI Elements
     private void initialise(){
         batch = new SpriteBatch();
         stage = new Stage();
@@ -41,6 +42,7 @@ public class CreateScreen extends ScreenAdapter {
         back = new TextButton("Zurueck",skin);
     }
 
+    //brings the UI Elements on the Screen with the desired layout
     private void setLayout(){
         stage.addActor(table);
         table.add(nameGame).expandX().fillX().pad(10);
@@ -53,6 +55,7 @@ public class CreateScreen extends ScreenAdapter {
         table.add(start).expandX().fillX().pad(10);
     }
 
+    //looped method to allow the screen to act and change appearance
     @Override
     public void render(float delta){
         createGame();
@@ -63,6 +66,7 @@ public class CreateScreen extends ScreenAdapter {
         batch.end();
     }
 
+    //disposes the UI Elements when the screen gets closed to reduce ram usage
     @Override
     public void dispose(){
         skin.dispose();
@@ -70,6 +74,7 @@ public class CreateScreen extends ScreenAdapter {
         batch.dispose();
     }
 
+    //create the save Object and starts the Game
     private void createGame(){
         if(start.isChecked()&& !Objects.equals(gameName.getText(), "") && !Objects.equals(charName.getText(), "")){
             SAVE = new Save(gameName.getText());
@@ -78,6 +83,7 @@ public class CreateScreen extends ScreenAdapter {
         }
     }
 
+    //leads back to mainScreen when the back button is pressed
     private void back(){
         if(back.isChecked()){
             INSTANCE.setScreen(new MainScreen());
