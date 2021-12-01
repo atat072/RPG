@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 
+import java.io.IOException;
 import java.util.Objects;
 
 import static de.atat072.rpg.RPG.INSTANCE;
@@ -70,7 +71,7 @@ public class CreateScreen extends ScreenAdapter {
         batch.dispose();
     }
 
-    private void createGame(){
+    private void createGame() {
         if(start.isChecked()&& !Objects.equals(gameName.getText(), "") && !Objects.equals(charName.getText(), "")){
             Preferences prefs = Gdx.app.getPreferences("oradrin_"+gameName.getText());
             prefs.putString("name", charName.getText());

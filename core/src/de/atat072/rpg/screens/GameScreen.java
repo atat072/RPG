@@ -7,24 +7,30 @@ import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
+import de.atat072.rpg.Story.StoryCollection;
 
-import java.lang.reflect.Array;
+import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import static de.atat072.rpg.RPG.INSTANCE;
 
-public class GameScreen extends ScreenAdapter {
+public class GameScreen extends ScreenAdapter implements Serializable {
 
-    private Skin skin = new Skin(Gdx.files.internal("gdx-skins-master/commodore64/skin/uiskin.json"));
+    private static Skin skin = new Skin(Gdx.files.internal("gdx-skins-master/commodore64/skin/uiskin.json"));
     private SpriteBatch batch;
     private Stage stage;
-    private Table table,tableText, tableOptions;
-    private ScrollPane scrollText;
-    private ArrayList<Label> text;
-    private ArrayList<Label> options;
+    private static Table table,tableText, tableOptions;
+    private static AutoFocusScrollPane scrollPaneText;
+    private static ArrayList<Label> storyText;
     private String name;
     private Preferences prefs;
+    public static TextButton option1Btn;
+    public static TextButton option2Btn;
+    public static TextButton option3Btn;
+    public static TextButton option4Btn;
+
+    //Create StoryHandler to handle Story
+    //private StoryHandler storyHandler;
 
     public GameScreen(String name){
         this.name = name;
@@ -46,27 +52,38 @@ public class GameScreen extends ScreenAdapter {
         tableOptions = new Table(skin);
         tableOptions.background("dialog");
         //tableOptions.debug();
-        scrollText = new ScrollPane(null,skin);
+        scrollPaneText = new AutoFocusScrollPane();
         //scrollText.debug();
-        scrollText.setScrollbarsVisible(true);
-        text = new ArrayList<>();
-        options = new ArrayList<>();
+        scrollPaneText.setScrollbarsVisible(true);
+        storyText = new ArrayList<>();
+        option1Btn = new TextButton("Option1", skin);
+        option2Btn = new TextButton("Option2", skin);
+        option3Btn = new TextButton("Option3", skin);
+        option4Btn = new TextButton("Option4", skin);
+
+        StoryCollection storyCollection = new StoryCollection();
+        storyCollection.startStory(1);
+        //storyHandler = new StoryHandler(this, "Baeckerei");
     }
 
     private void setLayout(){
         stage.addActor(table);
-        table.add(scrollText).expand().fill().pad(10);
-        scrollText.setActor(tableText);
-        for(Label l:text){
+        table.add(scrollPaneText).expand().fill().pad(10);
+        scrollPaneText.setActor(tableText);
+        for(Label l:storyText){
             tableText.add(l).expandX().fillX().pad(10);
             tableText.row();
         }
         table.row();
-        table.add(tableOptions).expand().fill().pad(10);
-        for(Label l:options){
-            tableOptions.add(l).expandX().fillX().pad(10);
-            tableOptions.row();
-        }
+        table.add(tableOptions).fill();
+        tableOptions.add(option1Btn).expand().fill();
+        tableOptions.row();
+        tableOptions.add(option2Btn).expand().fill();
+        tableOptions.row();
+        tableOptions.add(option3Btn).expand().fill();
+        tableOptions.row();
+        tableOptions.add(option4Btn).expand().fill();
+        tableOptions.row();
     }
 
     @Override
@@ -88,26 +105,11 @@ public class GameScreen extends ScreenAdapter {
 
     private void Update() {
         tableText.clear();
-        for(Label l:text){
+        for(Label l: storyText){
             tableText.add(l).expandX().fillX().pad(10);
             tableText.row();
         }
-        tableOptions.clear();
-        for(Label l:options){
-            tableOptions.add(l).expandX().fillX().pad(10);
-            tableOptions.row();
-        }
-    }
 
-    public void setText(String newText){
-        text.add(new Label(newText, skin));
-    }
-
-    public void setOption(ArrayList<String> newOptions){
-        options.clear();
-        for(String s: newOptions){
-            options.add(new Label(s,skin));
-        }
     }
 
     private void goToIngameMenu(){
@@ -152,4 +154,16 @@ public class GameScreen extends ScreenAdapter {
         prefs.flush();
     }
 
+    public static void addStoryText(String newStoryText) {
+        storyText.add(new Label(newStoryText, skin));
+        tableText.row();
+        scrollPaneText.scrollTo(0,0,0,0);
+    }
+
+    public static void changeOptions(String newOption1, String newOption2, String newOption3, String newOption4) {
+        option1Btn.setText(newOption1);
+        option2Btn.setText(newOption2);
+        option3Btn.setText(newOption3);
+        option4Btn.setText(newOption4);
+    }
 }
