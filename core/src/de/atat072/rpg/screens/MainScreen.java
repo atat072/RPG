@@ -6,12 +6,12 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
+import de.atat072.rpg.RPG;
 
 import static de.atat072.rpg.RPG.INSTANCE;
 
 public class MainScreen extends ScreenAdapter {
-
-    private Skin skin = new Skin(Gdx.files.internal("gdx-skins-master/commodore64/skin/uiskin.json"));
+    
     private Label welcome;
     private Button newGame, loadGame, quit;
     private Stage stage;
@@ -28,13 +28,13 @@ public class MainScreen extends ScreenAdapter {
         batch = new SpriteBatch();
         stage = new Stage();
         Gdx.input.setInputProcessor(stage);
-        table = new Table(skin);
+        table = new Table(RPG.skin);
         table.background("window");
         table.setFillParent(true);
-        welcome = new Label("Wilkommen in Oradrin",skin, "optional");
-        newGame = new TextButton("Neues Spiel",skin, "default");
-        loadGame = new TextButton("Spielstand laden",skin,"default");
-        quit = new TextButton("Beenden",skin,"default");
+        welcome = new Label("Wilkommen in Oradrin",RPG.skin, "optional");
+        newGame = new TextButton("Neues Spiel",RPG.skin, "default");
+        loadGame = new TextButton("Spielstand laden",RPG.skin,"default");
+        quit = new TextButton("Beenden",RPG.skin,"default");
     }
 
     //brings the UI Elements on the Screen with the desired layout
@@ -68,7 +68,6 @@ public class MainScreen extends ScreenAdapter {
     public void dispose() {
         batch.dispose();
         stage.dispose();
-        skin.dispose();
     }
 
     //brings you to the CreateScreen

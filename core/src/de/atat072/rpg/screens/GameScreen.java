@@ -2,11 +2,11 @@ package de.atat072.rpg.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
+import de.atat072.rpg.RPG;
 import de.atat072.rpg.Story.StoryCollection;
 
 import java.io.Serializable;
@@ -15,26 +15,20 @@ import java.util.ArrayList;
 import static de.atat072.rpg.RPG.INSTANCE;
 
 public class GameScreen extends ScreenAdapter implements Serializable {
-
-    private static Skin skin = new Skin(Gdx.files.internal("gdx-skins-master/commodore64/skin/uiskin.json"));
+    
     private SpriteBatch batch;
     private Stage stage;
     private static Table table,tableText, tableOptions;
     private static AutoFocusScrollPane scrollPaneText;
     private static ArrayList<Label> storyText;
     private String name;
-    private Preferences prefs;
     public static TextButton option1Btn;
     public static TextButton option2Btn;
     public static TextButton option3Btn;
     public static TextButton option4Btn;
 
-    //Create StoryHandler to handle Story
-    //private StoryHandler storyHandler;
-
     public GameScreen(String name){
         this.name = name;
-        prefs = Gdx.app.getPreferences(name);
         initialise();
         setLayout();
     }
@@ -44,23 +38,19 @@ public class GameScreen extends ScreenAdapter implements Serializable {
         batch = new SpriteBatch();
         stage = new Stage();
         Gdx.input.setInputProcessor(stage);
-        table = new Table(skin);
+        table = new Table(RPG.skin);
         table.background("window");
         table.setFillParent(true);
         //table.debug();
-        tableText = new Table(skin);
+        tableText = new Table(RPG.skin);
         //tableText.debug();
-        tableOptions = new Table(skin);
+        tableOptions = new Table(RPG.skin);
         tableOptions.background("dialog");
         //tableOptions.debug();
         scrollPaneText = new AutoFocusScrollPane();
         //scrollText.debug();
         scrollPaneText.setScrollbarsVisible(true);
         storyText = new ArrayList<>();
-        option1Btn = new TextButton("Option1", skin);
-        option2Btn = new TextButton("Option2", skin);
-        option3Btn = new TextButton("Option3", skin);
-        option4Btn = new TextButton("Option4", skin);
 
         StoryCollection storyCollection = new StoryCollection();
         storyCollection.startStory(1);
@@ -78,14 +68,6 @@ public class GameScreen extends ScreenAdapter implements Serializable {
         }
         table.row();
         table.add(tableOptions).fill();
-        tableOptions.add(option1Btn).expand().fill();
-        tableOptions.row();
-        tableOptions.add(option2Btn).expand().fill();
-        tableOptions.row();
-        tableOptions.add(option3Btn).expand().fill();
-        tableOptions.row();
-        tableOptions.add(option4Btn).expand().fill();
-        tableOptions.row();
     }
 
     //looped method to allow the screen to act and change appearance
@@ -100,9 +82,9 @@ public class GameScreen extends ScreenAdapter implements Serializable {
     }
 
     //disposes the UI Elements when the screen gets closed to reduce ram usage
+    //TODO Causing Errors on reopen the screen
     @Override
     public void dispose(){
-        skin.dispose();
         stage.dispose();
         batch.dispose();
     }
@@ -128,44 +110,51 @@ public class GameScreen extends ScreenAdapter implements Serializable {
         return this.name;
     }
 
-    public Preferences getPrefs(){
-        return prefs;
-    }
-
-    public void setPrefsInt(String key, int n){
-        if(key!=null&& !key.equals("")) {
-            prefs.putInteger(key, n);
-        }
-    }
-
-    public void setPrefsString(String key, String s){
-        if(key!=null&& !key.equals("")) {
-            prefs.putString(key, s);
-        }
-    }
-
-    public void setPrefsBoolean(String key, boolean b){
-        if(key!=null&& !key.equals("")) {
-            prefs.putBoolean(key, b);
-        }
-    }
-
-    public void setPrefsFloat(String key, float f){
-        if(key!=null&& !key.equals("")) {
-            prefs.putFloat(key, f);
-        }
-    }
-
+    //Add text to the Story table
     public static void addStoryText(String newStoryText) {
-        storyText.add(new Label(newStoryText, skin));
+        storyText.add(new Label(newStoryText, RPG.skin));
         tableText.row();
-        scrollPaneText.scrollTo(0,0,0,0);
     }
 
+    public static void scrollDown() {
+        scrollPaneText.layout();
+        scrollPaneText.setScrollY(scrollPaneText.getMaxY());
+    }
+
+    //Chnage the Text of the Option buttons
     public static void changeOptions(String newOption1, String newOption2, String newOption3, String newOption4) {
         option1Btn.setText(newOption1);
         option2Btn.setText(newOption2);
         option3Btn.setText(newOption3);
         option4Btn.setText(newOption4);
+    }
+
+    //Refreshes the Buttons after taking a decision
+    public static void refreshButtons() {
+        if (option1Btn != null)
+            option1Btn.remove();
+
+        if (option2Btn != null)
+            option2Btn.remove();
+
+        if (option3Btn != null)
+            option3Btn.remove();
+
+        if (option4Btn != null)
+            option4Btn.remove();
+
+        option1Btn = new TextButton("Option1", RPG.skin);
+        option2Btn = new TextButton("Option2", RPG.skin);
+        option3Btn = new TextButton("Option3", RPG.skin);
+        option4Btn = new TextButton("Option4", RPG.skin);
+
+        tableOptions.add(option1Btn).expand().fill();
+        tableOptions.row();
+        tableOptions.add(option2Btn).expand().fill();
+        tableOptions.row();
+        tableOptions.add(option3Btn).expand().fill();
+        tableOptions.row();
+        tableOptions.add(option4Btn).expand().fill();
+        tableOptions.row();
     }
 }

@@ -1,6 +1,6 @@
 package de.atat072.rpg.chars;
 
-public class Player extends Char{
+public class Player extends Char {
 
     private int reputation;
 

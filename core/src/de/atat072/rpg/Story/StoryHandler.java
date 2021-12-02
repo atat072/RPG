@@ -19,18 +19,18 @@ public class StoryHandler {
                                 "am Stamm ab und faellst zu Boden wie eine \n" +
                                 "faule Frucht.\n" +
                                 "Du hoerst von oben ein paar gelaechter und\n" +
-                                " wie Tiana ruft: 'Karik hol mal den\n" +
+                                "wie Tiana ruft: 'Karik hol mal den\n" +
                                 "Neuling hoch.'\n" +
                                 "Kaum ist sie fertig den Befehl zu erteilen\n" +
                                 " landet ein staemmig gebauter Elf neben dir und \n" +
                                 "schmeisst dich ueber seine Schulter. Mit dir\n" +
-                                "im Schlepptau klettert er muehelos auf den Baum. \n" +
+                                "im Schlepptau klettert er muehelos auf den Baum.\n" +
                                 "Sobald er oben landet laesst er dich wie ein Sack\n" +
-                                " fallen, so dass du dort genauso liegst wie zuvor \n" +
+                                "fallen, so dass du dort genauso liegst wie zuvor \n" +
                                 "auf dem Boden. Als du dich beim Aufrappeln umschaust\n" +
                                 "faellt dir ein offenes Feuer ins Auge.\n" +
                                 "Tiana: 'Keine Sorgen wegen dem Feuer das ist\n" +
-                                " magisch, das wird die Plattform nicht in\n" +
+                                "magisch, das wird die Plattform nicht in\n" +
                                 "brand setzen.'\n",
                         "Blaueflecken reiben und versuchen zu entspannen.", null,
                         "", null,
@@ -66,19 +66,40 @@ public class StoryHandler {
 
         story1DecisionsMap.put("Opt11", story1Opt11Decisions);
 
+        //Decision 9
+        Decision story1Opt9Decisions =
+                new Decision(
+                        "Opt9",
+                        "Tiana: 'Schoen dich dabei zu haben. Komm mit!'\n" +
+                                "Sie fuehrt dich durch den dichten Buchenwald,\n" +
+                                "wobei sie nicht den direkten weg nimmt. Nach \n" +
+                                "einigen schnellen richtungsaenderungen weisst du\n" +
+                                "nicht mehr von wo ihr gekommen seid.\n" +
+                                "Kurz darauf bleibt Tiana neben einem Baum stehen.\n" +
+                                "Tiana: 'Hoffen wir mal, das du gelernt hast\n" +
+                                "zu Klettern.'\n" +
+                                "Ruft sie dir noch zu waehrend sie ueber dir im\n" +
+                                "dichten Eichenlaub verschwindet.\n",
+                        "(Auf den Baum klettern) [Strength Ckeck]", Decision.checkDecision(story1DecisionsMap.get("Opt11"), story1DecisionsMap.get("Opt12"), "str"),
+                        "", null,
+                        "", null,
+                        "", null
+                );
+        story1DecisionsMap.put("Opt9", story1Opt9Decisions);
+
         //Decision 10
         Decision story1Opt10Decisions =
                 new Decision(
                         "Opt10",
                         "Tiana:'Ich respektiere deine Entscheidung auch\n" +
-                                "wenn ich sie nicht gut heisse. Ueberleg es dir \n " +
+                                "wenn ich sie nicht gut heisse. Ueberleg es dir\n " +
                                 "bitte noch mal.'\n" +
                                 "Du kehrst zu deinem Dorf zurueck und siehst\n" +
-                                "schon von weitem Rauch aufsteigen. Als du das \n" +
+                                "schon von weitem Rauch aufsteigen. Als du das\n" +
                                 "Dorf erreichst siehst du einen brennenden\n" +
-                                "Leichenhaufen. Daneben steht ein Schild mit der \n" +
+                                "Leichenhaufen. Daneben steht ein Schild mit der\n" +
                                 "Aufschrift 'Dies ist die Strafe für deinen\n" +
-                                "Verrat an Asmodeus.'. \n" +
+                                "Verrat an Asmodeus.'.\n" +
                                 "Du hoerst das klappern der Knochen von einigen\n" +
                                 "Skeletten. Das Geraeusch wird Lauter und du'\n" +
                                 "rennst zurueck in den Wald. Dir wird klar,\n" +
@@ -96,35 +117,15 @@ public class StoryHandler {
                 );
         story1DecisionsMap.put("Opt10", story1Opt10Decisions);
 
-        //Decision 9
-        Decision story1Opt9Decisions =
-                new Decision(
-                        "Opt9",
-                        "Tiana: 'Schoen dich dabei zu haben. Komm mit!'\n" +
-                                "Sie fuehrt dich durch den dichten Buchenwald,\n" +
-                                " wobei sie nicht den direkten weg nimmt. Nach \n" +
-                                "einigen schnellen richtungsaenderungen weisst du\n" +
-                                " nicht mehr von wo ihr gekommen seid.\n" +
-                                "Kurz darauf bleibt Tiana neben einem Baum stehen.\n" +
-                                "Tiana: 'Hoffen wir mal, das du gelernt hast\n" +
-                                " zu Klettern.'\n" +
-                                "Ruft sie dir noch zu waehrend sie ueber dir im\n" +
-                                " dichten Eichenlaub verschwindet.\n",
-                        "(Auf den Baum klettern) [Strength Ckeck]", new Decision(story1DecisionsMap.get("Opt11"), story1DecisionsMap.get("opt12"), GameScreen.option1Btn, "str"),
-                        "", null,
-                        "", null,
-                        "", null
-                );
-        story1DecisionsMap.put("Opt9", story1Opt9Decisions);
 
         //Decision 8
         Decision story1Opt8Decisions =
                 new Decision(
                         "Opt8",
                         "Tiana:'Du weisst also nichts relevantes. Naja wenn\n" +
-                                "du jetzt eh schon auf ihrer Abschussliste \n " +
+                                "du jetzt eh schon auf ihrer Abschussliste\n " +
                                 "stehst, kannst du dich uns auch anschliessen der\n" +
-                                " Zorn der Hoellen erwartet dich so \n" +
+                                "Zorn der Hoellen erwartet dich so\n" +
                                 "oder so, der Unterschied besteht lediglich darin,\n" +
                                 "ob du den Daemonen vorher noch eins auswischt.'\n",
                         "Ok, ich komme mit euch.", story1DecisionsMap.get("Opt9"),
@@ -134,39 +135,6 @@ public class StoryHandler {
                         "", null
                 );
         story1DecisionsMap.put("Opt8", story1Opt8Decisions);
-
-        //Decision 7
-        Decision story1Opt7Decisions =
-                new Decision(
-                        "Opt7",
-                        "Tiana:'Hmm Ueberrascht das ich deine Luege durchschaut\n" +
-                                "habe. Ich bin am Koeniglichen Hof \n" +
-                                "aufgewachsen, umgeben von Politikern. Da entwickelt\n" +
-                                " man zwangslauufig ein gutes gespuer fuer \n" +
-                                "Luegen. Und jetzt raus mit der Sprache! Was weisst du?'\n",
-                        "Ja ja ok, ich weiß etwas ueber ein Relikt\n" +
-                                "welches Andariel gerne haben wuerde.", story1DecisionsMap.get("Opt5"),
-                        "", null,
-                        "", null,
-                        "", null
-                );
-        story1DecisionsMap.put("Opt7", story1Opt7Decisions);
-
-        //Decision 6
-        Decision story1Opt6Decisions =
-                new Decision(
-                        "Opt6",
-                        "Tiana:'Genauso wenig wie ich, also rueck raus\n" +
-                                "mit der Sprache. Wenn wir ueberleben wollen \n" +
-                                "brauchen wir alle Informationen, die wir\n" +
-                                " kriegen koennen.'\n",
-                        "Ja ja ok, ich weiß etwas über ein Relikt\n" +
-                                "welches Andariel gerne haben würde.", story1DecisionsMap.get("Opt5"),
-                        "", null,
-                        "", null,
-                        "", null
-                );
-        story1DecisionsMap.put("Opt6", story1Opt6Decisions);
 
         //Decision 5
         Decision story1Opt5Decisions =
@@ -184,6 +152,40 @@ public class StoryHandler {
                 );
         story1DecisionsMap.put("Opt5", story1Opt5Decisions);
 
+        //Decision 7
+        Decision story1Opt7Decisions =
+                new Decision(
+                        "Opt7",
+                        "Tiana:'Hmm Ueberrascht das ich deine Luege durchschaut\n" +
+                                "habe. Ich bin am Koeniglichen Hof aufgewachsen,\n" +
+                                "umgeben von Politikern. Da entwickelt\n" +
+                                "man zwangslauufig ein gutes gespuer fuer Luegen.\n" +
+                                "Und jetzt raus mit der Sprache! Was weisst du?'\n",
+                        "Ja ja ok, ich weiss etwas ueber ein Relikt\n" +
+                                "welches Andariel gerne haben wuerde.", story1DecisionsMap.get("Opt5"),
+                        "", null,
+                        "", null,
+                        "", null
+                );
+        story1DecisionsMap.put("Opt7", story1Opt7Decisions);
+
+        //Decision 6
+        Decision story1Opt6Decisions =
+                new Decision(
+                        "Opt6",
+                        "Tiana:'Genauso wenig wie ich, also rueck raus\n" +
+                                "mit der Sprache. Wenn wir ueberleben wollen\n" +
+                                "brauchen wir alle Informationen, die wir\n" +
+                                "kriegen koennen.'\n",
+                        "Ja ja ok, ich weiss etwas über ein Relikt\n" +
+                                "welches Andariel gerne haben würde.", story1DecisionsMap.get("Opt5"),
+                        "", null,
+                        "", null,
+                        "", null
+                );
+        story1DecisionsMap.put("Opt6", story1Opt6Decisions);
+
+
         //Decision 4
         Decision story1Opt4Decisions =
                 new Decision(
@@ -192,7 +194,7 @@ public class StoryHandler {
                                 "du dann fliehen, die anderen, die nichts \n" +
                                 "wussten, liess Andariel doch gehen?'\n",
                         "(Nichts Sagen)", story1DecisionsMap.get("Opt7"),
-                        "Andariel haette mit nicht geglaubt, \n" +
+                        "Andariel haette mir nicht geglaubt,\n" +
                                 "wenn ich gesagt haette, das ich nichts weiss.", story1DecisionsMap.get("Opt6"),
                         "", null,
                         "", null
@@ -204,14 +206,14 @@ public class StoryHandler {
                 new Decision(
                         "Opt3",
                         "Tiana:'Nicht ich persoenlich aber meine Verbuendeten,\n" +
-                                "wenn du willst kannst du dich uns gern \n" +
+                                "wenn du willst kannst du dich uns gern\n" +
                                 "anschliessen wenn dir Andariel auch auf den\n" +
                                 "Geist geht oder wir sorgen fuer deinen Schutz in \n" +
                                 "unserem Stuetzpunkt wenn du etwas weisst, das\n" +
-                                "Andariel braucht. Also, zurueck zu meiner \n" +
+                                "Andariel braucht. Also, zurueck zu meiner\n" +
                                 "Frage was weisst du?'\n",
                         "Ich weiss nichts was euch helfen koennte.\n" +
-                                "(Luegen) [Charisma Check]", new Decision(story1DecisionsMap.get("Opt8"), story1DecisionsMap.get("opt4"), GameScreen.option1Btn, "wis"),
+                                "(Luegen) [Charisma Check]", Decision.checkDecision(story1DecisionsMap.get("Opt8"), story1DecisionsMap.get("Opt4"),"chr"),
                         "Ich weiss etwas ueber ein Relikt welches\n" +
                                 "Andariel gerne haben wuerde.", story1DecisionsMap.get("Opt5"),
                         "", null,
@@ -236,7 +238,7 @@ public class StoryHandler {
                                 "umsonst sein und hilf uns. Was weißt du was\n" +
                                 "Andriel wissen will?'",
                         "Ich weiss nichts was euch helfen koennte.\n" +
-                                "(Luegen) [Charisma Check]", new Decision(story1DecisionsMap.get("Opt8"), story1DecisionsMap.get("opt4"), GameScreen.option1Btn, "wis"),
+                                "(Luegen) [Charisma Check]", Decision.checkDecision(story1DecisionsMap.get("Opt8"), story1DecisionsMap.get("Opt4"),"chr"),
                         "Ich weiss etwas ueber ein Relikt welches\n" +
                                 " Andariel gerne haben wuerde.", story1DecisionsMap.get("Opt5"),
                         "", null,
@@ -257,7 +259,7 @@ public class StoryHandler {
                                 "einen Vorteil gegenueber Andariel und Wissen\n" +
                                 "ist einer der besten, also was weisst du?'",
                         "Ich weiss nichts was euch helfen könnte.\n" +
-                                "(Luegen) [Charisma Check]", new Decision(story1DecisionsMap.get("Opt8"), story1DecisionsMap.get("opt4"), GameScreen.option1Btn, "wis"),
+                                "(Luegen) [Charisma Check]", Decision.checkDecision(story1DecisionsMap.get("Opt8"), story1DecisionsMap.get("Opt4"),"chr"),
                         "Mit deinen aktionen machts du uns das \n" +
                                 "Leben nur schwerer!", story1DecisionsMap.get("Opt2"),
                         "Ich weiss etwas ueber ein Relikt welches \n" +
@@ -291,31 +293,12 @@ public class StoryHandler {
                                 "Tiana Holimion die Anfuehrerin des Widerstandes. \n" +
                                 "Was weisst du, dass du die ehre \n" +
                                 "hattest eine Audienz bei Andariel zu bekommen?'",
-                        "Es gab keinen Grund. (Luegen) [Charisma Check]", new Decision(story1DecisionsMap.get("Opt8"), story1DecisionsMap.get("opt4"), GameScreen.option1Btn, "wis"),
+                        "Es gab keinen Grund. (Luegen) [Charisma Check]", Decision.checkDecision(story1DecisionsMap.get("Opt8"), story1DecisionsMap.get("Opt4"),"chr"),
                         "Hast du mich gerettet?", story1DecisionsMap.get("Opt3"),
                         "Wegen dir behandeln uns die Daemonen immer schlechter!", story1DecisionsMap.get("Opt2"),
                         "Du bist die Prinzessin der Elfen?", story1DecisionsMap.get("Opt1")
                 ); //TODO Implement right values for Lügen Check und für ... die antribut einsetzen
         story1DecisionsMap.put("Intro", story1IntroDecisions);
-
-        //Debug
-//        System.out.println(story1DecisionsMap.get("Opt12").decisionText);
-//        System.out.println(story1DecisionsMap.get("Opt11").decisionText);
-//        System.out.println(story1DecisionsMap.get("Opt10").decisionText);
-//        System.out.println(story1DecisionsMap.get("Opt9").decisionText);
-//        System.out.println(story1DecisionsMap.get("Opt8").decisionText);
-//        System.out.println(story1DecisionsMap.get("Opt7").decisionText);
-//        System.out.println(story1DecisionsMap.get("Opt6").decisionText);
-//        System.out.println(story1DecisionsMap.get("Opt5").decisionText);
-//        System.out.println(story1DecisionsMap.get("Opt4").decisionText);
-//        System.out.println(story1DecisionsMap.get("Opt3").decisionText);
-//        System.out.println(story1DecisionsMap.get("Opt2").decisionText);
-//        System.out.println(story1DecisionsMap.get("Opt1").decisionText);
-//        System.out.println(story1DecisionsMap.get("Intro").decisionText);
-        //Debug
-//        for (Decision d : story1DecisionsMap.values()) {
-//            System.out.println(d.decisionName + " " + d.decisionText);
-//        }
 
         //TODO load decidion path out of savegame
 

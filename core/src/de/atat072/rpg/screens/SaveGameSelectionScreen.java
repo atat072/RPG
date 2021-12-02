@@ -7,13 +7,14 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
+import de.atat072.rpg.RPG;
+
 import java.util.ArrayList;
 import static de.atat072.rpg.RPG.INSTANCE;
 import static de.atat072.rpg.Save.loadGame;
 
 public class SaveGameSelectionScreen extends ScreenAdapter {
-
-    private Skin skin = new Skin(Gdx.files.internal("gdx-skins-master/commodore64/skin/uiskin.json"));
+    
     private Stage stage;
     private Table tableOut;
     private Table tableIn;
@@ -34,19 +35,19 @@ public class SaveGameSelectionScreen extends ScreenAdapter {
         batch = new SpriteBatch();
         stage = new Stage();
         Gdx.input.setInputProcessor(stage);
-        tableOut = new Table(skin);
+        tableOut = new Table(RPG.skin);
         tableOut.background("window");
         tableOut.setFillParent(true);
         tableIn = new Table();
         tableIn.setFillParent(true);
-        scrollPane = new ScrollPane(null,skin,"default");
-        select = new Label("Welchen Spielstand willst du laden", skin, "optional");
+        scrollPane = new ScrollPane(null,RPG.skin,"default");
+        select = new Label("Welchen Spielstand willst du laden", RPG.skin, "optional");
         saveGameSelector = new ButtonGroup();
         saveGameSelector.setMaxCheckCount(1);
         saveGameSelector.setMinCheckCount(1);
         saveGames = new ArrayList<>();
         for(String g: getSaveGames()){
-            CheckBox b = new CheckBox(g,skin);
+            CheckBox b = new CheckBox(g,RPG.skin);
             b.setName(g);
             saveGames.add(b);
         }
@@ -54,8 +55,8 @@ public class SaveGameSelectionScreen extends ScreenAdapter {
             saveGameSelector.add(b);
         }
         saveGames.get(0).setChecked(true);
-        back = new TextButton("Zurueck", skin, "default");
-        load = new TextButton("Spielsatnd laden", skin);
+        back = new TextButton("Zurueck", RPG.skin, "default");
+        load = new TextButton("Spielsatnd laden", RPG.skin);
     }
 
     //brings the UI Elements on the Screen with the desired layout
@@ -92,7 +93,6 @@ public class SaveGameSelectionScreen extends ScreenAdapter {
     public void dispose(){
         batch.dispose();
         stage.dispose();
-        skin.dispose();
     }
 
     //returns all files in the saveGame directory
@@ -102,6 +102,9 @@ public class SaveGameSelectionScreen extends ScreenAdapter {
         dirHandle = Gdx.files.local("saveGames");
         for(FileHandle entry: dirHandle.list()){
             temp.add(entry.name());
+        }
+        if (temp.isEmpty()) {
+            temp.add("No Saves");
         }
         return temp;
     }
@@ -123,9 +126,11 @@ public class SaveGameSelectionScreen extends ScreenAdapter {
                     temp = b.getName();
                 }
             }
-            loadGame(temp);
-            INSTANCE.setScreen(new GameScreen(temp));
-            this.dispose();
+            if (!temp.equals("No Saves")) {
+                loadGame(temp);
+                INSTANCE.setScreen(new GameScreen(temp));
+                this.dispose();
+            }
         }
     }
 }

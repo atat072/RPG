@@ -1,10 +1,12 @@
 package de.atat072.rpg.Story;
 
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import de.atat072.rpg.chars.Methods;
 import de.atat072.rpg.screens.GameScreen;
+
+import static de.atat072.rpg.RPG.SAVE;
 
 public class Decision {
     String decisionName;
@@ -30,7 +32,7 @@ public class Decision {
     Decision trueCheck;
     Decision falseCheck;
 
-    TextButton decisionBtn;
+    int decisionBtnNumber;
 
     String checkTyp;
     boolean checkResult;
@@ -40,177 +42,120 @@ public class Decision {
         this.decisionText = decisionText;
 
         this.decision1 = decision1;
-        this.decision1Btn = GameScreen.option1Btn;
         this.decision1decision = decision1decision;
 
         this.decision2 = decision2;
-        this.decision2Btn = GameScreen.option2Btn;
         this.decision2decision = decision2decision;
 
         this.decision3 = decision3;
-        this.decision3Btn = GameScreen.option3Btn;
         this.decision3decision = decision3decision;
 
         this.decision4 = decision4;
-        this.decision4Btn = GameScreen.option4Btn;
         this.decision4decision = decision4decision;
 
         this.checkResult = false;
     }
 
     //CheckDecision Methods
-    public Decision(Decision trueCheck, Decision falseCheck, TextButton decisionBtn, String checkTyp) {
+    public Decision() {
         this.trueCheck = trueCheck;
         this.falseCheck = falseCheck;
-        this.checkResult = true;
+        this.decisionBtnNumber = decisionBtnNumber;
         this.checkTyp = checkTyp;
-
-        this.decisionBtn = decisionBtn;
+        this.checkResult = true;
     }
 
     public void loadDecision() {
-        if (checkResult) {
-            System.out.println(trueCheck.decisionText);
-            System.out.println(falseCheck.decisionText);
-            boolean checkResultValue = true;
-            //ToDO add decided decisions as String to savegame to read it later on (Start with Intro)
-            //ToDo implement check
-            switch (checkTyp) {
-                case "str":
-                    //checkResultValue = Methods.chek();
-                    break;
-                case "con":
-                    //checkResultValue = Methods.chek();
-                    break;
-                case "dex":
-                    //checkResultValue = Methods.chek();
-                    break;
-                case "ent":
-                    //checkResultValue = Methods.chek();
-                    break;
-                case "wis":
-                    //checkResultValue = Methods.chek();
-                    break;
-                case "chr":
-                    //checkResultValue = Methods.chek();
-                    break;
+        GameScreen.refreshButtons();
 
-                default:
-                    System.out.println("Check typ do not exist!");
-            }
-            if (checkResultValue) {
-                EventListener defaultListener = decisionBtn.getListeners().get(0);
-                if (decisionBtn.getListeners().size > 0) {
-                    for (EventListener listener : decisionBtn.getListeners()) {
-                        decisionBtn.removeListener(listener);
-                    }
-                    decisionBtn.addListener(defaultListener);
+        //Set Option for Button 1 of this Screen
+        decision1Btn = GameScreen.option1Btn;
+
+        if (decision1decision != null) {
+            decision1Btn.addListener(new ChangeListener() {
+                @Override
+                public void changed(ChangeEvent event, Actor actor) {
+                    decision1decision.loadDecision();
                 }
-                decisionBtn.addListener(new ChangeListener() {
-                    @Override
-                    public void changed(ChangeEvent event, Actor actor) {
-                        GameScreen.addStoryText(trueCheck.decisionText);
-                        GameScreen.changeOptions(trueCheck.decision1, trueCheck.decision2, trueCheck.decision3, trueCheck.decision4);
-                        checkResult = false;
-                        trueCheck.loadDecision();
-                    }
-                });
-            } else {
-                EventListener defaultListener = decisionBtn.getListeners().get(0);
-                if (decisionBtn.getListeners().size > 0) {
-                    for (EventListener listener : decisionBtn.getListeners()) {
-                        decisionBtn.removeListener(listener);
-                    }
-                    decisionBtn.addListener(defaultListener);
+            });
+        }
+
+        //Set Option for Button 2 of this Screen
+        decision2Btn = GameScreen.option2Btn;
+
+        if (decision2decision != null) {
+            decision2Btn.addListener(new ChangeListener() {
+                @Override
+                public void changed(ChangeEvent event, Actor actor) {
+                    decision2decision.loadDecision();
                 }
-                decisionBtn.addListener(new ChangeListener() {
-                    @Override
-                    public void changed(ChangeEvent event, Actor actor) {
-                        GameScreen.addStoryText(falseCheck.decisionText);
-                        GameScreen.changeOptions(falseCheck.decision1, falseCheck.decision2, falseCheck.decision3, falseCheck.decision4);
-                        checkResult = false;
-                        falseCheck.loadDecision();
-                    }
-                });
-            }
+            });
+        }
+
+        //Set Option for Button 3 of this Screen
+        decision3Btn = GameScreen.option3Btn;
+
+        if (decision3decision != null) {
+            decision3Btn.addListener(new ChangeListener() {
+                @Override
+                public void changed(ChangeEvent event, Actor actor) {
+                    decision3decision.loadDecision();
+                }
+            });
+        }
+
+        //Set Option for Button 4 of this Screen
+        decision4Btn = GameScreen.option4Btn;
+
+        if (decision4decision != null) {
+            decision4Btn.addListener(new ChangeListener() {
+                @Override
+                public void changed(ChangeEvent event, Actor actor) {
+                    decision4decision.loadDecision();
+                }
+            });
+        }
+
+        //Edit Texts on GameScreen
+        GameScreen.addStoryText(decisionText);
+        GameScreen.changeOptions(decision1, decision2, decision3, decision4);
+        GameScreen.scrollDown();
+    }
+
+    public static Decision checkDecision(Decision trueCheck, Decision falseCheck, String checkTyp) {
+        boolean checkResultValue = true;
+        //ToDO add decided decisions as String to savegame to read it later on (Start with Intro)
+        switch (checkTyp) {
+            case "str":
+                checkResultValue = Methods.chek(SAVE.getCharsWithIndex(0).getStr(),0);
+                break;
+            case "con":
+                checkResultValue = Methods.chek(SAVE.getCharsWithIndex(0).getCon(),0);
+                break;
+            case "dex":
+                checkResultValue = Methods.chek(SAVE.getCharsWithIndex(0).getDex(),0);
+                break;
+            case "ent":
+                checkResultValue = Methods.chek(SAVE.getCharsWithIndex(0).getEnt(),0);
+                break;
+            case "wis":
+                checkResultValue = Methods.chek(SAVE.getCharsWithIndex(0).getWis(),0);
+                break;
+            case "chr":
+                checkResultValue = Methods.chek(SAVE.getCharsWithIndex(0).getChr(),0);
+                break;
+
+            default:
+                System.out.println("Check typ do not exist!");
+        }
+        if (checkResultValue) {
+            System.out.println("Succes");
+
+            return trueCheck;
         } else {
-//            System.out.println(decision1decision.decisionText);
-//            System.out.println(decision2decision.decisionText);
-//            System.out.println(decision3decision.decisionText);
-//            System.out.println(decision4decision.decisionText);
+            System.out.println("Fail");
 
-            //Handel Option Button 1
-            EventListener defaultListenerBtn1 = decision1Btn.getListeners().get(0);
-            if (decision1Btn.getListeners().size > 0) {
-                for (EventListener listener : decision1Btn.getListeners()) {
-                    decision1Btn.removeListener(listener);
-                }
-                decision1Btn.addListener(defaultListenerBtn1);
-            }
-            if (decision1decision != null) {
-                decision1Btn.addListener(new ChangeListener() {
-                    @Override
-                    public void changed(ChangeEvent event, Actor actor) {
-                        decision1decision.loadDecision();
-                    }
-                });
-            }
-
-            //Handel Option Button 2
-            EventListener defaultListenerBtn2 = decision2Btn.getListeners().get(0);
-            System.out.println(decision2Btn.getListeners().size);
-            if (decision2Btn.getListeners().size > 0) {
-                for (EventListener listener : decision2Btn.getListeners()) {
-                    decision2Btn.removeListener(listener);
-                }
-                decision2Btn.addListener(defaultListenerBtn2);
-            }
-            if (decision2decision != null) {
-                decision2Btn.addListener(new ChangeListener() {
-                    @Override
-                    public void changed(ChangeEvent event, Actor actor) {
-                        decision2decision.loadDecision();
-                    }
-                });
-            }
-            System.out.println(decision2Btn.getListeners().size);
-            //Handel Option Button 3
-            EventListener defaultListenerBtn3 = decision3Btn.getListeners().get(0);
-            if (decision3Btn.getListeners().size > 0) {
-                for (EventListener listener : decision3Btn.getListeners()) {
-                    decision3Btn.removeListener(listener);
-                }
-                decision3Btn.addListener(defaultListenerBtn3);
-            }
-            if (decision3decision != null) {
-                decision3Btn.addListener(new ChangeListener() {
-                    @Override
-                    public void changed(ChangeEvent event, Actor actor) {
-                        decision3decision.loadDecision();
-                    }
-                });
-            }
-
-            //Handel Option Button 4
-            EventListener defaultListenerBtn4 = decision4Btn.getListeners().get(0);
-            if (decision4Btn.getListeners().size > 0) {
-                for (EventListener listener : decision4Btn.getListeners()) {
-                    decision4Btn.removeListener(listener);
-                }
-                decision4Btn.addListener(defaultListenerBtn4);
-            }
-            if (decision4decision != null) {
-                decision4Btn.addListener(new ChangeListener() {
-                    @Override
-                    public void changed(ChangeEvent event, Actor actor) {
-                        decision4decision.loadDecision();
-                    }
-                });
-            }
-
-            //Edit Texts on GameScreen
-            GameScreen.addStoryText(decisionText);
-            GameScreen.changeOptions(decision1, decision2, decision3, decision4);
+            return falseCheck;
         }
     }
 }
