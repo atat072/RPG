@@ -8,13 +8,13 @@ import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import de.atat072.rpg.RPG;
 
 import static de.atat072.rpg.RPG.INSTANCE;
 import static de.atat072.rpg.RPG.SAVE;
 
 public class MenuScreen extends ScreenAdapter {
-
-    private Skin skin = new Skin(Gdx.files.internal("gdx-skins-master/commodore64/skin/uiskin.json"));
+    
     private SpriteBatch batch;
     private Stage stage;
     private Table table;
@@ -32,12 +32,12 @@ public class MenuScreen extends ScreenAdapter {
         batch = new SpriteBatch();
         stage = new Stage();
         Gdx.input.setInputProcessor(stage);
-        table = new Table(skin);
+        table = new Table(RPG.skin);
         table.background("window");
         table.setFillParent(true);
-        back =new TextButton("Zuruek zu Spliel",skin);
-        save = new TextButton("Spiel speichern", skin);
-        saveAndExit = new TextButton("Speichern und Beenden",skin);
+        back =new TextButton("Zuruek zu Spliel",RPG.skin);
+        save = new TextButton("Spiel speichern", RPG.skin);
+        saveAndExit = new TextButton("Speichern und Beenden",RPG.skin);
     }
 
     //brings the UI Elements on the Screen with the desired layout
@@ -65,7 +65,6 @@ public class MenuScreen extends ScreenAdapter {
     //disposes the UI Elements when the screen gets closed to reduce ram usage
     @Override
     public void dispose(){
-        skin.dispose();
         stage.dispose();
         batch.dispose();
     }
@@ -96,6 +95,7 @@ public class MenuScreen extends ScreenAdapter {
     private void saveAndExit(){
         if(saveAndExit.isChecked()) {
             save();
+            SAVE.closeSave();
             INSTANCE.setScreen(new MainScreen());
             gameScreen.dispose();
             this.dispose();

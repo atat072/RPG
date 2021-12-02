@@ -6,12 +6,12 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
+import de.atat072.rpg.RPG;
 
 import static de.atat072.rpg.RPG.INSTANCE;
 
 public class CreditScreen extends ScreenAdapter {
-
-    private Skin skin = new Skin(Gdx.files.internal("gdx-skins-master/commodore64/skin/uiskin.json"));
+    
     private ScrollPane scrollPane;
     private Label development, gui, guiSkin, story, voiceActors;
     private Stage stage;
@@ -28,18 +28,18 @@ public class CreditScreen extends ScreenAdapter {
     private void initialise(){
         batch = new SpriteBatch();
         stage = new Stage();
-        table = new Table(skin);
+        table = new Table(RPG.skin);
         table.background("window");
         table.setFillParent(true);
-        scrollPane = new ScrollPane(null, skin);
+        scrollPane = new ScrollPane(null, RPG.skin);
         tableMain = new Table();
         tableMain.setFillParent(true);
-        back = new TextButton("Zurueck",skin);
-        development = new Label("Development by Lennard Stubbe and Paul Henke",skin);
-        gui = new Label("GUI design by Paul Henke", skin);
-        guiSkin = new Label("GUI-skin by Raymond \"Raeleus\" Buckley", skin);
-        story = new Label("story written by Paul Henke",skin);
-        voiceActors = new Label("placeholder",skin);
+        back = new TextButton("Zurueck",RPG.skin);
+        development = new Label("Development by Lennard Stubbe and Paul Henke",RPG.skin);
+        gui = new Label("GUI design by Paul Henke", RPG.skin);
+        guiSkin = new Label("GUI-skin by Raymond \"Raeleus\" Buckley", RPG.skin);
+        story = new Label("story written by Paul Henke",RPG.skin);
+        voiceActors = new Label("placeholder",RPG.skin);
     }
 
     //put the UI Elements on the Screen and set the Layout
@@ -78,7 +78,6 @@ public class CreditScreen extends ScreenAdapter {
     public void dispose() {
         batch.dispose();
         stage.dispose();
-        skin.dispose();
     }
 
     //leads back to mainScreen when the back button is pressed

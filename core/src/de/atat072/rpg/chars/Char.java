@@ -2,7 +2,7 @@ package de.atat072.rpg.chars;
 
 import java.io.Serializable;
 
-public abstract class Char implements Serializable {
+public abstract class Char implements Serializable{
 
     private String name;
     private int hp,MAXHP,ac,str,con,dex,ent,wis,chr,armor;

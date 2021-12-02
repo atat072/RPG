@@ -36,7 +36,7 @@ public class Save implements Serializable {
      */
     public void save() {
         try {
-            FileOutputStream fileOutputStream = new FileOutputStream(String.valueOf(Gdx.files.local("saveGames/" + name + ".ser")));
+            FileOutputStream fileOutputStream = new FileOutputStream(String.valueOf(Gdx.files.local("saveGames/" + name)));
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
             objectOutputStream.writeObject(this);
             objectOutputStream.flush();
@@ -49,12 +49,33 @@ public class Save implements Serializable {
     // Used to load the serialized Save class
     public static void loadGame(String name){
         try {
-            FileInputStream fileInputStream = new FileInputStream(String.valueOf(Gdx.files.local("saveGames/" + name + ".ser")));
+            FileInputStream fileInputStream = new FileInputStream(String.valueOf(Gdx.files.local("saveGames/" + name)));
             ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
             SAVE = (Save) objectInputStream.readObject();
             objectInputStream.close();
         }catch(Exception e){
             System.out.println(e.getMessage());
         }
+    }
+
+    //Get Chars with name
+    public Char getCharsWithName(String name) {
+        for (Char c : chars) {
+            if (c.getName().equals(name)) {
+                return c;
+            }
+        }
+
+        return null;
+    }
+
+    //Get Chars with index
+    public Char getCharsWithIndex(int index) {
+        return chars.get(index);
+    }
+
+    //Close save
+    public void closeSave() {
+        SAVE = null;
     }
 }

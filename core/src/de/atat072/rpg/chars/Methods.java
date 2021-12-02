@@ -25,7 +25,17 @@ public abstract class Methods {
 
     //Method for checking if the charter succeeds on a challenge
     public static boolean chek(int score, int bonus){
-        return dice(100)+bonus<score;
+        int diceResult = dice(100);
+
+        //Debug
+//        System.out.println(diceResult+bonus + " <= " + score);
+//        if(diceResult+bonus <= score) {
+//            System.out.println("Success");
+//        } else {
+//            System.out.println("Fail");
+//        }
+
+        return diceResult+bonus<=score;
     }
 
     //calculates if the attack hits and the damage dealt by an attack
