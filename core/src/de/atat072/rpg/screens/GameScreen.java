@@ -53,7 +53,7 @@ public class GameScreen extends ScreenAdapter implements Serializable {
         storyText = new ArrayList<>();
 
         StoryCollection storyCollection = new StoryCollection();
-        storyCollection.startStory(1);
+        storyCollection.startStory("Story-0.1");
     }
 
     //brings the UI Elements on the Screen with the desired layout

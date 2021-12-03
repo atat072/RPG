@@ -17,67 +17,38 @@ import java.beans.XMLDecoder;
 import java.beans.XMLEncoder;
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 
-public class StoryHandler {
-    public HashMap<Integer, Story> stories = new HashMap<>();
-    private HashMap<String, Decision> story1DecisionsMap = new HashMap<>();
-    public StoryHandler() {
+public abstract class StoryHandler {
+    public static ArrayList<Story> createStories() {
+        ArrayList<Story> stories = new ArrayList<>();
 
-        Story story1 = new Story(null, createStory("Story0.1"));
+        HashMap<String, ArrayList<StoryDecisionValues>> storyMap = new HashMap<>();
 
-        stories.put(1, story1);
-    }
+        storyMap = readXmlFile();
 
-    public void writeStory(String name, Object c) {
-        File storyFile = new File(String.valueOf(Gdx.files.internal("Data/" + name)));
+        for (String storyName : storyMap.keySet()) {
+            HashMap<String, Decision> storyDecisionMap = new HashMap<>();
 
-        XMLEncoder encoder=null;
-        try{
-            encoder=new XMLEncoder(new BufferedOutputStream(new FileOutputStream(storyFile)));
-        }catch(FileNotFoundException fileNotFound){
-            System.out.println("ERROR: While Creating or Opening the File dvd.xml");
+            for (StoryDecisionValues v : storyMap.get(storyName)) {
+                Decision storyDecision =
+                        new Decision(
+                                v.decisionName,
+                                v.decisionText,
+                                v.decision1, Decision.checkDecision(storyDecisionMap.get(v.decision1Decision1), storyDecisionMap.get(v.decision1Decision2), v.checkTyp1),
+                                v.decision2, Decision.checkDecision(storyDecisionMap.get(v.decision2Decision1), storyDecisionMap.get(v.decision2Decision2), v.checkTyp2),
+                                v.decision3, Decision.checkDecision(storyDecisionMap.get(v.decision3Decision1), storyDecisionMap.get(v.decision3Decision2), v.checkTyp3),
+                                v.decision4, Decision.checkDecision(storyDecisionMap.get(v.decision4Decision1), storyDecisionMap.get(v.decision4Decision2), v.checkTyp4)
+                        );
+                storyDecisionMap.put(v.decisionName, storyDecision);
+            }
+            Story story = new Story(storyName,null, storyDecisionMap);
+            stories.add(story);
         }
-        encoder.writeObject(c);
-        encoder.close();
+        return stories;
     }
 
-    public ArrayList<StoryValues> readStory(String name) {
-        File storyFile = new File(String.valueOf(Gdx.files.internal("Data/" + name)));
-
-        XMLDecoder decoder=null;
-        try {
-            decoder=new XMLDecoder(new BufferedInputStream(new FileInputStream(storyFile)));
-        } catch (FileNotFoundException e) {
-            System.out.println("ERROR: File dvd.xml not found");
-        }
-        return (ArrayList<StoryValues>) decoder.readObject();
-    }
-
-    public HashMap<String, Decision> createStory(String name) {
-        HashMap<String, Decision> storyMap = new HashMap<>();
-        ArrayList<StoryValues> storyValues = new ArrayList<>();
-
-        storyValues = readXmlFile(name);
-
-        for (StoryValues v : storyValues) {
-            Decision storyDecision =
-                    new Decision(
-                            v.decisionName,
-                            v.decisionText,
-                            v.decision1, Decision.checkDecision(storyMap.get(v.decision1Decision1), storyMap.get(v.decision1Decision2), v.checkTyp1),
-                            v.decision2, Decision.checkDecision(storyMap.get(v.decision2Decision1), storyMap.get(v.decision2Decision2), v.checkTyp2),
-                            v.decision3, Decision.checkDecision(storyMap.get(v.decision3Decision1), storyMap.get(v.decision3Decision2), v.checkTyp3),
-                            v.decision4, Decision.checkDecision(storyMap.get(v.decision4Decision1), storyMap.get(v.decision4Decision2), v.checkTyp4)
-                    );
-            storyMap.put(v.decisionName, storyDecision);
-        }
-
-        return storyMap;
-    }
-
-    public void writeXmlFile(HashMap<String, ArrayList<StoryValues>> story) {
+    public void writeXmlFile(HashMap<String, ArrayList<StoryDecisionValues>> story) {
         File file = new File(String.valueOf(Gdx.files.internal("Data/Stories.xml")));
 
         try {
@@ -92,7 +63,7 @@ public class StoryHandler {
                 Element storyRoot = doc.createElement(s);
                 root.appendChild(storyRoot);
 
-                for (StoryValues sv : story.get(s)) {
+                for (StoryDecisionValues sv : story.get(s)) {
                     Element decisionRoot = doc.createElement(sv.getDecisionName());
                     storyRoot.appendChild(decisionRoot);
 
@@ -177,10 +148,11 @@ public class StoryHandler {
         }
     }
 
-    public ArrayList<StoryValues> readXmlFile(String storyName) {
+    public static HashMap<String, ArrayList<StoryDecisionValues>> readXmlFile() {
         File file = new File(String.valueOf(Gdx.files.internal("Data/Stories.xml")));
 
-        ArrayList<StoryValues> storyValues = new ArrayList<>();
+        String storyName = "";
+        HashMap<String, ArrayList<StoryDecisionValues>> storyMap = new HashMap<>();
 
         try {
             //Get Document Builder
@@ -197,30 +169,36 @@ public class StoryHandler {
             Element root = document.getDocumentElement();
 
             //Get all employees
-            Node storyRoot = document.getElementsByTagName(storyName).item(0);
+            NodeList storyRoots = root.getChildNodes();
 
-            NodeList decisionList = storyRoot.getChildNodes();
+            for (int e = 0; e < storyRoots.getLength(); e++) {
+                storyName = storyRoots.item(e).getNodeName();
 
-            for (int i = 0; i < decisionList.getLength(); i++) {
-                Node decisionNode = decisionList.item(i);
-                if (decisionNode.getNodeType() == Node.ELEMENT_NODE) {
-                    NodeList decisionValues = decisionNode.getChildNodes();
-                    Element decisionValuesElement = (Element) decisionValues;
+                ArrayList<StoryDecisionValues> storyDecisionValues = new ArrayList<>();
 
-                    storyValues.add(new StoryValues(decisionNode.getNodeName(),
-                            decisionValuesElement.getElementsByTagName("DecisionText").item(0).getTextContent(),
-                            decisionValuesElement.getElementsByTagName("Decision1").item(0).getTextContent(),
-                            decisionValuesElement.getElementsByTagName("Decision2").item(0).getTextContent(),
-                            decisionValuesElement.getElementsByTagName("Decision3").item(0).getTextContent(),
-                            decisionValuesElement.getElementsByTagName("Decision4").item(0).getTextContent(),
-                            decisionValuesElement.getElementsByTagName("Decision1Decision1").item(0).getTextContent(), decisionValuesElement.getElementsByTagName("Decision1Decision2").item(0).getTextContent(),
-                            decisionValuesElement.getElementsByTagName("Decision2Decision1").item(0).getTextContent(), decisionValuesElement.getElementsByTagName("Decision1Decision2").item(0).getTextContent(),
-                            decisionValuesElement.getElementsByTagName("Decision3Decision1").item(0).getTextContent(), decisionValuesElement.getElementsByTagName("Decision1Decision2").item(0).getTextContent(),
-                            decisionValuesElement.getElementsByTagName("Decision4Decision1").item(0).getTextContent(), decisionValuesElement.getElementsByTagName("Decision1Decision2").item(0).getTextContent(),
-                            decisionValuesElement.getElementsByTagName("DecisionCheckTyp1").item(0).getTextContent(), decisionValuesElement.getElementsByTagName("DecisionCheckTyp2").item(0).getTextContent(),
-                            decisionValuesElement.getElementsByTagName("DecisionCheckTyp3").item(0).getTextContent(), decisionValuesElement.getElementsByTagName("DecisionCheckTyp4").item(0).getTextContent()
-                    ));
+                NodeList decisionList = storyRoots.item(e).getChildNodes();
+                for (int i = 0; i < decisionList.getLength(); i++) {
+                    Node decisionNode = decisionList.item(i);
+                    if (decisionNode.getNodeType() == Node.ELEMENT_NODE) {
+                        NodeList decisionValues = decisionNode.getChildNodes();
+                        Element decisionValuesElement = (Element) decisionValues;
+
+                        storyDecisionValues.add(new StoryDecisionValues(decisionNode.getNodeName(),
+                                decisionValuesElement.getElementsByTagName("DecisionText").item(0).getTextContent(),
+                                decisionValuesElement.getElementsByTagName("Decision1").item(0).getTextContent(),
+                                decisionValuesElement.getElementsByTagName("Decision2").item(0).getTextContent(),
+                                decisionValuesElement.getElementsByTagName("Decision3").item(0).getTextContent(),
+                                decisionValuesElement.getElementsByTagName("Decision4").item(0).getTextContent(),
+                                decisionValuesElement.getElementsByTagName("Decision1Decision1").item(0).getTextContent(), decisionValuesElement.getElementsByTagName("Decision1Decision2").item(0).getTextContent(),
+                                decisionValuesElement.getElementsByTagName("Decision2Decision1").item(0).getTextContent(), decisionValuesElement.getElementsByTagName("Decision1Decision2").item(0).getTextContent(),
+                                decisionValuesElement.getElementsByTagName("Decision3Decision1").item(0).getTextContent(), decisionValuesElement.getElementsByTagName("Decision1Decision2").item(0).getTextContent(),
+                                decisionValuesElement.getElementsByTagName("Decision4Decision1").item(0).getTextContent(), decisionValuesElement.getElementsByTagName("Decision1Decision2").item(0).getTextContent(),
+                                decisionValuesElement.getElementsByTagName("DecisionCheckTyp1").item(0).getTextContent(), decisionValuesElement.getElementsByTagName("DecisionCheckTyp2").item(0).getTextContent(),
+                                decisionValuesElement.getElementsByTagName("DecisionCheckTyp3").item(0).getTextContent(), decisionValuesElement.getElementsByTagName("DecisionCheckTyp4").item(0).getTextContent()
+                        ));
+                    }
                 }
+                storyMap.put(storyName, storyDecisionValues);
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -228,7 +206,32 @@ public class StoryHandler {
             e.printStackTrace();
         }
 
-        return storyValues;
+        return storyMap;
+    }
+
+    public void writeSerializedStory(String name, Object c) {
+        File storyFile = new File(String.valueOf(Gdx.files.internal("Data/" + name)));
+
+        XMLEncoder encoder=null;
+        try{
+            encoder=new XMLEncoder(new BufferedOutputStream(new FileOutputStream(storyFile)));
+        }catch(FileNotFoundException fileNotFound){
+            System.out.println("ERROR: While Creating or Opening the File dvd.xml");
+        }
+        encoder.writeObject(c);
+        encoder.close();
+    }
+
+    public ArrayList<StoryDecisionValues> readSerializedStory(String name) {
+        File storyFile = new File(String.valueOf(Gdx.files.internal("Data/" + name)));
+
+        XMLDecoder decoder=null;
+        try {
+            decoder=new XMLDecoder(new BufferedInputStream(new FileInputStream(storyFile)));
+        } catch (FileNotFoundException e) {
+            System.out.println("ERROR: File dvd.xml not found");
+        }
+        return (ArrayList<StoryDecisionValues>) decoder.readObject();
     }
 }
 

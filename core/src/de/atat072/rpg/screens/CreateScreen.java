@@ -161,6 +161,7 @@ public class CreateScreen extends ScreenAdapter {
     //create the save Object and starts the Game
     private void createGame(){
         if(start.isChecked()&& validInput()){
+            start.setChecked(false);
             boolean saveDontExist = true;
 
             FileHandle dirHandle;
@@ -190,21 +191,27 @@ public class CreateScreen extends ScreenAdapter {
 
     private void setZero(){
         if (Objects.equals(str.getText(), "0")){
+            str.setText("1");
             str.setCursorPosition(1);
         }
         if (Objects.equals(dex.getText(), "0")){
+            dex.setText("1");
             dex.setCursorPosition(1);
         }
         if (Objects.equals(con.getText(), "0")){
+            con.setText("1");
             con.setCursorPosition(1);
         }
         if (Objects.equals(ent.getText(), "0")){
+            ent.setText("1");
             ent.setCursorPosition(1);
         }
         if (Objects.equals(wis.getText(), "0")){
+            wis.setText("1");
             wis.setCursorPosition(1);
         }
         if (Objects.equals(chr.getText(), "0")){
+            chr.setText("1");
             chr.setCursorPosition(1);
         }
     }

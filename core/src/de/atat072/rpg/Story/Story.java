@@ -4,10 +4,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Story {
+    String storyName;
     ArrayList<String> decisionPath; //Beschreibt alle Decisions die gewählt wurden um bei einem laden der Story nachlesen zu können
     HashMap<String, Decision> decisions = new HashMap<>();
 
-    public Story(ArrayList<String> decisionPath, HashMap<String, Decision> decisions) {
+    public Story(String storyName, ArrayList<String> decisionPath, HashMap<String, Decision> decisions) {
+        this.storyName = storyName;
         this.decisionPath = decisionPath;
         this.decisions = decisions;
     }
