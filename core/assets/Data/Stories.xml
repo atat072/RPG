@@ -1,0 +1,334 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+
+<!--Help:-->
+<!-- Story structure:
+- All Stories getting added as children to the "Stories" Root
+- You call the stories "Story 0.1", "Story 0.2", "Story 0.9", "Story 1.0" and so on
+- In the Story you have to put in your Decisions and name them useful -> Opt1, Opt12, ...
+- Whit in each decision you have to put in following statements:
+    - <DecisionText></DecisionText>
+    - <Decision1></Decision1> | Text for the First Decision
+    - <Decision2></Decision2> | Text for the Second Decision
+    - <Decision3></Decision3> | Text for the Third Decision
+    - <Decision4></Decision4> | Text for the Fourth Decision
+- Each Line of following statements represents one possible Decision
+- If you want to do a Check, you have to write in the first statement
+  of the corresponding line, the name of the Decision you have defined
+  earlier -> Opt1, Opt2, ... that should get called on success
+  and in the second statement of the line the name of the decision when
+  the check fails and last but not least the check typ in the last
+  statement of that line:
+    str (Strength),
+    con (Constitution),
+    dex (Dexterity),
+    ent (Intelligence),
+    wis (Wisdom),
+    chr (Charisma)
+- If you do not want to do a check just write the name of the corresponding decision
+  in to the first statement and leave the rest empty
+    - <Decision1Decision1></Decision1Decision1> <Decision1Decision2></Decision1Decision2> <DecisionCheckTyp1></DecisionCheckTyp1>
+    - <Decision2Decision1></Decision2Decision1> <Decision2Decision2></Decision2Decision2> <DecisionCheckTyp2></DecisionCheckTyp2>
+    - <Decision3Decision1></Decision3Decision1> <Decision3Decision2></Decision3Decision2> <DecisionCheckTyp3></DecisionCheckTyp3>
+    - <Decision4Decision1></Decision4Decision1> <Decision4Decision2></Decision4Decision2> <DecisionCheckTyp4></DecisionCheckTyp4>
+-->
+
+<Stories>
+    <Story0.1>
+        <Opt12>
+            <DecisionText>
+Du versuchst es ihr gleichzutun rutscht aber
+am Stamm ab und faellst zu Boden wie eine
+faule Frucht.
+Du hoerst von oben ein paar gelaechter und
+wie Tiana ruft: 'Karik hol mal den
+Neuling hoch.'
+Kaum ist sie fertig den Befehl zu erteilen
+landet ein staemmig gebauter Elf neben dir und
+schmeisst dich ueber seine Schulter. Mit dir
+im Schlepptau klettert er muehelos auf den Baum.
+Sobald er oben landet laesst er dich wie ein Sack
+fallen, so dass du dort genauso liegst wie zuvor
+auf dem Boden. Als du dich beim Aufrappeln umschaust
+faellt dir ein offenes Feuer ins Auge.
+Tiana: 'Keine Sorgen wegen dem Feuer das ist
+magisch, das wird die Plattform nicht in
+                brand setzen.'
+            </DecisionText>
+            <Decision1>(Blaueflecken reiben und versuchen zu entspannen.)</Decision1>
+            <Decision2></Decision2>
+            <Decision3></Decision3>
+            <Decision4></Decision4>
+            <Decision1Decision1></Decision1Decision1> <Decision1Decision2></Decision1Decision2> <DecisionCheckTyp1></DecisionCheckTyp1>
+            <Decision2Decision1></Decision2Decision1> <Decision2Decision2></Decision2Decision2> <DecisionCheckTyp2></DecisionCheckTyp2>
+            <Decision3Decision1></Decision3Decision1> <Decision3Decision2></Decision3Decision2> <DecisionCheckTyp3></DecisionCheckTyp3>
+            <Decision4Decision1></Decision4Decision1> <Decision4Decision2></Decision4Decision2> <DecisionCheckTyp4></DecisionCheckTyp4>
+        </Opt12>
+        <Opt11>
+            <DecisionText>
+Du schwingst dich mit leichtigkeit in die Baumkrone
+und landest auf einer Holzplattform. Du siehst
+von hier aus noch andere kleinere Plattformen.
+Diese scheint jedoch die Hauptplattform zu sein,
+auf ihr befinden sich kleinere Werkstaetten und
+eine winzige Waffenkammer. An den Werkstaetten
+stellen einige Elfen Pfeile her. Bevor du deine
+Aufmerksamkeit dem Feuer unter einem Topf
+widmen kannst spricht dich Tianan an.
+Tiana: 'Bist sportlicher als du aussiehst.
+Willkommen im Hauptquatier des Widerstandes.
+Ich weiss es macht nicht viel her aber es ist
+das beste was wir haben. Und mach dir keine
+Sorgen wegen dem Feuer es ist magisch ist wird
+nicht auf die Plattform uebergreifend.'
+            </DecisionText>
+            <Decision1>(Entspannen und den Aufenthalt geniessen)</Decision1>
+            <Decision2></Decision2>
+            <Decision3></Decision3>
+            <Decision4></Decision4>
+            <Decision1Decision1></Decision1Decision1> <Decision1Decision2></Decision1Decision2> <DecisionCheckTyp1></DecisionCheckTyp1>
+            <Decision2Decision1></Decision2Decision1> <Decision2Decision2></Decision2Decision2> <DecisionCheckTyp2></DecisionCheckTyp2>
+            <Decision3Decision1></Decision3Decision1> <Decision3Decision2></Decision3Decision2> <DecisionCheckTyp3></DecisionCheckTyp3>
+            <Decision4Decision1></Decision4Decision1> <Decision4Decision2></Decision4Decision2> <DecisionCheckTyp4></DecisionCheckTyp4>
+        </Opt11>
+        <Opt9>
+            <DecisionText>
+Tiana: 'Schoen dich dabei zu haben. Komm mit!'
+Sie fuehrt dich durch den dichten Buchenwald,
+wobei sie nicht den direkten weg nimmt. Nach
+einigen schnellen richtungsaenderungen weisst du
+nicht mehr von wo ihr gekommen seid.
+Kurz darauf bleibt Tiana neben einem Baum stehen.
+Tiana: 'Hoffen wir mal, das du gelernt hast
+zu Klettern.'
+Ruft sie dir noch zu waehrend sie ueber dir im
+dichten Eichenlaub verschwindet.
+            </DecisionText>
+            <Decision1>(Auf den Baum klettern) [Strength Ckeck]</Decision1>
+            <Decision2></Decision2>
+            <Decision3></Decision3>
+            <Decision4></Decision4>
+            <Decision1Decision1>Opt11</Decision1Decision1> <Decision1Decision2>Opt12</Decision1Decision2> <DecisionCheckTyp1>str</DecisionCheckTyp1>
+            <Decision2Decision1></Decision2Decision1> <Decision2Decision2></Decision2Decision2> <DecisionCheckTyp2></DecisionCheckTyp2>
+            <Decision3Decision1></Decision3Decision1> <Decision3Decision2></Decision3Decision2> <DecisionCheckTyp3></DecisionCheckTyp3>
+            <Decision4Decision1></Decision4Decision1> <Decision4Decision2></Decision4Decision2> <DecisionCheckTyp4></DecisionCheckTyp4>
+        </Opt9>
+        <Opt10>
+            <DecisionText>
+Tiana:'Ich respektiere deine Entscheidung auch
+wenn ich sie nicht gut heisse. Ueberleg es dir
+bitte noch mal.'
+Du kehrst zu deinem Dorf zurueck und siehst
+schon von weitem Rauch aufsteigen. Als du das
+Dorf erreichst siehst du einen brennenden
+Leichenhaufen. Daneben steht ein Schild mit der
+Aufschrift 'Dies ist die Strafe für deinen
+Verrat an Asmodeus.'.
+Du hoerst das klappern der Knochen von einigen
+Skeletten. Das Geraeusch wird Lauter und du'
+rennst zurueck in den Wald. Dir wird klar,
+dass es kein zurueck mehr gibt.
+Im Wald suchst du nach Tiana und findest sie
+einige Zeit spaeter.
+Tiana: 'Oh du hast deine Meinung aber
+schnell geaendert.'
+            </DecisionText>
+            <Decision1>Die Daemonen haben mein Dorf zerstoert
+                und alle getoetet, ich schliesse mich
+                euch an!</Decision1>
+            <Decision2></Decision2>
+            <Decision3></Decision3>
+            <Decision4></Decision4>
+            <Decision1Decision1>Opt9</Decision1Decision1> <Decision1Decision2></Decision1Decision2> <DecisionCheckTyp1></DecisionCheckTyp1>
+            <Decision2Decision1></Decision2Decision1> <Decision2Decision2></Decision2Decision2> <DecisionCheckTyp2></DecisionCheckTyp2>
+            <Decision3Decision1></Decision3Decision1> <Decision3Decision2></Decision3Decision2> <DecisionCheckTyp3></DecisionCheckTyp3>
+            <Decision4Decision1></Decision4Decision1> <Decision4Decision2></Decision4Decision2> <DecisionCheckTyp4></DecisionCheckTyp4>
+        </Opt10>
+        <Opt8>
+            <DecisionText>
+Tiana:'Du weisst also nichts relevantes. Naja wenn
+du jetzt eh schon auf ihrer Abschussliste
+stehst, kannst du dich uns auch anschliessen der
+Zorn der Hoellen erwartet dich so
+oder so, der Unterschied besteht lediglich darin,
+ob du den Daemonen vorher noch eins auswischt.'
+            </DecisionText>
+            <Decision1>Ok, ich komme mit euch.</Decision1>
+            <Decision2>Nein, ich denke wir sollten
+                getrennte wege gehen.</Decision2>
+            <Decision3></Decision3>
+            <Decision4></Decision4>
+            <Decision1Decision1>Opt9</Decision1Decision1> <Decision1Decision2></Decision1Decision2> <DecisionCheckTyp1></DecisionCheckTyp1>
+            <Decision2Decision1>Opt10</Decision2Decision1> <Decision2Decision2></Decision2Decision2> <DecisionCheckTyp2></DecisionCheckTyp2>
+            <Decision3Decision1></Decision3Decision1> <Decision3Decision2></Decision3Decision2> <DecisionCheckTyp3></DecisionCheckTyp3>
+            <Decision4Decision1></Decision4Decision1> <Decision4Decision2></Decision4Decision2> <DecisionCheckTyp4></DecisionCheckTyp4>
+        </Opt8>
+        <Opt5>
+            <DecisionText>
+Tiana:'Interessant. Ein altes Relikt also, aber
+wofuer braucht sie das? Jetzt nicht, nicht hier!
+Komm mit zu uns, da bist du sicher und dort
+koennen wir alles in ruhe Besprechen.'
+            </DecisionText>
+            <Decision1>Ok, ich komme mit euch.</Decision1>
+            <Decision2>Nein, ich denke wir sollten
+                getrennte wege gehen.</Decision2>
+            <Decision3></Decision3>
+            <Decision4></Decision4>
+            <Decision1Decision1>Opt9</Decision1Decision1> <Decision1Decision2></Decision1Decision2> <DecisionCheckTyp1></DecisionCheckTyp1>
+            <Decision2Decision1>Opt10</Decision2Decision1> <Decision2Decision2></Decision2Decision2> <DecisionCheckTyp2></DecisionCheckTyp2>
+            <Decision3Decision1></Decision3Decision1> <Decision3Decision2></Decision3Decision2> <DecisionCheckTyp3></DecisionCheckTyp3>
+            <Decision4Decision1></Decision4Decision1> <Decision4Decision2></Decision4Decision2> <DecisionCheckTyp4></DecisionCheckTyp4>
+        </Opt5>
+        <Opt7>
+            <DecisionText>
+Tiana:'Hmm Ueberrascht das ich deine Luege durchschaut
+habe. Ich bin am Koeniglichen Hof aufgewachsen,
+umgeben von Politikern. Da entwickelt
+man zwangslauufig ein gutes gespuer fuer Luegen.
+Und jetzt raus mit der Sprache! Was weisst du?'
+            </DecisionText>
+            <Decision1>Ja ja ok, ich weiss etwas ueber ein Relikt
+                welches Andariel gerne haben wuerde.</Decision1>
+            <Decision2></Decision2>
+            <Decision3></Decision3>
+            <Decision4></Decision4>
+            <Decision1Decision1>Opt5</Decision1Decision1> <Decision1Decision2></Decision1Decision2> <DecisionCheckTyp1></DecisionCheckTyp1>
+            <Decision2Decision1></Decision2Decision1> <Decision2Decision2></Decision2Decision2> <DecisionCheckTyp2></DecisionCheckTyp2>
+            <Decision3Decision1></Decision3Decision1> <Decision3Decision2></Decision3Decision2> <DecisionCheckTyp3></DecisionCheckTyp3>
+            <Decision4Decision1></Decision4Decision1> <Decision4Decision2></Decision4Decision2> <DecisionCheckTyp4></DecisionCheckTyp4>
+        </Opt7>
+        <Opt6>
+            <DecisionText>
+Tiana:'Genauso wenig wie ich, also rueck raus
+mit der Sprache. Wenn wir ueberleben wollen
+brauchen wir alle Informationen, die wir
+kriegen koennen.'
+            </DecisionText>
+            <Decision1>Ja ja ok, ich weiss etwas über ein Relikt
+                welches Andariel gerne haben würde.</Decision1>
+            <Decision2></Decision2>
+            <Decision3></Decision3>
+            <Decision4></Decision4>
+            <Decision1Decision1>Opt5</Decision1Decision1> <Decision1Decision2></Decision1Decision2> <DecisionCheckTyp1></DecisionCheckTyp1>
+            <Decision2Decision1></Decision2Decision1> <Decision2Decision2></Decision2Decision2> <DecisionCheckTyp2></DecisionCheckTyp2>
+            <Decision3Decision1></Decision3Decision1> <Decision3Decision2></Decision3Decision2> <DecisionCheckTyp3></DecisionCheckTyp3>
+            <Decision4Decision1></Decision4Decision1> <Decision4Decision2></Decision4Decision2> <DecisionCheckTyp4></DecisionCheckTyp4>
+        </Opt6>
+        <Opt4>
+            <DecisionText>
+                Tiana:'Du weisst also nichts? Aber warum musstest
+                du dann fliehen, die anderen, die nichts
+                wussten, liess Andariel doch gehen?'
+            </DecisionText>
+            <Decision1>(Nichts Sagen)</Decision1>
+            <Decision2>Andariel haette mir nicht geglaubt,
+                wenn ich gesagt haette, das ich nichts weiss.</Decision2>
+            <Decision3></Decision3>
+            <Decision4></Decision4>
+            <Decision1Decision1>Opt7</Decision1Decision1> <Decision1Decision2></Decision1Decision2> <DecisionCheckTyp1></DecisionCheckTyp1>
+            <Decision2Decision1>Opt6</Decision2Decision1> <Decision2Decision2></Decision2Decision2> <DecisionCheckTyp2></DecisionCheckTyp2>
+            <Decision3Decision1></Decision3Decision1> <Decision3Decision2></Decision3Decision2> <DecisionCheckTyp3></DecisionCheckTyp3>
+            <Decision4Decision1></Decision4Decision1> <Decision4Decision2></Decision4Decision2> <DecisionCheckTyp4></DecisionCheckTyp4>
+        </Opt4>
+        <Opt3>
+            <DecisionText>
+Tiana:'Nicht ich persoenlich aber meine Verbuendeten,
+wenn du willst kannst du dich uns gern
+anschliessen wenn dir Andariel auch auf den
+Geist geht oder wir sorgen fuer deinen Schutz in
+unserem Stuetzpunkt wenn du etwas weisst, das
+Andariel braucht. Also, zurueck zu meiner
+Frage was weisst du?'
+            </DecisionText>
+            <Decision1>Ich weiss nichts was euch helfen koennte.
+                (Luegen) [Charisma Check]</Decision1>
+            <Decision2>Ich weiss etwas ueber ein Relikt welches
+                Andariel gerne haben wuerde.</Decision2>
+            <Decision3></Decision3>
+            <Decision4></Decision4>
+            <Decision1Decision1>Opt8</Decision1Decision1> <Decision1Decision2>Opt4</Decision1Decision2> <DecisionCheckTyp1>chr</DecisionCheckTyp1>
+            <Decision2Decision1>Opt5</Decision2Decision1> <Decision2Decision2></Decision2Decision2> <DecisionCheckTyp2></DecisionCheckTyp2>
+            <Decision3Decision1></Decision3Decision1> <Decision3Decision2></Decision3Decision2> <DecisionCheckTyp3></DecisionCheckTyp3>
+            <Decision4Decision1></Decision4Decision1> <Decision4Decision2></Decision4Decision2> <DecisionCheckTyp4></DecisionCheckTyp4>
+        </Opt3>
+        <Opt2>
+            <DecisionText>
+Tiana:'Als ob sie jemals nett zu uns gewesen wären.
+Früher oder später hätten sie uns eh hingerichtet
+oder versklavt. Da sterb ich lieber im Kampf um
+mein Volk zu befreien als das zuzulassen.
+Außerdem hast du es mit deiner lüge
+von ebend den anderen auch nicht leichter
+gemacht. Somit musst du dir selbst genauso
+Vorwürfe machen wie mir.
+Nun las das leid das du gebracht hast nicht
+umsonst sein und hilf uns. Was weißt du was
+Andriel wissen will?'
+            </DecisionText>
+            <Decision1>Ich weiss nichts was euch helfen koennte.
+                (Luegen) [Charisma Check]</Decision1>
+            <Decision2>Ich weiss etwas ueber ein Relikt welches
+                Andariel gerne haben wuerde.</Decision2>
+            <Decision3></Decision3>
+            <Decision4></Decision4>
+            <Decision1Decision1>Opt8</Decision1Decision1> <Decision1Decision2>Opt4</Decision1Decision2> <DecisionCheckTyp1>chr</DecisionCheckTyp1>
+            <Decision2Decision1>Opt5</Decision2Decision1> <Decision2Decision2></Decision2Decision2> <DecisionCheckTyp2></DecisionCheckTyp2>
+            <Decision3Decision1></Decision3Decision1> <Decision3Decision2></Decision3Decision2> <DecisionCheckTyp3></DecisionCheckTyp3>
+            <Decision4Decision1></Decision4Decision1> <Decision4Decision2></Decision4Decision2> <DecisionCheckTyp4></DecisionCheckTyp4>
+        </Opt2>
+        <Opt1>
+            <DecisionText>
+Tiana: 'Ja die bin ich, aber das ist egal solange
+die Daemonen uns unterdruecken habe ich auch
+keine Macht. Also versuche ich mit den Truppen,
+die dem Koenigshaus treu sind die Daemonen zu
+vertreiben. Um das zu schaffen brauchen wir
+einen Vorteil gegenueber Andariel und Wissen
+ist einer der besten, also was weisst du?'
+            </DecisionText>
+            <Decision1>Ich weiss nichts was euch helfen könnte.
+                (Luegen) [Charisma Check]</Decision1>
+            <Decision2>Mit deinen aktionen machts du uns das
+                Leben nur schwerer!</Decision2>
+            <Decision3>Ich weiss etwas ueber ein Relikt welches
+                Andariel gerne haben wuerde.</Decision3>
+            <Decision4></Decision4>
+            <Decision1Decision1>Opt8</Decision1Decision1> <Decision1Decision2>Opt4</Decision1Decision2> <DecisionCheckTyp1>chr</DecisionCheckTyp1>
+            <Decision2Decision1>Opt2</Decision2Decision1> <Decision2Decision2> </Decision2Decision2> <DecisionCheckTyp2></DecisionCheckTyp2>
+            <Decision3Decision1>Opt5</Decision3Decision1> <Decision3Decision2> </Decision3Decision2> <DecisionCheckTyp3></DecisionCheckTyp3>
+            <Decision4Decision1></Decision4Decision1> <Decision4Decision2> </Decision4Decision2> <DecisionCheckTyp4></DecisionCheckTyp4>
+        </Opt1>
+        <Intro>
+            <DecisionText>
+Du wirst von einer Handvoll Untote verfolgt nachdem
+du dich geweigert hast Andariel zu verraten wo
+das Relikt ist.
+Nach dem du dich in den Wald gefluechtet hast
+werden die Untoten von einer kleinen Gruppe
+Elfen durch einen Angriff abgelenkt.
+Nachdem der Kampf außer Sicht- und
+Hoerreichweite ist bleibst du stehen.
+Kurz danach springt eine Elfe aus den
+Baeumen und landet neben dir.
+Im sprung ruft sie dir zu 'Bist ziemlich mutig
+dich Andariel zu widersetzen'.
+'Leute wie dich kann ich im Widerstand gebrauchen.';
+Vor dir steht eine junge Elfe in hochwertiger
+Lederruestung sie hat einen Langbogen und
+Koecher auf dem Ruecken.
+Bevor du antworten kannst sagt sie 'Ich bin
+Tiana Holimion die Anfuehrerin des Widerstandes.
+Was weisst du, dass du die ehre
+hattest eine Audienz bei Andariel zu bekommen?'
+            </DecisionText>
+            <Decision1>Es gab keinen Grund. (Luegen) [Charisma Check]</Decision1>
+            <Decision2>Hast du mich gerettet?</Decision2>
+            <Decision3>Wegen dir behandeln uns die Daemonen immer schlechter!</Decision3>
+            <Decision4>Du bist die Prinzessin der Elfen?</Decision4>
+            <Decision1Decision1>Opt8</Decision1Decision1> <Decision1Decision2>Opt4</Decision1Decision2> <DecisionCheckTyp1>chr</DecisionCheckTyp1>
+            <Decision2Decision1>Opt3</Decision2Decision1> <Decision2Decision2> </Decision2Decision2> <DecisionCheckTyp2></DecisionCheckTyp2>
+            <Decision3Decision1>Opt2</Decision3Decision1> <Decision3Decision2> </Decision3Decision2> <DecisionCheckTyp3></DecisionCheckTyp3>
+            <Decision4Decision1>Opt1</Decision4Decision1> <Decision4Decision2> </Decision4Decision2> <DecisionCheckTyp4></DecisionCheckTyp4>
+        </Intro>
+    </Story0.1>
+</Stories>
