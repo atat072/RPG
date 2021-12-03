@@ -8,7 +8,7 @@ public abstract class Char implements Serializable{
     private int hp,MAXHP,ac,str,con,dex,ent,wis,chr,armor;
 
     //sets all Scores for the Char
-    public Char(String name, int str, int con, int dex, int ent, int wis, int chr, int armor) {
+    public Char(String name, int str, int dex, int con, int ent, int wis, int chr, int armor) {
         this.name = name;
         this.str = str;
         this.con = con;

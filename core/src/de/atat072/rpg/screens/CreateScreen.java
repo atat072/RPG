@@ -20,7 +20,7 @@ public class CreateScreen extends ScreenAdapter {
     private Stage stage;
     private Table table;
     private Label nameGame,nameChar,lSTR,lDEX,lCON,lINT,lWIS,lCHA,points;
-    private TextField gameName,charName,str,dex,con,ent,wis,cha;
+    private TextField gameName,charName,str,dex,con,ent,wis, chr;
     private TextField.TextFieldFilter onlyNumber;
     private Button start, back;
 
@@ -58,8 +58,8 @@ public class CreateScreen extends ScreenAdapter {
         ent.setTextFieldFilter(onlyNumber);
         wis = new TextField("20",SKIN);
         wis.setTextFieldFilter(onlyNumber);
-        cha = new TextField("20",SKIN);
-        cha.setTextFieldFilter(onlyNumber);
+        chr = new TextField("20",SKIN);
+        chr.setTextFieldFilter(onlyNumber);
         points = new Label("Du kannst noch "+pointsLeft()+" vergeben",SKIN);
         start = new TextButton("Reise beginnen", SKIN);
         back = new TextButton("Zurueck", SKIN);
@@ -92,7 +92,7 @@ public class CreateScreen extends ScreenAdapter {
         table.add(wis).expandX().fillX().pad(10);
         table.row();
         table.add(lCHA).expandX().fillX().pad(10);
-        table.add(cha).expandX().fillX().pad(10);
+        table.add(chr).expandX().fillX().pad(10);
         table.row();
         table.add(back).expandX().fillX().pad(10);
         table.add(start).expandX().fillX().pad(10);
@@ -101,6 +101,7 @@ public class CreateScreen extends ScreenAdapter {
     //looped method to allow the screen to act and change appearance
     @Override
     public void render(float delta){
+        setZero();
         createGame();
         back();
         points.setText("Du kannst noch "+pointsLeft()+" vergeben");
@@ -147,6 +148,27 @@ public class CreateScreen extends ScreenAdapter {
         }
     }
 
+    private void setZero(){
+        if (Objects.equals(str.getText(), "")){
+            str.setText("0");
+        }
+        if (Objects.equals(dex.getText(), "")){
+            dex.setText("0");
+        }
+        if (Objects.equals(con.getText(), "")){
+            con.setText("0");
+        }
+        if (Objects.equals(ent.getText(), "")){
+            ent.setText("0");
+        }
+        if (Objects.equals(wis.getText(), "")){
+            wis.setText("0");
+        }
+        if (Objects.equals(chr.getText(), "")){
+            chr.setText("0");
+        }
+    }
+
     private String pointsLeft(){
         int points = 200;
         //System.out.println(points);
@@ -160,7 +182,7 @@ public class CreateScreen extends ScreenAdapter {
         //System.out.println(points);
         points -=Integer.parseInt(wis.getText());
         //System.out.println(points);
-        points -=Integer.parseInt(cha.getText());
+        points -=Integer.parseInt(chr.getText());
         //System.out.println(points);
         return String.valueOf(points);
     }
@@ -172,7 +194,7 @@ public class CreateScreen extends ScreenAdapter {
             return false;
         }else if(Integer.parseInt(con.getText())<1 || Integer.parseInt(ent.getText())<1){
             return false;
-        }else if(Integer.parseInt(wis.getText())<1 || Integer.parseInt(cha.getText())<1){
+        }else if(Integer.parseInt(wis.getText())<1 || Integer.parseInt(chr.getText())<1){
             return false;
         }else return Integer.parseInt(pointsLeft()) == 0;
     }
@@ -184,7 +206,7 @@ public class CreateScreen extends ScreenAdapter {
         scores.add(Integer.parseInt(con.getText()));
         scores.add(Integer.parseInt(ent.getText()));
         scores.add(Integer.parseInt(wis.getText()));
-        scores.add(Integer.parseInt(cha.getText()));
+        scores.add(Integer.parseInt(chr.getText()));
         return scores;
     }
 }
