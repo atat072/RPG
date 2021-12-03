@@ -1,309 +1,235 @@
 package de.atat072.rpg.Story;
 
-import de.atat072.rpg.chars.Methods;
-import de.atat072.rpg.screens.GameScreen;
+import com.badlogic.gdx.Gdx;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.*;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+import java.beans.XMLDecoder;
+import java.beans.XMLEncoder;
+import java.io.*;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 
 public class StoryHandler {
     public HashMap<Integer, Story> stories = new HashMap<>();
-
+    private HashMap<String, Decision> story1DecisionsMap = new HashMap<>();
     public StoryHandler() {
-        HashMap<String, Decision> story1DecisionsMap = new HashMap<>();
 
-        //Decision 12
-        Decision story1Opt12Decisions =
-                new Decision(
-                        "Opt12",
-                        "Du versuchst es ihr gleichzutun rutscht aber\n" +
-                                "am Stamm ab und faellst zu Boden wie eine \n" +
-                                "faule Frucht.\n" +
-                                "Du hoerst von oben ein paar gelaechter und\n" +
-                                "wie Tiana ruft: 'Karik hol mal den\n" +
-                                "Neuling hoch.'\n" +
-                                "Kaum ist sie fertig den Befehl zu erteilen\n" +
-                                " landet ein staemmig gebauter Elf neben dir und \n" +
-                                "schmeisst dich ueber seine Schulter. Mit dir\n" +
-                                "im Schlepptau klettert er muehelos auf den Baum.\n" +
-                                "Sobald er oben landet laesst er dich wie ein Sack\n" +
-                                "fallen, so dass du dort genauso liegst wie zuvor \n" +
-                                "auf dem Boden. Als du dich beim Aufrappeln umschaust\n" +
-                                "faellt dir ein offenes Feuer ins Auge.\n" +
-                                "Tiana: 'Keine Sorgen wegen dem Feuer das ist\n" +
-                                "magisch, das wird die Plattform nicht in\n" +
-                                "brand setzen.'\n",
-                        "Blaueflecken reiben und versuchen zu entspannen.", null,
-                        "", null,
-                        "", null,
-                        "", null
-                ); //ToDo neue Story Laden
-        story1DecisionsMap.put("Opt12", story1Opt12Decisions);
-
-
-        //Decision 11
-        Decision story1Opt11Decisions = new Decision(
-                "Opt11",
-                "Du schwingst dich mit leichtigkeit in die Baumkrone\n" +
-                        "und landest auf einer Holzplattform. Du siehst\n" +
-                        "von hier aus noch andere kleinere Plattformen. \n" +
-                        "Diese scheint jedoch die Hauptplattform zu sein,\n" +
-                        "auf ihr befinden sich kleinere Werkstaetten und\n" +
-                        "eine winzige Waffenkammer. An den Werkstaetten\n" +
-                        "stellen einige Elfen Pfeile her. Bevor du deine \n" +
-                        "Aufmerksamkeit dem Feuer unter einem Topf\n" +
-                        "widmen kannst spricht dich Tianan an.\n" +
-                        "Tiana: 'Bist sportlicher als du aussiehst.\n" +
-                        "Willkommen im Hauptquatier des Widerstandes.\n" +
-                        "Ich weiss es macht nicht viel her aber es ist\n" +
-                        "das beste was wir haben. Und mach dir keine \n" +
-                        "Sorgen wegen dem Feuer es ist magisch ist wird\n" +
-                        "nicht auf die Plattform uebergreifend.'\n",
-                "(Entspannen und den Aufenthalt geniessen)", null,
-                "", null,
-                "", null,
-                "", null
-        ); //ToDo neue Story Laden
-
-        story1DecisionsMap.put("Opt11", story1Opt11Decisions);
-
-        //Decision 9
-        Decision story1Opt9Decisions =
-                new Decision(
-                        "Opt9",
-                        "Tiana: 'Schoen dich dabei zu haben. Komm mit!'\n" +
-                                "Sie fuehrt dich durch den dichten Buchenwald,\n" +
-                                "wobei sie nicht den direkten weg nimmt. Nach \n" +
-                                "einigen schnellen richtungsaenderungen weisst du\n" +
-                                "nicht mehr von wo ihr gekommen seid.\n" +
-                                "Kurz darauf bleibt Tiana neben einem Baum stehen.\n" +
-                                "Tiana: 'Hoffen wir mal, das du gelernt hast\n" +
-                                "zu Klettern.'\n" +
-                                "Ruft sie dir noch zu waehrend sie ueber dir im\n" +
-                                "dichten Eichenlaub verschwindet.\n",
-                        "(Auf den Baum klettern) [Strength Ckeck]", Decision.checkDecision(story1DecisionsMap.get("Opt11"), story1DecisionsMap.get("Opt12"), "str"),
-                        "", null,
-                        "", null,
-                        "", null
-                );
-        story1DecisionsMap.put("Opt9", story1Opt9Decisions);
-
-        //Decision 10
-        Decision story1Opt10Decisions =
-                new Decision(
-                        "Opt10",
-                        "Tiana:'Ich respektiere deine Entscheidung auch\n" +
-                                "wenn ich sie nicht gut heisse. Ueberleg es dir\n " +
-                                "bitte noch mal.'\n" +
-                                "Du kehrst zu deinem Dorf zurueck und siehst\n" +
-                                "schon von weitem Rauch aufsteigen. Als du das\n" +
-                                "Dorf erreichst siehst du einen brennenden\n" +
-                                "Leichenhaufen. Daneben steht ein Schild mit der\n" +
-                                "Aufschrift 'Dies ist die Strafe für deinen\n" +
-                                "Verrat an Asmodeus.'.\n" +
-                                "Du hoerst das klappern der Knochen von einigen\n" +
-                                "Skeletten. Das Geraeusch wird Lauter und du'\n" +
-                                "rennst zurueck in den Wald. Dir wird klar,\n" +
-                                "dass es kein zurueck mehr gibt.\n" +
-                                "Im Wald suchst du nach Tiana und findest sie\n" +
-                                "einige Zeit spaeter.\n" +
-                                "Tiana: 'Oh du hast deine Meinung aber\n" +
-                                "schnell geaendert.'\n",
-                        "Die Daemonen haben mein Dorf zerstoert\n" +
-                                "und alle getoetet, ich schliesse mich\n" +
-                                "euch an!", story1DecisionsMap.get("Opt9"),
-                        "", null,
-                        "", null,
-                        "", null
-                );
-        story1DecisionsMap.put("Opt10", story1Opt10Decisions);
-
-
-        //Decision 8
-        Decision story1Opt8Decisions =
-                new Decision(
-                        "Opt8",
-                        "Tiana:'Du weisst also nichts relevantes. Naja wenn\n" +
-                                "du jetzt eh schon auf ihrer Abschussliste\n " +
-                                "stehst, kannst du dich uns auch anschliessen der\n" +
-                                "Zorn der Hoellen erwartet dich so\n" +
-                                "oder so, der Unterschied besteht lediglich darin,\n" +
-                                "ob du den Daemonen vorher noch eins auswischt.'\n",
-                        "Ok, ich komme mit euch.", story1DecisionsMap.get("Opt9"),
-                        "Nein, ich denke wir sollten\n" +
-                                "getrennte wege gehen.", story1DecisionsMap.get("Opt10"),
-                        "", null,
-                        "", null
-                );
-        story1DecisionsMap.put("Opt8", story1Opt8Decisions);
-
-        //Decision 5
-        Decision story1Opt5Decisions =
-                new Decision(
-                        "Opt5",
-                        "Tiana:'Interessant. Ein altes Relikt also, aber\n" +
-                                "wofuer braucht sie das? Jetzt nicht, nicht hier!\n " +
-                                "Komm mit zu uns, da bist du sicher und dort \n" +
-                                "koennen wir alles in ruhe Besprechen.'\n",
-                        "Ok, ich komme mit euch.", story1DecisionsMap.get("Opt9"),
-                        "Nein, ich denke wir sollten\n" +
-                                "getrennte wege gehen.", story1DecisionsMap.get("Opt10"),
-                        "", null,
-                        "", null
-                );
-        story1DecisionsMap.put("Opt5", story1Opt5Decisions);
-
-        //Decision 7
-        Decision story1Opt7Decisions =
-                new Decision(
-                        "Opt7",
-                        "Tiana:'Hmm Ueberrascht das ich deine Luege durchschaut\n" +
-                                "habe. Ich bin am Koeniglichen Hof aufgewachsen,\n" +
-                                "umgeben von Politikern. Da entwickelt\n" +
-                                "man zwangslauufig ein gutes gespuer fuer Luegen.\n" +
-                                "Und jetzt raus mit der Sprache! Was weisst du?'\n",
-                        "Ja ja ok, ich weiss etwas ueber ein Relikt\n" +
-                                "welches Andariel gerne haben wuerde.", story1DecisionsMap.get("Opt5"),
-                        "", null,
-                        "", null,
-                        "", null
-                );
-        story1DecisionsMap.put("Opt7", story1Opt7Decisions);
-
-        //Decision 6
-        Decision story1Opt6Decisions =
-                new Decision(
-                        "Opt6",
-                        "Tiana:'Genauso wenig wie ich, also rueck raus\n" +
-                                "mit der Sprache. Wenn wir ueberleben wollen\n" +
-                                "brauchen wir alle Informationen, die wir\n" +
-                                "kriegen koennen.'\n",
-                        "Ja ja ok, ich weiss etwas über ein Relikt\n" +
-                                "welches Andariel gerne haben würde.", story1DecisionsMap.get("Opt5"),
-                        "", null,
-                        "", null,
-                        "", null
-                );
-        story1DecisionsMap.put("Opt6", story1Opt6Decisions);
-
-
-        //Decision 4
-        Decision story1Opt4Decisions =
-                new Decision(
-                        "Opt4",
-                        "Tiana:'Du weisst also nichts? Aber warum musstest\n" +
-                                "du dann fliehen, die anderen, die nichts \n" +
-                                "wussten, liess Andariel doch gehen?'\n",
-                        "(Nichts Sagen)", story1DecisionsMap.get("Opt7"),
-                        "Andariel haette mir nicht geglaubt,\n" +
-                                "wenn ich gesagt haette, das ich nichts weiss.", story1DecisionsMap.get("Opt6"),
-                        "", null,
-                        "", null
-                );
-        story1DecisionsMap.put("Opt4", story1Opt4Decisions);
-
-        //Decision 3
-        Decision story1Opt3Decisions =
-                new Decision(
-                        "Opt3",
-                        "Tiana:'Nicht ich persoenlich aber meine Verbuendeten,\n" +
-                                "wenn du willst kannst du dich uns gern\n" +
-                                "anschliessen wenn dir Andariel auch auf den\n" +
-                                "Geist geht oder wir sorgen fuer deinen Schutz in \n" +
-                                "unserem Stuetzpunkt wenn du etwas weisst, das\n" +
-                                "Andariel braucht. Also, zurueck zu meiner\n" +
-                                "Frage was weisst du?'\n",
-                        "Ich weiss nichts was euch helfen koennte.\n" +
-                                "(Luegen) [Charisma Check]", Decision.checkDecision(story1DecisionsMap.get("Opt8"), story1DecisionsMap.get("Opt4"),"chr"),
-                        "Ich weiss etwas ueber ein Relikt welches\n" +
-                                "Andariel gerne haben wuerde.", story1DecisionsMap.get("Opt5"),
-                        "", null,
-                        "", null
-                );
-        story1DecisionsMap.put("Opt3", story1Opt3Decisions);
-
-
-        //Decision 2
-        Decision story1Opt2Decisions =
-                new Decision(
-                        "Opt2",
-                        "Tiana:'Als ob sie jemals nett zu uns gewesen wären.\n" +
-                                "Früher oder später hätten sie uns eh hingerichtet\n" +
-                                "oder versklavt. Da sterb ich lieber im Kampf um\n" +
-                                "mein Volk zu befreien als das zuzulassen.\n" +
-                                "Außerdem hast du es mit deiner lüge\n" +
-                                "von ebend den anderen auch nicht leichter\n" +
-                                "gemacht. Somit musst du dir selbst genauso\n" +
-                                "Vorwürfe machen wie mir.\n" +
-                                "Nun las das leid das du gebracht hast nicht\n" +
-                                "umsonst sein und hilf uns. Was weißt du was\n" +
-                                "Andriel wissen will?'",
-                        "Ich weiss nichts was euch helfen koennte.\n" +
-                                "(Luegen) [Charisma Check]", Decision.checkDecision(story1DecisionsMap.get("Opt8"), story1DecisionsMap.get("Opt4"),"chr"),
-                        "Ich weiss etwas ueber ein Relikt welches\n" +
-                                " Andariel gerne haben wuerde.", story1DecisionsMap.get("Opt5"),
-                        "", null,
-                        "", null
-                );
-        story1DecisionsMap.put("Opt2", story1Opt2Decisions);
-
-
-        //Decision 1
-        Decision story1Opt1Decisions =
-                new Decision(
-                        "Opt1",
-                        "Tiana: 'Ja die bin ich, aber das ist egal solange\n" +
-                                "die Daemonen uns unterdruecken habe ich auch\n" +
-                                "keine Macht. Also versuche ich mit den Truppen,\n" +
-                                "die dem Koenigshaus treu sind die Daemonen zu\n" +
-                                "vertreiben. Um das zu schaffen brauchen wir\n" +
-                                "einen Vorteil gegenueber Andariel und Wissen\n" +
-                                "ist einer der besten, also was weisst du?'",
-                        "Ich weiss nichts was euch helfen könnte.\n" +
-                                "(Luegen) [Charisma Check]", Decision.checkDecision(story1DecisionsMap.get("Opt8"), story1DecisionsMap.get("Opt4"),"chr"),
-                        "Mit deinen aktionen machts du uns das \n" +
-                                "Leben nur schwerer!", story1DecisionsMap.get("Opt2"),
-                        "Ich weiss etwas ueber ein Relikt welches \n" +
-                                "Andariel gerne haben wuerde.", story1DecisionsMap.get("Opt5"),
-                        "", null
-                );
-        story1DecisionsMap.put("Opt1", story1Opt1Decisions);
-
-
-        //Decision Intro
-        Decision story1IntroDecisions =
-                new Decision(
-                        "Intro",
-                        "Du wirst von einer Handvoll Untote verfolgt nachdem\n" +
-                                "du dich geweigert hast Andariel zu verraten wo\n" +
-                                "das Relikt ist.\n" +
-                                "Nach dem du dich in den Wald gefluechtet hast \n" +
-                                "werden die Untoten von einer kleinen Gruppe \n" +
-                                "Elfen durch einen Angriff abgelenkt. \n" +
-                                "Nachdem der Kampf außer Sicht- und \n" +
-                                "Hoerreichweite ist bleibst du stehen. \n" +
-                                "Kurz danach springt eine Elfe aus den \n" +
-                                "Bauumen und landet neben dir. \n" +
-                                "Im sprung ruft sie dir zu 'Bist ziemlich mutig\n" +
-                                "dich Andariel zu widersetzen'. \n" +
-                                "'Leute wie dich kann ich im Widerstand gebrauchen.'\n" +
-                                "Vor dir steht eine junge Elfe in hochwertiger \n" +
-                                "Lederruestung sie hat einen Langbogen und \n" +
-                                "Koecher auf dem Ruecken.\n" +
-                                "Bevor du antworten kannst sagt sie 'Ich bin \n" +
-                                "Tiana Holimion die Anfuehrerin des Widerstandes. \n" +
-                                "Was weisst du, dass du die ehre \n" +
-                                "hattest eine Audienz bei Andariel zu bekommen?'",
-                        "Es gab keinen Grund. (Luegen) [Charisma Check]", Decision.checkDecision(story1DecisionsMap.get("Opt8"), story1DecisionsMap.get("Opt4"),"chr"),
-                        "Hast du mich gerettet?", story1DecisionsMap.get("Opt3"),
-                        "Wegen dir behandeln uns die Daemonen immer schlechter!", story1DecisionsMap.get("Opt2"),
-                        "Du bist die Prinzessin der Elfen?", story1DecisionsMap.get("Opt1")
-                ); //TODO Implement right values for Lügen Check und für ... die antribut einsetzen
-        story1DecisionsMap.put("Intro", story1IntroDecisions);
-
-        //TODO load decidion path out of savegame
-
-        Story story1 = new Story(null, story1DecisionsMap);
+        Story story1 = new Story(null, createStory("Story0.1"));
 
         stories.put(1, story1);
     }
+
+    public void writeStory(String name, Object c) {
+        File storyFile = new File(String.valueOf(Gdx.files.internal("Data/" + name)));
+
+        XMLEncoder encoder=null;
+        try{
+            encoder=new XMLEncoder(new BufferedOutputStream(new FileOutputStream(storyFile)));
+        }catch(FileNotFoundException fileNotFound){
+            System.out.println("ERROR: While Creating or Opening the File dvd.xml");
+        }
+        encoder.writeObject(c);
+        encoder.close();
+    }
+
+    public ArrayList<StoryValues> readStory(String name) {
+        File storyFile = new File(String.valueOf(Gdx.files.internal("Data/" + name)));
+
+        XMLDecoder decoder=null;
+        try {
+            decoder=new XMLDecoder(new BufferedInputStream(new FileInputStream(storyFile)));
+        } catch (FileNotFoundException e) {
+            System.out.println("ERROR: File dvd.xml not found");
+        }
+        return (ArrayList<StoryValues>) decoder.readObject();
+    }
+
+    public HashMap<String, Decision> createStory(String name) {
+        HashMap<String, Decision> storyMap = new HashMap<>();
+        ArrayList<StoryValues> storyValues = new ArrayList<>();
+
+        storyValues = readXmlFile(name);
+
+        for (StoryValues v : storyValues) {
+            Decision storyDecision =
+                    new Decision(
+                            v.decisionName,
+                            v.decisionText,
+                            v.decision1, Decision.checkDecision(storyMap.get(v.decision1Decision1), storyMap.get(v.decision1Decision2), v.checkTyp1),
+                            v.decision2, Decision.checkDecision(storyMap.get(v.decision2Decision1), storyMap.get(v.decision2Decision2), v.checkTyp2),
+                            v.decision3, Decision.checkDecision(storyMap.get(v.decision3Decision1), storyMap.get(v.decision3Decision2), v.checkTyp3),
+                            v.decision4, Decision.checkDecision(storyMap.get(v.decision4Decision1), storyMap.get(v.decision4Decision2), v.checkTyp4)
+                    );
+            storyMap.put(v.decisionName, storyDecision);
+        }
+
+        return storyMap;
+    }
+
+    public void writeXmlFile(HashMap<String, ArrayList<StoryValues>> story) {
+        File file = new File(String.valueOf(Gdx.files.internal("Data/Stories.xml")));
+
+        try {
+            DocumentBuilderFactory dFact = DocumentBuilderFactory.newInstance();
+            DocumentBuilder build = dFact.newDocumentBuilder();
+            Document doc = build.newDocument();
+
+            Element root = doc.createElement("Stories");
+            doc.appendChild(root);
+
+            for (String s : story.keySet()) {
+                Element storyRoot = doc.createElement(s);
+                root.appendChild(storyRoot);
+
+                for (StoryValues sv : story.get(s)) {
+                    Element decisionRoot = doc.createElement(sv.getDecisionName());
+                    storyRoot.appendChild(decisionRoot);
+
+                    Element text = doc.createElement("DecisionText");
+                    text.appendChild(doc.createTextNode(String.valueOf(sv.getDecisionText())));
+                    decisionRoot.appendChild(text);
+
+                    Element decision1 = doc.createElement("Decision1");
+                    decision1.appendChild(doc.createTextNode(String.valueOf(sv.getDecision1())));
+                    decisionRoot.appendChild(decision1);
+
+                    Element decision2 = doc.createElement("Decision2");
+                    decision2.appendChild(doc.createTextNode(String.valueOf(sv.getDecision2())));
+                    decisionRoot.appendChild(decision2);
+
+                    Element decision3 = doc.createElement("Decision3");
+                    decision3.appendChild(doc.createTextNode(String.valueOf(sv.getDecision3())));
+                    decisionRoot.appendChild(decision3);
+
+                    Element decision4 = doc.createElement("Decision4");
+                    decision4.appendChild(doc.createTextNode(String.valueOf(sv.getDecision4())));
+                    decisionRoot.appendChild(decision4);
+
+                    Element decision1Decision1 = doc.createElement("Decision1Decision1");
+                    decision1Decision1.appendChild(doc.createTextNode(String.valueOf(sv.getDecision1Decision1())));
+                    decisionRoot.appendChild(decision1Decision1);
+
+                    Element decision2Decision1 = doc.createElement("Decision2Decision1");
+                    decision2Decision1.appendChild(doc.createTextNode(String.valueOf(sv.getDecision2Decision1())));
+                    decisionRoot.appendChild(decision2Decision1);
+
+                    Element decision3Decision1 = doc.createElement("Decision3Decision1");
+                    decision3Decision1.appendChild(doc.createTextNode(String.valueOf(sv.getDecision3Decision1())));
+                    decisionRoot.appendChild(decision3Decision1);
+
+                    Element decision4Decision1 = doc.createElement("Decision4Decision1");
+                    decision4Decision1.appendChild(doc.createTextNode(String.valueOf(sv.getDecision4Decision1())));
+                    decisionRoot.appendChild(decision4Decision1);
+
+                    Element decision1Decision2 = doc.createElement("Decision1Decision2");
+                    decision1Decision2.appendChild(doc.createTextNode(String.valueOf(sv.getDecision1Decision1())));
+                    decisionRoot.appendChild(decision1Decision2);
+
+                    Element decision2Decision2 = doc.createElement("Decision2Decision2");
+                    decision2Decision2.appendChild(doc.createTextNode(String.valueOf(sv.getDecision2Decision2())));
+                    decisionRoot.appendChild(decision2Decision2);
+
+                    Element decision3Decision2 = doc.createElement("Decision3Decision2");
+                    decision3Decision2.appendChild(doc.createTextNode(String.valueOf(sv.getDecision3Decision2())));
+                    decisionRoot.appendChild(decision3Decision2);
+
+                    Element decision4Decision2 = doc.createElement("Decision4Decision2");
+                    decision4Decision2.appendChild(doc.createTextNode(String.valueOf(sv.getDecision4Decision2())));
+                    decisionRoot.appendChild(decision4Decision2);
+                }
+            }
+
+            // Save the document to the disk file
+            TransformerFactory tranFactory = TransformerFactory.newInstance();
+            Transformer aTransformer = tranFactory.newTransformer();
+
+            aTransformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
+            aTransformer.setOutputProperty(OutputKeys.INDENT, "yes");
+            aTransformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "2");
+
+            DOMSource source = new DOMSource(doc);
+            try {
+                // location and name of XML file you can change as per need
+                FileWriter fos = new FileWriter(file);
+                StreamResult result = new StreamResult(fos);
+                aTransformer.transform(source, result);
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        } catch (TransformerException ex) {
+            System.out.println("Error outputting document");
+
+        } catch (ParserConfigurationException ex) {
+            System.out.println("Error building document");
+        }
+    }
+
+    public ArrayList<StoryValues> readXmlFile(String storyName) {
+        File file = new File(String.valueOf(Gdx.files.internal("Data/Stories.xml")));
+
+        ArrayList<StoryValues> storyValues = new ArrayList<>();
+
+        try {
+            //Get Document Builder
+            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder builder = factory.newDocumentBuilder();
+
+            //Build Document
+            Document document = builder.parse(file);
+
+            //Normalize the XML Structure; It's just too important !!
+            document.getDocumentElement().normalize();
+
+            //Here comes the root node
+            Element root = document.getDocumentElement();
+
+            //Get all employees
+            Node storyRoot = document.getElementsByTagName(storyName).item(0);
+
+            NodeList decisionList = storyRoot.getChildNodes();
+
+            for (int i = 0; i < decisionList.getLength(); i++) {
+                Node decisionNode = decisionList.item(i);
+                if (decisionNode.getNodeType() == Node.ELEMENT_NODE) {
+                    NodeList decisionValues = decisionNode.getChildNodes();
+                    Element decisionValuesElement = (Element) decisionValues;
+
+                    storyValues.add(new StoryValues(decisionNode.getNodeName(),
+                            decisionValuesElement.getElementsByTagName("DecisionText").item(0).getTextContent(),
+                            decisionValuesElement.getElementsByTagName("Decision1").item(0).getTextContent(),
+                            decisionValuesElement.getElementsByTagName("Decision2").item(0).getTextContent(),
+                            decisionValuesElement.getElementsByTagName("Decision3").item(0).getTextContent(),
+                            decisionValuesElement.getElementsByTagName("Decision4").item(0).getTextContent(),
+                            decisionValuesElement.getElementsByTagName("Decision1Decision1").item(0).getTextContent(), decisionValuesElement.getElementsByTagName("Decision1Decision2").item(0).getTextContent(),
+                            decisionValuesElement.getElementsByTagName("Decision2Decision1").item(0).getTextContent(), decisionValuesElement.getElementsByTagName("Decision1Decision2").item(0).getTextContent(),
+                            decisionValuesElement.getElementsByTagName("Decision3Decision1").item(0).getTextContent(), decisionValuesElement.getElementsByTagName("Decision1Decision2").item(0).getTextContent(),
+                            decisionValuesElement.getElementsByTagName("Decision4Decision1").item(0).getTextContent(), decisionValuesElement.getElementsByTagName("Decision1Decision2").item(0).getTextContent(),
+                            decisionValuesElement.getElementsByTagName("DecisionCheckTyp1").item(0).getTextContent(), decisionValuesElement.getElementsByTagName("DecisionCheckTyp2").item(0).getTextContent(),
+                            decisionValuesElement.getElementsByTagName("DecisionCheckTyp3").item(0).getTextContent(), decisionValuesElement.getElementsByTagName("DecisionCheckTyp4").item(0).getTextContent()
+                    ));
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (SAXException | ParserConfigurationException e) {
+            e.printStackTrace();
+        }
+
+        return storyValues;
+    }
 }
+
+
