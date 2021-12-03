@@ -1,8 +1,8 @@
 package de.atat072.rpg;
 
 import com.badlogic.gdx.Gdx;
-import de.atat072.rpg.chars.Char;
-import de.atat072.rpg.chars.Player;
+import de.atat072.rpg.gameObjects.Char;
+import de.atat072.rpg.gameObjects.Player;
 import static de.atat072.rpg.RPG.SAVE;
 import java.io.*;
 import java.util.ArrayList;
