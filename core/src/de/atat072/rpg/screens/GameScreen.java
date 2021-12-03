@@ -54,7 +54,6 @@ public class GameScreen extends ScreenAdapter implements Serializable {
 
         StoryCollection storyCollection = new StoryCollection();
         storyCollection.startStory(1);
-        //storyHandler = new StoryHandler(this, "Baeckerei");
     }
 
     //brings the UI Elements on the Screen with the desired layout
