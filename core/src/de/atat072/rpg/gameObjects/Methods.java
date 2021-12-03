@@ -1,4 +1,4 @@
-package de.atat072.rpg.chars;
+package de.atat072.rpg.gameObjects;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -9,7 +9,7 @@ public abstract class Methods {
     returns a random number between 1 and sides
     replacement for realWorld dice
      */
-    private static int dice(int sides){
+    public static int dice(int sides){
         Random dice = new Random();
         return 1+ dice.nextInt(sides);
     }

@@ -3,7 +3,7 @@ package de.atat072.rpg.Story;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
-import de.atat072.rpg.chars.Methods;
+import de.atat072.rpg.gameObjects.Methods;
 import de.atat072.rpg.screens.GameScreen;
 
 import static de.atat072.rpg.RPG.SAVE;
