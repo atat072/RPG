@@ -150,19 +150,40 @@ public class CreateScreen extends ScreenAdapter {
     private String pointsLeft(){
         int points = 200;
         //System.out.println(points);
-        points -=Integer.parseInt(str.getText());
+        if (!str.getText().isEmpty())
+            points -=Integer.parseInt(str.getText());
         //System.out.println(points);
-        points -=Integer.parseInt(dex.getText());
+        if (!dex.getText().isEmpty())
+            points -=Integer.parseInt(dex.getText());
         //System.out.println(points);
-        points -=Integer.parseInt(con.getText());
+        if (!con.getText().isEmpty())
+            points -=Integer.parseInt(con.getText());
         //System.out.println(points);
-        points -=Integer.parseInt(ent.getText());
+        if (!ent.getText().isEmpty())
+            points -=Integer.parseInt(ent.getText());
         //System.out.println(points);
-        points -=Integer.parseInt(wis.getText());
+        if (!wis.getText().isEmpty())
+            points -=Integer.parseInt(wis.getText());
         //System.out.println(points);
-        points -=Integer.parseInt(cha.getText());
+        if (!cha.getText().isEmpty())
+            points -=Integer.parseInt(cha.getText());
         //System.out.println(points);
         return String.valueOf(points);
+    }
+
+    private void adjustInputValues() {
+        int pointValue = Integer.parseInt(String.valueOf(points.getText()));
+
+        int strValue = Integer.parseInt(str.getText());
+        int dexValue = Integer.parseInt(dex.getText());
+        int conValue = Integer.parseInt(con.getText());
+        int entValue = Integer.parseInt(ent.getText());
+        int wisValue = Integer.parseInt(wis.getText());
+        int chaValue = Integer.parseInt(cha.getText());
+
+        if (pointValue - Integer.parseInt(str.getText()) <= 0) {
+            str.setText(String.valueOf(Integer.parseInt(str.getText())-Integer.parseInt(String.valueOf(points.getText()))));
+        }
     }
 
     private boolean validInput(){
