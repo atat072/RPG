@@ -6,13 +6,13 @@ import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
-import de.atat072.rpg.RPG;
 import de.atat072.rpg.Story.StoryCollection;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 
 import static de.atat072.rpg.RPG.INSTANCE;
+import static de.atat072.rpg.RPG.SKIN;
 
 public class GameScreen extends ScreenAdapter implements Serializable {
     
@@ -38,13 +38,13 @@ public class GameScreen extends ScreenAdapter implements Serializable {
         batch = new SpriteBatch();
         stage = new Stage();
         Gdx.input.setInputProcessor(stage);
-        table = new Table(RPG.SKIN);
+        table = new Table(SKIN);
         table.background("window");
         table.setFillParent(true);
         //table.debug();
-        tableText = new Table(RPG.SKIN);
+        tableText = new Table(SKIN);
         //tableText.debug();
-        tableOptions = new Table(RPG.SKIN);
+        tableOptions = new Table(SKIN);
         tableOptions.background("dialog");
         //tableOptions.debug();
         scrollPaneText = new AutoFocusScrollPane();
@@ -112,7 +112,7 @@ public class GameScreen extends ScreenAdapter implements Serializable {
 
     //Add text to the Story table
     public static void addStoryText(String newStoryText) {
-        storyText.add(new Label(newStoryText, RPG.SKIN));
+        storyText.add(new Label(newStoryText, SKIN));
         tableText.row();
     }
 
@@ -143,10 +143,10 @@ public class GameScreen extends ScreenAdapter implements Serializable {
         if (option4Btn != null)
             option4Btn.remove();
 
-        option1Btn = new TextButton("Option1", RPG.SKIN);
-        option2Btn = new TextButton("Option2", RPG.SKIN);
-        option3Btn = new TextButton("Option3", RPG.SKIN);
-        option4Btn = new TextButton("Option4", RPG.SKIN);
+        option1Btn = new TextButton("Option1", SKIN);
+        option2Btn = new TextButton("Option2", SKIN);
+        option3Btn = new TextButton("Option3", SKIN);
+        option4Btn = new TextButton("Option4", SKIN);
 
         tableOptions.add(option1Btn).expand().fill();
         tableOptions.row();

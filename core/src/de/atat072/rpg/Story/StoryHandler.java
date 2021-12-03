@@ -1,7 +1,6 @@
 package de.atat072.rpg.Story;
 
-import de.atat072.rpg.chars.Methods;
-import de.atat072.rpg.screens.GameScreen;
+
 
 import java.util.HashMap;
 
