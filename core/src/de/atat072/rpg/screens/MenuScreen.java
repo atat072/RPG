@@ -5,7 +5,6 @@ import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import de.atat072.rpg.RPG;
@@ -32,12 +31,12 @@ public class MenuScreen extends ScreenAdapter {
         batch = new SpriteBatch();
         stage = new Stage();
         Gdx.input.setInputProcessor(stage);
-        table = new Table(RPG.skin);
+        table = new Table(RPG.SKIN);
         table.background("window");
         table.setFillParent(true);
-        back =new TextButton("Zuruek zu Spliel",RPG.skin);
-        save = new TextButton("Spiel speichern", RPG.skin);
-        saveAndExit = new TextButton("Speichern und Beenden",RPG.skin);
+        back =new TextButton("Zuruek zu Spliel",RPG.SKIN);
+        save = new TextButton("Spiel speichern", RPG.SKIN);
+        saveAndExit = new TextButton("Speichern und Beenden",RPG.SKIN);
     }
 
     //brings the UI Elements on the Screen with the desired layout

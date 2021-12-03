@@ -28,18 +28,18 @@ public class CreditScreen extends ScreenAdapter {
     private void initialise(){
         batch = new SpriteBatch();
         stage = new Stage();
-        table = new Table(RPG.skin);
+        table = new Table(RPG.SKIN);
         table.background("window");
         table.setFillParent(true);
-        scrollPane = new ScrollPane(null, RPG.skin);
+        scrollPane = new ScrollPane(null, RPG.SKIN);
         tableMain = new Table();
         tableMain.setFillParent(true);
-        back = new TextButton("Zurueck",RPG.skin);
-        development = new Label("Development by Lennard Stubbe and Paul Henke",RPG.skin);
-        gui = new Label("GUI design by Paul Henke", RPG.skin);
-        guiSkin = new Label("GUI-skin by Raymond \"Raeleus\" Buckley", RPG.skin);
-        story = new Label("story written by Paul Henke",RPG.skin);
-        voiceActors = new Label("placeholder",RPG.skin);
+        back = new TextButton("Zurueck",RPG.SKIN);
+        development = new Label("Development by Lennard Stubbe and Paul Henke",RPG.SKIN);
+        gui = new Label("GUI design by Paul Henke", RPG.SKIN);
+        guiSkin = new Label("GUI-skin by Raymond \"Raeleus\" Buckley", RPG.SKIN);
+        story = new Label("story written by Paul Henke",RPG.SKIN);
+        voiceActors = new Label("placeholder",RPG.SKIN);
     }
 
     //put the UI Elements on the Screen and set the Layout

@@ -35,19 +35,19 @@ public class SaveGameSelectionScreen extends ScreenAdapter {
         batch = new SpriteBatch();
         stage = new Stage();
         Gdx.input.setInputProcessor(stage);
-        tableOut = new Table(RPG.skin);
+        tableOut = new Table(RPG.SKIN);
         tableOut.background("window");
         tableOut.setFillParent(true);
         tableIn = new Table();
         tableIn.setFillParent(true);
-        scrollPane = new ScrollPane(null,RPG.skin,"default");
-        select = new Label("Welchen Spielstand willst du laden", RPG.skin, "optional");
+        scrollPane = new ScrollPane(null,RPG.SKIN,"default");
+        select = new Label("Welchen Spielstand willst du laden", RPG.SKIN, "optional");
         saveGameSelector = new ButtonGroup();
         saveGameSelector.setMaxCheckCount(1);
         saveGameSelector.setMinCheckCount(1);
         saveGames = new ArrayList<>();
         for(String g: getSaveGames()){
-            CheckBox b = new CheckBox(g,RPG.skin);
+            CheckBox b = new CheckBox(g,RPG.SKIN);
             b.setName(g);
             saveGames.add(b);
         }
@@ -55,8 +55,8 @@ public class SaveGameSelectionScreen extends ScreenAdapter {
             saveGameSelector.add(b);
         }
         saveGames.get(0).setChecked(true);
-        back = new TextButton("Zurueck", RPG.skin, "default");
-        load = new TextButton("Spielsatnd laden", RPG.skin);
+        back = new TextButton("Zurueck", RPG.SKIN, "default");
+        load = new TextButton("Spielsatnd laden", RPG.SKIN);
     }
 
     //brings the UI Elements on the Screen with the desired layout

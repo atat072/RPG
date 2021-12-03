@@ -28,13 +28,13 @@ public class MainScreen extends ScreenAdapter {
         batch = new SpriteBatch();
         stage = new Stage();
         Gdx.input.setInputProcessor(stage);
-        table = new Table(RPG.skin);
+        table = new Table(RPG.SKIN);
         table.background("window");
         table.setFillParent(true);
-        welcome = new Label("Wilkommen in Oradrin",RPG.skin, "optional");
-        newGame = new TextButton("Neues Spiel",RPG.skin, "default");
-        loadGame = new TextButton("Spielstand laden",RPG.skin,"default");
-        quit = new TextButton("Beenden",RPG.skin,"default");
+        welcome = new Label("Wilkommen in Oradrin",RPG.SKIN, "optional");
+        newGame = new TextButton("Neues Spiel",RPG.SKIN, "default");
+        loadGame = new TextButton("Spielstand laden",RPG.SKIN,"default");
+        quit = new TextButton("Beenden",RPG.SKIN,"default");
     }
 
     //brings the UI Elements on the Screen with the desired layout
