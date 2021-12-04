@@ -13,10 +13,10 @@ public class Save implements Serializable {
     private ArrayList<Char> chars;
     private boolean mission1, mission2;
 
-    public Save(String name){
-        this.name = name;
+    public Save(String gameName, String charName, ArrayList<Integer> scores){
+        this.name = gameName;
         chars = new ArrayList<>();
-        createChars();
+        createChars(charName, scores);
         mission1 = false;
         mission2 = false;
     }
@@ -24,8 +24,8 @@ public class Save implements Serializable {
     /*
     Creates the Player and NPC when a new Game is created
      */
-    private void createChars(){
-        chars.add(new Player(name,33,34,33,33,33,34,4,0));
+    private void createChars(String charName, ArrayList<Integer> scores){
+        chars.add(new Player(charName, scores.get(0), scores.get(1),scores.get(2) ,scores.get(3), scores.get(4), scores.get(5),4,0));
         //todo add all NPC when story is finished
     }
 

@@ -1,24 +1,21 @@
 package de.atat072.rpg.Story;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class StoryCollection {
-    HashMap<Integer, Story> stories = new HashMap<>();
+    ArrayList<Story> stories = new ArrayList<>();
 
     public StoryCollection() {
-        StoryHandler storyHandler = new StoryHandler();
-        this.stories = storyHandler.stories;
+        this.stories = StoryHandler.createStories();
     }
 
-    public void startStory(int storyId) {
-        for (int i : stories.keySet()) {
-            if (i == storyId) {
-                stories.get(i).start();
+    public void startStory(String storyName) {
+        for (Story story : stories) {
+            if (story.storyName == storyName) {
+                story.start();
                 return;
             }
         }
-
         System.out.println("No Story with that id!");
     }
 }

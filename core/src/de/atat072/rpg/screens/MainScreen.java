@@ -6,9 +6,9 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
-import de.atat072.rpg.RPG;
 
 import static de.atat072.rpg.RPG.INSTANCE;
+import static de.atat072.rpg.RPG.SKIN;
 
 public class MainScreen extends ScreenAdapter {
     
@@ -28,13 +28,13 @@ public class MainScreen extends ScreenAdapter {
         batch = new SpriteBatch();
         stage = new Stage();
         Gdx.input.setInputProcessor(stage);
-        table = new Table(RPG.skin);
+        table = new Table(SKIN);
         table.background("window");
         table.setFillParent(true);
-        welcome = new Label("Wilkommen in Oradrin",RPG.skin, "optional");
-        newGame = new TextButton("Neues Spiel",RPG.skin, "default");
-        loadGame = new TextButton("Spielstand laden",RPG.skin,"default");
-        quit = new TextButton("Beenden",RPG.skin,"default");
+        welcome = new Label("Wilkommen in Oradrin",SKIN, "optional");
+        newGame = new TextButton("Neues Spiel",SKIN, "default");
+        loadGame = new TextButton("Spielstand laden",SKIN,"default");
+        quit = new TextButton("Beenden",SKIN,"default");
     }
 
     //brings the UI Elements on the Screen with the desired layout

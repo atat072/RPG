@@ -7,11 +7,12 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
-import de.atat072.rpg.RPG;
+
 
 import java.util.ArrayList;
 import static de.atat072.rpg.RPG.INSTANCE;
 import static de.atat072.rpg.Save.loadGame;
+import static de.atat072.rpg.RPG.SKIN;
 
 public class SaveGameSelectionScreen extends ScreenAdapter {
     
@@ -35,19 +36,19 @@ public class SaveGameSelectionScreen extends ScreenAdapter {
         batch = new SpriteBatch();
         stage = new Stage();
         Gdx.input.setInputProcessor(stage);
-        tableOut = new Table(RPG.skin);
+        tableOut = new Table(SKIN);
         tableOut.background("window");
         tableOut.setFillParent(true);
         tableIn = new Table();
         tableIn.setFillParent(true);
-        scrollPane = new ScrollPane(null,RPG.skin,"default");
-        select = new Label("Welchen Spielstand willst du laden", RPG.skin, "optional");
+        scrollPane = new ScrollPane(null,SKIN,"default");
+        select = new Label("Welchen Spielstand willst du laden", SKIN, "optional");
         saveGameSelector = new ButtonGroup();
         saveGameSelector.setMaxCheckCount(1);
         saveGameSelector.setMinCheckCount(1);
         saveGames = new ArrayList<>();
         for(String g: getSaveGames()){
-            CheckBox b = new CheckBox(g,RPG.skin);
+            CheckBox b = new CheckBox(g,SKIN);
             b.setName(g);
             saveGames.add(b);
         }
@@ -55,8 +56,8 @@ public class SaveGameSelectionScreen extends ScreenAdapter {
             saveGameSelector.add(b);
         }
         saveGames.get(0).setChecked(true);
-        back = new TextButton("Zurueck", RPG.skin, "default");
-        load = new TextButton("Spielsatnd laden", RPG.skin);
+        back = new TextButton("Zurueck", SKIN, "default");
+        load = new TextButton("Spielsatnd laden", SKIN);
     }
 
     //brings the UI Elements on the Screen with the desired layout

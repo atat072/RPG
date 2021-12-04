@@ -1,6 +1,6 @@
 package de.atat072.rpg.Story;
 
-public class StoryValues {
+public class StoryDecisionValues {
     String decisionName;
     String decisionText;
 
@@ -23,10 +23,10 @@ public class StoryValues {
     String checkTyp3;
     String checkTyp4;
 
-    public StoryValues() {
+    public StoryDecisionValues() {
     }
 
-    public StoryValues(String decisionName, String decisionText, String decision1, String decision2, String decision3, String decision4, String decision1Decision1, String decision1Decision2, String decision2Decision1, String decision2Decision2, String decision3Decision1, String decision3Decision2, String decision4Decision1, String decision4Decision2, String checkTyp1, String checkTyp2, String checkTyp3, String checkTyp4) {
+    public StoryDecisionValues(String decisionName, String decisionText, String decision1, String decision2, String decision3, String decision4, String decision1Decision1, String decision1Decision2, String decision2Decision1, String decision2Decision2, String decision3Decision1, String decision3Decision2, String decision4Decision1, String decision4Decision2, String checkTyp1, String checkTyp2, String checkTyp3, String checkTyp4) {
         this.decisionName = decisionName;
         this.decisionText = decisionText;
         this.decision1 = decision1;

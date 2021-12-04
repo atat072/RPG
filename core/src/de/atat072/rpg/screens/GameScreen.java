@@ -6,13 +6,12 @@ import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
-import de.atat072.rpg.RPG;
 import de.atat072.rpg.Story.StoryCollection;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 
-import static de.atat072.rpg.RPG.INSTANCE;
+import static de.atat072.rpg.RPG.*;
 
 public class GameScreen extends ScreenAdapter implements Serializable {
     
@@ -31,6 +30,7 @@ public class GameScreen extends ScreenAdapter implements Serializable {
         this.name = name;
         initialise();
         setLayout();
+        test();
     }
 
     //creates all UI Elements
@@ -38,13 +38,13 @@ public class GameScreen extends ScreenAdapter implements Serializable {
         batch = new SpriteBatch();
         stage = new Stage();
         Gdx.input.setInputProcessor(stage);
-        table = new Table(RPG.skin);
+        table = new Table(SKIN);
         table.background("window");
         table.setFillParent(true);
         //table.debug();
-        tableText = new Table(RPG.skin);
+        tableText = new Table(SKIN);
         //tableText.debug();
-        tableOptions = new Table(RPG.skin);
+        tableOptions = new Table(SKIN);
         tableOptions.background("dialog");
         //tableOptions.debug();
         scrollPaneText = new AutoFocusScrollPane();
@@ -53,8 +53,7 @@ public class GameScreen extends ScreenAdapter implements Serializable {
         storyText = new ArrayList<>();
 
         StoryCollection storyCollection = new StoryCollection();
-        storyCollection.startStory(1);
-        //storyHandler = new StoryHandler(this, "Baeckerei");
+        storyCollection.startStory("Story-0.1");
     }
 
     //brings the UI Elements on the Screen with the desired layout
@@ -112,7 +111,7 @@ public class GameScreen extends ScreenAdapter implements Serializable {
 
     //Add text to the Story table
     public static void addStoryText(String newStoryText) {
-        storyText.add(new Label(newStoryText, RPG.skin));
+        storyText.add(new Label(newStoryText, SKIN));
         tableText.row();
     }
 
@@ -143,10 +142,10 @@ public class GameScreen extends ScreenAdapter implements Serializable {
         if (option4Btn != null)
             option4Btn.remove();
 
-        option1Btn = new TextButton("Option1", RPG.skin);
-        option2Btn = new TextButton("Option2", RPG.skin);
-        option3Btn = new TextButton("Option3", RPG.skin);
-        option4Btn = new TextButton("Option4", RPG.skin);
+        option1Btn = new TextButton("Option1", SKIN);
+        option2Btn = new TextButton("Option2", SKIN);
+        option3Btn = new TextButton("Option3", SKIN);
+        option4Btn = new TextButton("Option4", SKIN);
 
         tableOptions.add(option1Btn).expand().fill();
         tableOptions.row();
@@ -156,5 +155,15 @@ public class GameScreen extends ScreenAdapter implements Serializable {
         tableOptions.row();
         tableOptions.add(option4Btn).expand().fill();
         tableOptions.row();
+    }
+
+    private void test(){
+        System.out.println(SAVE.getCharsWithIndex(0).getStr());
+        System.out.println(SAVE.getCharsWithIndex(0).getDex());
+        System.out.println(SAVE.getCharsWithIndex(0).getCon());
+        System.out.println(SAVE.getCharsWithIndex(0).getEnt());
+        System.out.println(SAVE.getCharsWithIndex(0).getWis());
+        System.out.println(SAVE.getCharsWithIndex(0).getChr());
+
     }
 }
