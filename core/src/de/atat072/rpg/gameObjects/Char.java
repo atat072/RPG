@@ -1,4 +1,4 @@
-package de.atat072.rpg.chars;
+package de.atat072.rpg.gameObjects;
 
 import java.io.Serializable;
 
