@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+
+<!--Help:-->
+<!-- Fight structure:
+- To create a new Fight, add a Children to the corresponding Story
+- Name the fight like you want to, but always include "-Fight" -> "(Name)-Fight"
+- In the fight you have to but a child called "Intro" where you describe the
+  start of the Fight
+- After the Intro you also need to add a child called "Enemies"
+- In this child you can put the different enemies
+- An enemies should contain the following children:
+    - name //The name of the Enemy
+    - str //The Strength of the Enemy
+    - con //The Constitution of the Enemy
+    - dex //The Dexterity of the Enemy
+    - ent //The Intelligence of the Enemy
+    - wis //The Wisdom of the Enemy
+    - chr //The Charisma of the Enemy
+    - armor //The Armor Class of the Enemy
+    - relation //The Relation of the Enemy
+    - weapons //The Weapons of the Enemy
+- The weapons should contain also some children:
+    - name //The name of the weapon
+    - dice //The dice of the weapon
+    - diceCount //The dice count of the weapon
+- At the end of each successful fight the player will get
+  loot, just add the loot in the "Loot" children
+
+-->
+
+<Stories>
+    <Story-0.1>
+        <Dorf-Fight>
+            <Intro>
+Du loest dein starre entschlossen auf und drehst
+dich zu den langsam anhumpelnden skelleten um.
+Angst erfuellt greifst du dir ein schwert eines
+toten Dorfbewohners und bereitest dich auf den
+Kampf vor.
+            </Intro>
+            <Enemies>
+                <Skelett1>
+                    <name>Skelett1</name>
+                    <str>20</str>
+                    <con>20</con>
+                    <dex>20</dex>
+                    <ent>20</ent>
+                    <wis>20</wis>
+                    <chr>20</chr>
+                    <armor>3</armor>
+                    <relation>0</relation>
+                    <weapon>
+                        <name>Sword</name>
+                        <dice>1</dice>
+                        <diceCount>6</diceCount>
+                    </weapon>
+                </Skelett1>
+            </Enemies>
+            <Loot>
+            </Loot>
+        </Dorf-Fight>
+    </Story-0.1>
+</Stories>

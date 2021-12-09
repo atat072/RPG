@@ -9,7 +9,6 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import de.atat072.rpg.Save;
-import de.atat072.rpg.chars.Methods;
 
 import java.util.ArrayList;
 import java.util.Objects;

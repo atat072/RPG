@@ -3,6 +3,7 @@ package de.atat072.rpg.Story;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import de.atat072.rpg.Fight.FightDecision;
 import de.atat072.rpg.gameObjects.Methods;
 import de.atat072.rpg.screens.GameScreen;
 
@@ -15,18 +16,22 @@ public class Decision {
     String decision1;
     TextButton decision1Btn;
     Decision decision1decision;
+    public FightDecision fightDecision1;
 
     String decision2;
     TextButton decision2Btn;
     Decision decision2decision;
+    public FightDecision fightDecision2;
 
     String decision3;
     TextButton decision3Btn;
     Decision decision3decision;
+    public FightDecision fightDecision3;
 
     String decision4;
     TextButton decision4Btn;
     Decision decision4decision;
+    public FightDecision fightDecision4;
 
     //CheckDecision Values
     Decision trueCheck;
@@ -54,17 +59,67 @@ public class Decision {
         this.checkResult = false;
     }
 
-    //CheckDecision Methods
-    public Decision() {
-        this.trueCheck = trueCheck;
-        this.falseCheck = falseCheck;
-        this.checkTyp = checkTyp;
-        this.checkResult = true;
+    public Decision(String decisionName, String decisionText, String decision1, FightDecision fightDecision1, String decision2, Decision decision2decision, String decision3, Decision decision3decision, String decision4, Decision decision4decision) {
+        this.decisionName = decisionName;
+        this.decisionText = decisionText;
+
+        this.decision1 = decision1;
+        this.fightDecision1 = fightDecision1;
+
+        this.decision2 = decision2;
+        this.decision2decision = decision2decision;
+
+        this.decision3 = decision3;
+        this.decision3decision = decision3decision;
+
+        this.decision4 = decision4;
+        this.decision4decision = decision4decision;
+
+        this.checkResult = false;
+    }
+
+    public Decision(String decisionName, String decisionText, String decision1, Decision decision1decision, String decision2, FightDecision fightDecision2, String decision3, Decision decision3decision, String decision4, Decision decision4decision) {
+        this.decisionName = decisionName;
+        this.decisionText = decisionText;
+
+        this.decision1 = decision1;
+        this.decision1decision = decision1decision;
+
+        this.decision2 = decision2;
+        this.fightDecision2 = fightDecision2;
+
+        this.decision3 = decision3;
+        this.decision3decision = decision3decision;
+
+        this.decision4 = decision4;
+        this.decision4decision = decision4decision;
+
+        this.checkResult = false;
+    }
+
+    public Decision(String decisionName, String decisionText, String decision1, FightDecision fightDecision1, String decision2, FightDecision fightDecision2, String decision3, Decision decision3decision, String decision4, Decision decision4decision) {
+        this.decisionName = decisionName;
+        this.decisionText = decisionText;
+
+        this.decision1 = decision1;
+        this.fightDecision1 = fightDecision1;
+
+        this.decision2 = decision2;
+        this.fightDecision2 = fightDecision2;
+
+        this.decision3 = decision3;
+        this.decision3decision = decision3decision;
+
+        this.decision4 = decision4;
+        this.decision4decision = decision4decision;
+
+        this.checkResult = false;
     }
 
     public void loadDecision() {
         GameScreen.refreshButtons();
 
+        //<editor-fold desc="Set next Decision">
         //Set Option for Button 1 of this Screen
         decision1Btn = GameScreen.option1Btn;
 
@@ -75,16 +130,30 @@ public class Decision {
                     decision1decision.loadDecision();
                 }
             });
+        } else if (fightDecision1 != null){
+            decision1Btn.addListener(new ChangeListener() {
+                @Override
+                public void changed(ChangeEvent event, Actor actor) {
+                    fightDecision1.loadDecision();
+                }
+            });
         }
 
         //Set Option for Button 2 of this Screen
         decision2Btn = GameScreen.option2Btn;
-
         if (decision2decision != null) {
             decision2Btn.addListener(new ChangeListener() {
                 @Override
                 public void changed(ChangeEvent event, Actor actor) {
                     decision2decision.loadDecision();
+                }
+            });
+        } else if (fightDecision2 != null){
+            decision2Btn.addListener(new ChangeListener() {
+                @Override
+                public void changed(ChangeEvent event, Actor actor) {
+                    //DecisionRAM.fightDecisions.get()
+                    fightDecision2.loadDecision();
                 }
             });
         }
@@ -112,6 +181,7 @@ public class Decision {
                 }
             });
         }
+        //</editor-fold>
 
         //Edit Texts on GameScreen
         GameScreen.addStoryText(decisionText);
@@ -148,11 +218,11 @@ public class Decision {
             }
         }
         if (checkResultValue) {
-            System.out.println("Succes");
+            //System.out.println("Succes");
 
             return trueCheck;
         } else {
-            System.out.println("Fail");
+            //System.out.println("Fail");
 
             return falseCheck;
         }

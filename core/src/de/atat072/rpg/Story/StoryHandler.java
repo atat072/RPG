@@ -1,6 +1,7 @@
 package de.atat072.rpg.Story;
 
 import com.badlogic.gdx.Gdx;
+import de.atat072.rpg.Fight.FightDecision;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -30,17 +31,105 @@ public abstract class StoryHandler {
         for (String storyName : storyMap.keySet()) {
             HashMap<String, Decision> storyDecisionMap = new HashMap<>();
 
+            //Create fights
             for (StoryDecisionValues v : storyMap.get(storyName)) {
-                Decision storyDecision =
-                        new Decision(
-                                v.decisionName,
-                                v.decisionText,
-                                v.decision1, Decision.checkDecision(storyDecisionMap.get(v.decision1Decision1), storyDecisionMap.get(v.decision1Decision2), v.checkTyp1),
-                                v.decision2, Decision.checkDecision(storyDecisionMap.get(v.decision2Decision1), storyDecisionMap.get(v.decision2Decision2), v.checkTyp2),
-                                v.decision3, Decision.checkDecision(storyDecisionMap.get(v.decision3Decision1), storyDecisionMap.get(v.decision3Decision2), v.checkTyp3),
-                                v.decision4, Decision.checkDecision(storyDecisionMap.get(v.decision4Decision1), storyDecisionMap.get(v.decision4Decision2), v.checkTyp4)
-                        );
-                storyDecisionMap.put(v.decisionName, storyDecision);
+                if (v.decision1Decision1.contains("Fight")) {
+                    FightDecision fight = new FightDecision(v.decision1Decision1, 1);
+                    DecisionRAM.fightDecisions.put(v.decisionName, fight);
+                }
+                if (v.decision2Decision1.contains("Fight")) {
+                    FightDecision fight = new FightDecision(v.decision2Decision1, 2);
+                    DecisionRAM.fightDecisions.put(v.decisionName, fight);
+                }
+                if (v.decision3Decision1.contains("Fight")) {
+                    FightDecision fight = new FightDecision(v.decision3Decision1, 3);
+                    DecisionRAM.fightDecisions.put(v.decisionName, fight);
+                }
+                if (v.decision4Decision1.contains("Fight")) {
+                    FightDecision fight = new FightDecision(v.decision4Decision1, 4);
+                    DecisionRAM.fightDecisions.put(v.decisionName, fight);
+                }
+            }
+
+
+            for (StoryDecisionValues v : storyMap.get(storyName)) {
+                if (v.decision1Decision1.contains("Fight") && !v.decision2Decision1.contains("Fight") && !v.decision3Decision1.contains("Fight") && !v.decision4Decision1.contains("Fight")) {
+                    FightDecision fight1 = null;
+                    for (String name : DecisionRAM.fightDecisions.keySet()) {
+                        if (name.equals(v.decisionName)) {
+                            if (DecisionRAM.fightDecisions.get(name).getFightNumber() == 2) {
+                                fight1 = DecisionRAM.fightDecisions.get(name);
+                            }
+                        }
+                    }
+
+                    Decision storyDecision =
+                            new Decision(
+                                    v.decisionName,
+                                    v.decisionText,
+                                    v.decision1, fight1,
+                                    v.decision2, Decision.checkDecision(storyDecisionMap.get(v.decision2Decision1), storyDecisionMap.get(v.decision2Decision2), v.checkTyp2),
+                                    v.decision3, Decision.checkDecision(storyDecisionMap.get(v.decision3Decision1), storyDecisionMap.get(v.decision3Decision2), v.checkTyp3),
+                                    v.decision4, Decision.checkDecision(storyDecisionMap.get(v.decision4Decision1), storyDecisionMap.get(v.decision4Decision2), v.checkTyp4)
+                            );
+                    storyDecisionMap.put(v.decisionName, storyDecision);
+                }else if (!v.decision1Decision1.contains("Fight") && v.decision2Decision1.contains("Fight") && !v.decision3Decision1.contains("Fight") && !v.decision4Decision1.contains("Fight")) {
+                    FightDecision fight2 = null;
+                    for (String name : DecisionRAM.fightDecisions.keySet()) {
+                        if (name.equals(v.decisionName)) {
+                            if (DecisionRAM.fightDecisions.get(name).getFightNumber() == 2) {
+                                fight2 = DecisionRAM.fightDecisions.get(name);
+                            }
+                        }
+                    }
+
+                    Decision storyDecision =
+                            new Decision(
+                                    v.decisionName,
+                                    v.decisionText,
+                                    v.decision1, Decision.checkDecision(storyDecisionMap.get(v.decision1Decision1), storyDecisionMap.get(v.decision1Decision2), v.checkTyp1),
+                                    v.decision2, fight2,
+                                    v.decision3, Decision.checkDecision(storyDecisionMap.get(v.decision3Decision1), storyDecisionMap.get(v.decision3Decision2), v.checkTyp3),
+                                    v.decision4, Decision.checkDecision(storyDecisionMap.get(v.decision4Decision1), storyDecisionMap.get(v.decision4Decision2), v.checkTyp4)
+                            );
+                    storyDecisionMap.put(v.decisionName, storyDecision);
+                } else if (v.decision1Decision1.contains("Fight") && v.decision2Decision1.contains("Fight") && !v.decision3Decision1.contains("Fight") && !v.decision4Decision1.contains("Fight")) {
+                    FightDecision fight1 = null;
+                    FightDecision fight2 = null;
+                    for (String name : DecisionRAM.fightDecisions.keySet()) {
+                        if (name.equals(v.decisionName)) {
+                            if (DecisionRAM.fightDecisions.get(name).getFightNumber() == 1) {
+                                fight1 = DecisionRAM.fightDecisions.get(name);
+                            }
+                            if (DecisionRAM.fightDecisions.get(name).getFightNumber() == 2) {
+                                fight2 = DecisionRAM.fightDecisions.get(name);
+                            }
+                        }
+                    }
+
+                    Decision storyDecision =
+                            new Decision(
+                                    v.decisionName,
+                                    v.decisionText,
+                                    v.decision1, fight1,
+                                    v.decision2, fight2,
+                                    v.decision3, Decision.checkDecision(storyDecisionMap.get(v.decision3Decision1), storyDecisionMap.get(v.decision3Decision2), v.checkTyp3),
+                                    v.decision4, Decision.checkDecision(storyDecisionMap.get(v.decision4Decision1), storyDecisionMap.get(v.decision4Decision2), v.checkTyp4)
+                            );
+                    storyDecisionMap.put(v.decisionName, storyDecision);
+                }
+                else {
+                    Decision storyDecision =
+                            new Decision(
+                                    v.decisionName,
+                                    v.decisionText,
+                                    v.decision1, Decision.checkDecision(storyDecisionMap.get(v.decision1Decision1), storyDecisionMap.get(v.decision1Decision2), v.checkTyp1),
+                                    v.decision2, Decision.checkDecision(storyDecisionMap.get(v.decision2Decision1), storyDecisionMap.get(v.decision2Decision2), v.checkTyp2),
+                                    v.decision3, Decision.checkDecision(storyDecisionMap.get(v.decision3Decision1), storyDecisionMap.get(v.decision3Decision2), v.checkTyp3),
+                                    v.decision4, Decision.checkDecision(storyDecisionMap.get(v.decision4Decision1), storyDecisionMap.get(v.decision4Decision2), v.checkTyp4)
+                            );
+                    storyDecisionMap.put(v.decisionName, storyDecision);
+                }
             }
             Story story = new Story(storyName,null, storyDecisionMap);
             stories.add(story);

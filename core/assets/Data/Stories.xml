@@ -5,6 +5,7 @@
 - All Stories getting added as children to the "Stories" Root
 - You call the stories "Story-0.1", "Story-0.2", "Story-0.9", "Story-1.0" and so on
 - In the Story you have to put in your Decisions and name them useful -> Opt1, Opt12, ...
+- There always has to be a Decision called Intro which is the first loaded Decision
 - Whit in each decision you have to put in following statements:
     - <DecisionText></DecisionText>
     - <Decision1></Decision1> | Text for the First Decision
@@ -30,6 +31,7 @@
     - <Decision2Decision1></Decision2Decision1> <Decision2Decision2></Decision2Decision2> <DecisionCheckTyp2></DecisionCheckTyp2>
     - <Decision3Decision1></Decision3Decision1> <Decision3Decision2></Decision3Decision2> <DecisionCheckTyp3></DecisionCheckTyp3>
     - <Decision4Decision1></Decision4Decision1> <Decision4Decision2></Decision4Decision2> <DecisionCheckTyp4></DecisionCheckTyp4>
+- In case that you want to start a fight just write the Name of the created fight of the "StoryFights" in the first statement of the corresponding line.
 -->
 
 <Stories>
@@ -112,6 +114,26 @@ dichten Eichenlaub verschwindet.
             <Decision3Decision1></Decision3Decision1> <Decision3Decision2></Decision3Decision2> <DecisionCheckTyp3></DecisionCheckTyp3>
             <Decision4Decision1></Decision4Decision1> <Decision4Decision2></Decision4Decision2> <DecisionCheckTyp4></DecisionCheckTyp4>
         </Opt9>
+        <Opt13>
+            <DecisionText>
+Als du durch den Wald laeufst wird dir klar,
+dass es kein zurueck mehr gibt.
+Im Wald suchst du nach Tiana und findest sie
+einige Zeit spaeter.
+Tiana: 'Oh du hast deine Meinung aber
+schnell geaendert.'
+            </DecisionText>
+            <Decision1>Die Daemonen haben mein Dorf zerstoert
+und alle getoetet, ich schliesse mich
+euch an!</Decision1>
+            <Decision2></Decision2>
+            <Decision3></Decision3>
+            <Decision4></Decision4>
+            <Decision1Decision1>Opt9</Decision1Decision1> <Decision1Decision2></Decision1Decision2> <DecisionCheckTyp1></DecisionCheckTyp1>
+            <Decision2Decision1></Decision2Decision1> <Decision2Decision2></Decision2Decision2> <DecisionCheckTyp2></DecisionCheckTyp2>
+            <Decision3Decision1></Decision3Decision1> <Decision3Decision2></Decision3Decision2> <DecisionCheckTyp3></DecisionCheckTyp3>
+            <Decision4Decision1></Decision4Decision1> <Decision4Decision2></Decision4Decision2> <DecisionCheckTyp4></DecisionCheckTyp4>
+        </Opt13>
         <Opt10>
             <DecisionText>
 Tiana:'Ich respektiere deine Entscheidung auch
@@ -125,23 +147,14 @@ Aufschrift 'Dies ist die Strafe für deinen
 Verrat an Asmodeus.'.
 Du hoerst das klappern der Knochen von einigen
 Skeletten. Das Geraeusch wird Lauter und du'
-rennst zurueck in den Wald. Dir wird klar,
-dass es kein zurueck mehr gibt.
-Im Wald suchst du nach Tiana und findest sie
-einige Zeit spaeter.
-Tiana: 'Oh du hast deine Meinung aber
-schnell geaendert.'
+erstarst.
             </DecisionText>
-            <Decision1>
-Die Daemonen haben mein Dorf zerstoert
-und alle getoetet, ich schliesse mich
-euch an!
-            </Decision1>
-            <Decision2></Decision2>
+            <Decision1>Zurueck in den Wald laufen.</Decision1>
+            <Decision2>Gegen die Skelette Kaempfen.</Decision2>
             <Decision3></Decision3>
             <Decision4></Decision4>
-            <Decision1Decision1>Opt9</Decision1Decision1> <Decision1Decision2></Decision1Decision2> <DecisionCheckTyp1></DecisionCheckTyp1>
-            <Decision2Decision1></Decision2Decision1> <Decision2Decision2></Decision2Decision2> <DecisionCheckTyp2></DecisionCheckTyp2>
+            <Decision1Decision1>Opt13</Decision1Decision1> <Decision1Decision2></Decision1Decision2> <DecisionCheckTyp1></DecisionCheckTyp1>
+            <Decision2Decision1>Dorf-Fight</Decision2Decision1> <Decision2Decision2></Decision2Decision2> <DecisionCheckTyp2></DecisionCheckTyp2>
             <Decision3Decision1></Decision3Decision1> <Decision3Decision2></Decision3Decision2> <DecisionCheckTyp3></DecisionCheckTyp3>
             <Decision4Decision1></Decision4Decision1> <Decision4Decision2></Decision4Decision2> <DecisionCheckTyp4></DecisionCheckTyp4>
         </Opt10>
@@ -155,10 +168,8 @@ oder so, der Unterschied besteht lediglich darin,
 ob du den Daemonen vorher noch eins auswischt.'
             </DecisionText>
             <Decision1>Ok, ich komme mit euch.</Decision1>
-            <Decision2>
-Nein, ich denke wir sollten
-getrennte wege gehen.
-            </Decision2>
+            <Decision2>Nein, ich denke wir sollten
+getrennte wege gehen.</Decision2>
             <Decision3></Decision3>
             <Decision4></Decision4>
             <Decision1Decision1>Opt9</Decision1Decision1> <Decision1Decision2></Decision1Decision2> <DecisionCheckTyp1></DecisionCheckTyp1>
@@ -175,7 +186,7 @@ koennen wir alles in ruhe Besprechen.'
             </DecisionText>
             <Decision1>Ok, ich komme mit euch.</Decision1>
             <Decision2>Nein, ich denke wir sollten
-                getrennte wege gehen.</Decision2>
+getrennte wege gehen.</Decision2>
             <Decision3></Decision3>
             <Decision4></Decision4>
             <Decision1Decision1>Opt9</Decision1Decision1> <Decision1Decision2></Decision1Decision2> <DecisionCheckTyp1></DecisionCheckTyp1>
@@ -191,10 +202,8 @@ umgeben von Politikern. Da entwickelt
 man zwangslauufig ein gutes gespuer fuer Luegen.
 Und jetzt raus mit der Sprache! Was weisst du?'
             </DecisionText>
-            <Decision1>
-Ja ja ok, ich weiss etwas ueber ein Relikt
-welches Andariel gerne haben wuerde.
-            </Decision1>
+            <Decision1>Ja ja ok, ich weiss etwas ueber ein Relikt
+welches Andariel gerne haben wuerde.</Decision1>
             <Decision2></Decision2>
             <Decision3></Decision3>
             <Decision4></Decision4>
@@ -210,10 +219,8 @@ mit der Sprache. Wenn wir ueberleben wollen
 brauchen wir alle Informationen, die wir
 kriegen koennen.'
             </DecisionText>
-            <Decision1>
-Ja ja ok, ich weiss etwas über ein Relikt
-welches Andariel gerne haben würde.
-            </Decision1>
+            <Decision1>Ja ja ok, ich weiss etwas über ein Relikt
+welches Andariel gerne haben würde.</Decision1>
             <Decision2></Decision2>
             <Decision3></Decision3>
             <Decision4></Decision4>
@@ -229,10 +236,8 @@ du dann fliehen, die anderen, die nichts
 wussten, liess Andariel doch gehen?'
             </DecisionText>
             <Decision1>(Nichts Sagen)</Decision1>
-            <Decision2>
-Andariel haette mir nicht geglaubt,
-wenn ich gesagt haette, das ich nichts weiss.
-            </Decision2>
+            <Decision2>Andariel haette mir nicht geglaubt,
+wenn ich gesagt haette, das ich nichts weiss.</Decision2>
             <Decision3></Decision3>
             <Decision4></Decision4>
             <Decision1Decision1>Opt7</Decision1Decision1> <Decision1Decision2></Decision1Decision2> <DecisionCheckTyp1></DecisionCheckTyp1>
@@ -250,14 +255,10 @@ unserem Stuetzpunkt wenn du etwas weisst, das
 Andariel braucht. Also, zurueck zu meiner
 Frage was weisst du?'
             </DecisionText>
-            <Decision1>
-Ich weiss nichts was euch helfen koennte.
-(Luegen) [Charisma Check]
-            </Decision1>
-            <Decision2>
-Ich weiss etwas ueber ein Relikt welches
-Andariel gerne haben wuerde.
-            </Decision2>
+            <Decision1>Ich weiss nichts was euch helfen koennte.
+(Luegen) [Charisma Check]</Decision1>
+            <Decision2>Ich weiss etwas ueber ein Relikt welches
+Andariel gerne haben wuerde.</Decision2>
             <Decision3></Decision3>
             <Decision4></Decision4>
             <Decision1Decision1>Opt8</Decision1Decision1> <Decision1Decision2>Opt4</Decision1Decision2> <DecisionCheckTyp1>chr</DecisionCheckTyp1>
@@ -279,14 +280,10 @@ Nun las das leid das du gebracht hast nicht
 umsonst sein und hilf uns. Was weißt du was
 Andriel wissen will?'
             </DecisionText>
-            <Decision1>
-Ich weiss nichts was euch helfen koennte.
-(Luegen) [Charisma Check]
-            </Decision1>
-            <Decision2>
-Ich weiss etwas ueber ein Relikt welches
-Andariel gerne haben wuerde.
-            </Decision2>
+            <Decision1>Ich weiss nichts was euch helfen koennte.
+(Luegen) [Charisma Check]</Decision1>
+            <Decision2>Ich weiss etwas ueber ein Relikt welches
+Andariel gerne haben wuerde.</Decision2>
             <Decision3></Decision3>
             <Decision4></Decision4>
             <Decision1Decision1>Opt8</Decision1Decision1> <Decision1Decision2>Opt4</Decision1Decision2> <DecisionCheckTyp1>chr</DecisionCheckTyp1>
@@ -304,18 +301,12 @@ vertreiben. Um das zu schaffen brauchen wir
 einen Vorteil gegenueber Andariel und Wissen
 ist einer der besten, also was weisst du?'
             </DecisionText>
-            <Decision1>
-Ich weiss nichts was euch helfen könnte.
-(Luegen) [Charisma Check]
-            </Decision1>
-            <Decision2>
-Mit deinen aktionen machts du uns das
-Leben nur schwerer!
-            </Decision2>
-            <Decision3>
-Ich weiss etwas ueber ein Relikt welches
-Andariel gerne haben wuerde.
-            </Decision3>
+            <Decision1>Ich weiss nichts was euch helfen könnte.
+(Luegen) [Charisma Check]</Decision1>
+            <Decision2>Mit deinen aktionen machts du uns das
+Leben nur schwerer!</Decision2>
+            <Decision3>Ich weiss etwas ueber ein Relikt welches
+Andariel gerne haben wuerde.</Decision3>
             <Decision4></Decision4>
             <Decision1Decision1>Opt8</Decision1Decision1> <Decision1Decision2>Opt4</Decision1Decision2> <DecisionCheckTyp1>chr</DecisionCheckTyp1>
             <Decision2Decision1>Opt2</Decision2Decision1> <Decision2Decision2> </Decision2Decision2> <DecisionCheckTyp2></DecisionCheckTyp2>
