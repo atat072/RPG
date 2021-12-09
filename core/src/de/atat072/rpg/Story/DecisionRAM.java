@@ -6,5 +6,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class DecisionRAM {
+    //Is saving all the fights for the Game to get accessed by the Decisions
     public static HashMap<String, FightDecision> fightDecisions = new HashMap<>();
 }

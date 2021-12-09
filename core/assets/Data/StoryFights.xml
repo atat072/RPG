@@ -56,8 +56,7 @@ Kampf vor.
                     </weapon>
                 </Skelett1>
             </Enemies>
-            <Loot>
-            </Loot>
+            <Loot></Loot>
         </Dorf-Fight>
     </Story-0.1>
 </Stories>
