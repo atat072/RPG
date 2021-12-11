@@ -29,34 +29,36 @@
 -->
 
 <Stories>
-    <Story-0.1>
-        <Dorf-Fight>
-            <Intro>
+    <Dorf-Fight>
+        <Intro>
 Du loest dein starre entschlossen auf und drehst
 dich zu den langsam anhumpelnden skelleten um.
 Angst erfuellt greifst du dir ein schwert eines
 toten Dorfbewohners und bereitest dich auf den
 Kampf vor.
-            </Intro>
-            <Enemies>
-                <Skelett1>
-                    <name>Skelett1</name>
-                    <str>20</str>
-                    <con>20</con>
-                    <dex>20</dex>
-                    <ent>20</ent>
-                    <wis>20</wis>
-                    <chr>20</chr>
-                    <armor>3</armor>
-                    <relation>0</relation>
-                    <weapon>
-                        <name>Sword</name>
-                        <dice>1</dice>
-                        <diceCount>6</diceCount>
-                    </weapon>
-                </Skelett1>
-            </Enemies>
-            <Loot></Loot>
-        </Dorf-Fight>
-    </Story-0.1>
+        </Intro>
+        <Enemies>
+            <Skelett1>
+                <name>Skelett1</name>
+                <str>20</str>
+                <con>20</con>
+                <dex>20</dex>
+                <ent>20</ent>
+                <wis>20</wis>
+                <chr>20</chr>
+                <armor>3</armor>
+                <relation>0</relation>
+                <wname>Sword</wname>
+                <wdice>6</wdice>
+                <wdiceCount>1</wdiceCount>
+            </Skelett1>
+        </Enemies>
+        <Loot>
+            <Potions>
+                <Potion1>false</Potion1>
+                <Potion2>true</Potion2>
+            </Potions>
+            <Coin>10</Coin>
+        </Loot>
+    </Dorf-Fight>
 </Stories>
