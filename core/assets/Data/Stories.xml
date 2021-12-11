@@ -32,6 +32,7 @@
     - <Decision3Decision1></Decision3Decision1> <Decision3Decision2></Decision3Decision2> <DecisionCheckTyp3></DecisionCheckTyp3>
     - <Decision4Decision1></Decision4Decision1> <Decision4Decision2></Decision4Decision2> <DecisionCheckTyp4></DecisionCheckTyp4>
 - In case that you want to start a fight just write the Name of the created fight of the "StoryFights" in the first statement of the corresponding line.
+- When you want to start a Story, just write the story name into the first statement of the corresponding line.
 -->
 
 <Stories>
