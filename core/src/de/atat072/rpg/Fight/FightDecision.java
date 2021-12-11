@@ -22,19 +22,13 @@ import java.util.HashMap;
 import static de.atat072.rpg.RPG.SAVE;
 
 public class FightDecision {
-    int fightNumber;
     String fightName;
 
-    public FightDecision(String fightName, int fightNumber) {
-        this.fightNumber = fightNumber;
+    public FightDecision(String fightName) {
         this.fightName = fightName;
     }
 
     public void loadDecision() {
         FightHandler fightHandler = new FightHandler(fightName);
-    }
-
-    public int getFightNumber() {
-        return fightNumber;
     }
 }

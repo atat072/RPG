@@ -26,11 +26,13 @@ public class GameScreen extends ScreenAdapter implements Serializable {
     public static TextButton option3Btn;
     public static TextButton option4Btn;
 
+    public static StoryCollection storyCollection;
+
     public GameScreen(String name){
         this.name = name;
         initialise();
         setLayout();
-        test();
+        //test();
     }
 
     //creates all UI Elements
@@ -52,7 +54,7 @@ public class GameScreen extends ScreenAdapter implements Serializable {
         scrollPaneText.setScrollbarsVisible(true);
         storyText = new ArrayList<>();
 
-        StoryCollection storyCollection = new StoryCollection();
+        storyCollection = new StoryCollection();
         storyCollection.startStory("Story-0.1");
     }
 

@@ -7,11 +7,12 @@ public class StoryCollection {
 
     public StoryCollection() {
         this.stories = StoryHandler.createStories();
+        stories.remove(0);
     }
 
     public void startStory(String storyName) {
         for (Story story : stories) {
-            if (story.storyName == storyName) {
+            if (story.storyName.equals(storyName)) {
                 story.start();
                 return;
             }

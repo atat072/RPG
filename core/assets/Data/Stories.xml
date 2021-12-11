@@ -60,7 +60,7 @@ magisch, das wird die Plattform nicht in
             <Decision2></Decision2>
             <Decision3></Decision3>
             <Decision4></Decision4>
-            <Decision1Decision1></Decision1Decision1> <Decision1Decision2></Decision1Decision2> <DecisionCheckTyp1></DecisionCheckTyp1>
+            <Decision1Decision1>Story-0.2</Decision1Decision1> <Decision1Decision2></Decision1Decision2> <DecisionCheckTyp1></DecisionCheckTyp1>
             <Decision2Decision1></Decision2Decision1> <Decision2Decision2></Decision2Decision2> <DecisionCheckTyp2></DecisionCheckTyp2>
             <Decision3Decision1></Decision3Decision1> <Decision3Decision2></Decision3Decision2> <DecisionCheckTyp3></DecisionCheckTyp3>
             <Decision4Decision1></Decision4Decision1> <Decision4Decision2></Decision4Decision2> <DecisionCheckTyp4></DecisionCheckTyp4>
@@ -87,7 +87,7 @@ nicht auf die Plattform uebergreifend.'
             <Decision2></Decision2>
             <Decision3></Decision3>
             <Decision4></Decision4>
-            <Decision1Decision1></Decision1Decision1> <Decision1Decision2></Decision1Decision2> <DecisionCheckTyp1></DecisionCheckTyp1>
+            <Decision1Decision1>Story-0.2</Decision1Decision1> <Decision1Decision2></Decision1Decision2> <DecisionCheckTyp1></DecisionCheckTyp1>
             <Decision2Decision1></Decision2Decision1> <Decision2Decision2></Decision2Decision2> <DecisionCheckTyp2></DecisionCheckTyp2>
             <Decision3Decision1></Decision3Decision1> <Decision3Decision2></Decision3Decision2> <DecisionCheckTyp3></DecisionCheckTyp3>
             <Decision4Decision1></Decision4Decision1> <Decision4Decision2></Decision4Decision2> <DecisionCheckTyp4></DecisionCheckTyp4>
@@ -346,4 +346,21 @@ hattest eine Audienz bei Andariel zu bekommen?'
             <Decision4Decision1>Opt1</Decision4Decision1> <Decision4Decision2> </Decision4Decision2> <DecisionCheckTyp4></DecisionCheckTyp4>
         </Intro>
     </Story-0.1>
+    <Story-0.2>
+        <Intro>
+            <DecisionText>
+Nachdem du eingenickt bist, wachst du wieder auf.
+Tina steht bereits zusammen mit ihren truppen
+am Basis eingang und schaut dich erwartungsvoll an.
+            </DecisionText>
+            <Decision1>Aufstehen und zu ihr gehen.</Decision1>
+            <Decision2>Sitzenbleiben und warten bis sie kommt.</Decision2>
+            <Decision3></Decision3>
+            <Decision4></Decision4>
+            <Decision1Decision1></Decision1Decision1> <Decision1Decision2></Decision1Decision2> <DecisionCheckTyp1></DecisionCheckTyp1>
+            <Decision2Decision1></Decision2Decision1> <Decision2Decision2> </Decision2Decision2> <DecisionCheckTyp2></DecisionCheckTyp2>
+            <Decision3Decision1></Decision3Decision1> <Decision3Decision2> </Decision3Decision2> <DecisionCheckTyp3></DecisionCheckTyp3>
+            <Decision4Decision1></Decision4Decision1> <Decision4Decision2> </Decision4Decision2> <DecisionCheckTyp4></DecisionCheckTyp4>
+        </Intro>
+    </Story-0.2>
 </Stories>
