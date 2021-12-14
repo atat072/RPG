@@ -51,6 +51,7 @@ Kampf vor.
                 <wname>Sword</wname>
                 <wdice>6</wdice>
                 <wdiceCount>1</wdiceCount>
+                <ranged>false</ranged>
             </Skelett1>
         </Enemies>
         <Loot>
