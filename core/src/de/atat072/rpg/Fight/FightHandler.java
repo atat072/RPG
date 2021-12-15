@@ -211,7 +211,8 @@ public class FightHandler {
         Char c = chars.retrieve();
         Player player =(Player) SAVE.getCharsWithIndex(0);
         if(c == player){
-            changeOptions("Nahkampf","Fernkampf","Heilen","");
+            String healOption = "Heilen ["+player.getHp()+"/"+player.getMAXHP()+"]";
+            changeOptions("Nahkampf","Fernkampf",healOption,"");
             if(option1Btn.isChecked()){
                 melee();
             }else if(option2Btn.isChecked()){
@@ -286,7 +287,7 @@ public class FightHandler {
         if(dmg>0){
             Boolean isKilled = target.takeDmg(dmg);
             if(isKilled){
-                killM();
+                killM(dmg);
             }else{hitM(dmg);}
         }else{
             missM();
@@ -322,7 +323,7 @@ public class FightHandler {
         if(dmg>0){
             Boolean isKilled = target.takeDmg(dmg);
             if(isKilled){
-                killR();
+                killR(dmg);
             }else{hitR(dmg);}
         }else{
             missR();
@@ -388,6 +389,7 @@ public class FightHandler {
     private void endFight(boolean win){
         if(win){
             addStoryText("Du gehst Siegreich aus dem Kampf hervor.");
+            //loadNextDecision("opt9");
         }else{
             addStoryText("Du bist gestorben.");
         }
@@ -590,4 +592,106 @@ public class FightHandler {
         displayText = displayText +"[Fuer "+dmg+" Schaden]";
         addStoryText(displayText);
     }
+
+    private void killR(int dmg) {
+        String displayText="";
+
+        File file = new File(String.valueOf(Gdx.files.internal("Data/FightTexts.xml")));
+
+        try {
+            //Get Document Builder
+            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder builder = factory.newDocumentBuilder();
+
+            //Build Document
+            Document document = builder.parse(file);
+
+            //Normalize the XML Structure; It's just too important !!
+            document.getDocumentElement().normalize();
+
+            //Here comes the root node
+            Element root = document.getDocumentElement();
+
+            NodeList nodes = root.getChildNodes();
+
+            for (int i = 0; i < nodes.getLength(); i++) {
+                Node n = nodes.item(i);
+                if(n.getNodeType()== Node.ELEMENT_NODE){
+                    Element typeElement = (Element) n;
+                    if (typeElement.getNodeName().equals("Ranged")){
+                        NodeList hmList = typeElement.getChildNodes();
+                        for (int j = 0; j < hmList.getLength(); j++) {
+                            Node m = hmList.item(j);
+                            if(m.getNodeType() == Node.ELEMENT_NODE){
+                                Element hmElement = (Element) m;
+                                if(hmElement.getNodeName().equals("Kill")){
+                                    NodeList texts = hmElement.getChildNodes();
+                                    Element textsElement = (Element) texts;
+                                    displayText = textsElement.getElementsByTagName("opt"+dice(texts.getLength())).item(0).getTextContent();
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (SAXException | ParserConfigurationException e) {
+            e.printStackTrace();
+        }
+        displayText = displayText +"[Fuer "+dmg+" Schaden]";
+        addStoryText(displayText);
+    }
+
+    private void killM(int dmg) {
+        String displayText="";
+
+        File file = new File(String.valueOf(Gdx.files.internal("Data/FightTexts.xml")));
+
+        try {
+            //Get Document Builder
+            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder builder = factory.newDocumentBuilder();
+
+            //Build Document
+            Document document = builder.parse(file);
+
+            //Normalize the XML Structure; It's just too important !!
+            document.getDocumentElement().normalize();
+
+            //Here comes the root node
+            Element root = document.getDocumentElement();
+
+            NodeList nodes = root.getChildNodes();
+
+            for (int i = 0; i < nodes.getLength(); i++) {
+                Node n = nodes.item(i);
+                if(n.getNodeType()== Node.ELEMENT_NODE){
+                    Element typeElement = (Element) n;
+                    if (typeElement.getNodeName().equals("Meele")){
+                        NodeList hmList = typeElement.getChildNodes();
+                        for (int j = 0; j < hmList.getLength(); j++) {
+                            Node m = hmList.item(j);
+                            if(m.getNodeType() == Node.ELEMENT_NODE){
+                                Element hmElement = (Element) m;
+                                if(hmElement.getNodeName().equals("Kill")){
+                                    NodeList texts = hmElement.getChildNodes();
+                                    Element textsElement = (Element) texts;
+                                    displayText = textsElement.getElementsByTagName("opt"+dice(texts.getLength())).item(0).getTextContent();
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (SAXException | ParserConfigurationException e) {
+            e.printStackTrace();
+        }
+        displayText = displayText +"[Fuer "+dmg+" Schaden]";
+        addStoryText(displayText);
+    }
+
+
 }

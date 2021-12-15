@@ -11,6 +11,11 @@
                 Text2
             </opt1>
         </Hit>
+        <Kill>
+            <opt1>
+                Text5
+            </opt1>
+        </Kill>
     </Ranged>
     <Meele>
         <Miss>
@@ -23,5 +28,10 @@
                 Text4
             </opt1>
         </Hit>
+        <Kill>
+            <opt1>
+                Text6
+            </opt1>
+        </Kill>
     </Meele>
 </Texts>
