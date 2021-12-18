@@ -6,7 +6,7 @@ public class NPC extends Char{
     private Weapon weapon;
     private boolean ranged;
 
-    public NPC(String name, int str, int con, int dex, int ent, int wis, int chr, int armor, int relation, Weapon w, boolean ranged) {
+    public NPC(String name, int str, int dex, int con, int ent, int wis, int chr, int armor, int relation, Weapon w, boolean ranged) {
         super(name, str, dex, con, ent, wis, chr, armor);
         this.relation=relation;
         weapon = w;

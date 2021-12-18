@@ -38,6 +38,7 @@ public class FightHandler {
         System.out.println(introText);
         refreshButtons();
         sort();
+        act();
     }
 
     public void refreshButtons() {
@@ -110,78 +111,39 @@ public class FightHandler {
                                                 weapon,
                                                 Boolean.parseBoolean(enemyElement.getElementsByTagName("ranged").item(0).getTextContent())
                                         );
+                                        charList.add(enemy);
                                     }
                                 }
                                 break;
-                            case "Loot":
-                                NodeList lootType = n.getChildNodes();
-                                for (int e=0; e<lootType.getLength();e++){
-                                    Node lootNode = lootType.item(e);
-                                    if(lootNode.getNodeType()==Node.ELEMENT_NODE){
-                                        switch (lootNode.getNodeName()) {
-                                            case "Potions":
-                                                NodeList potions = lootNode.getChildNodes();
-                                                for(int x=0; x< potions.getLength();x++){
-                                                    Element potion = (Element) potions.item(x);
-                                                    lootPotions.add(new HealingPotion(Boolean.parseBoolean(potion.getTextContent())));
-                                                }
-                                                break;
-                                            case "Coin":
-                                                Element Coin =(Element) lootNode;
-                                                lootCoin = Integer.parseInt(Coin.getTextContent());
-                                        }
-                                    }
-                                }
-                                break;
+//                            case "Loot":
+//                                NodeList lootType = n.getChildNodes();
+//                                for (int e=0; e<lootType.getLength();e++){
+//                                    Node lootNode = lootType.item(e);
+//                                    if(lootNode.getNodeType()==Node.ELEMENT_NODE){
+//                                        switch (lootNode.getNodeName()) {
+//                                            case "Potions":
+//                                                NodeList potions = lootNode.getChildNodes();
+//                                                for(int x=0; x< potions.getLength();x++){
+//                                                    Element potion = (Element) potions.item(x);
+//                                                    lootPotions.add(new HealingPotion(Boolean.parseBoolean(potion.getTextContent())));
+//                                                }
+//                                                break;
+//                                            case "Coin":
+//                                                Element Coin =(Element) lootNode;
+//                                                lootCoin = Integer.parseInt(Coin.getTextContent());
+//                                        }
+//                                    }
+//                                }
+//                                break;
                         }
                     }
                 }
-                //Element fightElement = (Element) fightNode;
-                //introText = fightElement.getElementsByTagName("Intro").item(0).getTextContent();
-                if (fightNode.getNodeName().equals("Intro")) {
-                    //introText = fightNode.getTextContent();
-                    //System.out.println(introText);
-                }
-
             }
-
-
-//           for (int e = 0; e < storyRoots.getLength(); e++) {
-//               fightName = storyRoots.item(e).getNodeName();
-//
-//               ArrayList<StoryDecisionValues> storyDecisionValues = new ArrayList<>();
-//
-//               NodeList decisionList = storyRoots.item(e).getChildNodes();
-//               for (int i = 0; i < decisionList.getLength(); i++) {
-//                   Node decisionNode = decisionList.item(i);
-//                   if (decisionNode.getNodeType() == Node.ELEMENT_NODE) {
-//                       NodeList decisionValues = decisionNode.getChildNodes();
-//                       Element decisionValuesElement = (Element) decisionValues;
-//
-//                       storyDecisionValues.add(new StoryDecisionValues(decisionNode.getNodeName(),
-//                               decisionValuesElement.getElementsByTagName("DecisionText").item(0).getTextContent(),
-//                               decisionValuesElement.getElementsByTagName("Decision1").item(0).getTextContent(),
-//                               decisionValuesElement.getElementsByTagName("Decision2").item(0).getTextContent(),
-//                               decisionValuesElement.getElementsByTagName("Decision3").item(0).getTextContent(),
-//                               decisionValuesElement.getElementsByTagName("Decision4").item(0).getTextContent(),
-//                               decisionValuesElement.getElementsByTagName("Decision1Decision1").item(0).getTextContent(), decisionValuesElement.getElementsByTagName("Decision1Decision2").item(0).getTextContent(),
-//                               decisionValuesElement.getElementsByTagName("Decision2Decision1").item(0).getTextContent(), decisionValuesElement.getElementsByTagName("Decision1Decision2").item(0).getTextContent(),
-//                               decisionValuesElement.getElementsByTagName("Decision3Decision1").item(0).getTextContent(), decisionValuesElement.getElementsByTagName("Decision1Decision2").item(0).getTextContent(),
-//                               decisionValuesElement.getElementsByTagName("Decision4Decision1").item(0).getTextContent(), decisionValuesElement.getElementsByTagName("Decision1Decision2").item(0).getTextContent(),
-//                               decisionValuesElement.getElementsByTagName("DecisionCheckTyp1").item(0).getTextContent(), decisionValuesElement.getElementsByTagName("DecisionCheckTyp2").item(0).getTextContent(),
-//                               decisionValuesElement.getElementsByTagName("DecisionCheckTyp3").item(0).getTextContent(), decisionValuesElement.getElementsByTagName("DecisionCheckTyp4").item(0).getTextContent()
-//                       ));
-//                   }
-//               }
-//               storyMap.put(fightName, storyDecisionValues);
-//           }
         } catch (IOException e) {
             e.printStackTrace();
         } catch (SAXException | ParserConfigurationException e) {
             e.printStackTrace();
         }
-
-        introText = "";
 
         return charList;
     }
@@ -201,10 +163,8 @@ public class FightHandler {
         });
         for(Char c: charList){
             chars.add(c);
-            if (c == SAVE.getCharsWithIndex(0)){
-                charList.remove(c);
-            }
         }
+        charList.remove(SAVE.getCharsWithIndex(0));
     }
 
     public void act(){
@@ -220,6 +180,7 @@ public class FightHandler {
             }else if(option3Btn.isChecked()&&!player.getPotions().isEmpty()){
                 heal();
             }
+            chars.add(c);
         }else{
             NPC enemy = (NPC) c;
             Player p = (Player) SAVE.getCharsWithIndex(0);
@@ -429,7 +390,10 @@ public class FightHandler {
                                 if(hmElement.getNodeName().equals("Miss")){
                                     NodeList texts = hmElement.getChildNodes();
                                     Element textsElement = (Element) texts;
-                                    displayText = textsElement.getElementsByTagName("opt"+dice(texts.getLength())).item(0).getTextContent();
+                                    int random = dice(texts.getLength());
+                                    String randomS = Integer.toString(random);
+                                    System.out.println(texts.getLength());
+                                    //displayText = textsElement.getElementsByTagName("opt"+randomS).item(0).getTextContent();
                                 }
                             }
                         }
@@ -478,7 +442,10 @@ public class FightHandler {
                                 if(hmElement.getNodeName().equals("Miss")){
                                     NodeList texts = hmElement.getChildNodes();
                                     Element textsElement = (Element) texts;
-                                    displayText = textsElement.getElementsByTagName("opt"+dice(texts.getLength())).item(0).getTextContent();
+                                    int random = dice(texts.getLength());
+                                    String randomS = Integer.toString(random);
+                                    System.out.println(texts.getLength());
+                                    //displayText = textsElement.getElementsByTagName("opt"+randomS).item(0).getTextContent();
                                 }
                             }
                         }
@@ -527,7 +494,10 @@ public class FightHandler {
                                 if(hmElement.getNodeName().equals("Hit")){
                                     NodeList texts = hmElement.getChildNodes();
                                     Element textsElement = (Element) texts;
-                                    displayText = textsElement.getElementsByTagName("opt"+dice(texts.getLength())).item(0).getTextContent();
+                                    int random = dice(texts.getLength());
+                                    String randomS = Integer.toString(random);
+                                    System.out.println(texts.getLength());
+                                    //displayText = textsElement.getElementsByTagName("opt"+randomS).item(0).getTextContent();
                                 }
                             }
                         }
@@ -577,7 +547,10 @@ public class FightHandler {
                                 if(hmElement.getNodeName().equals("Hit")){
                                     NodeList texts = hmElement.getChildNodes();
                                     Element textsElement = (Element) texts;
-                                    displayText = textsElement.getElementsByTagName("opt"+dice(texts.getLength())).item(0).getTextContent();
+                                    int random = dice(texts.getLength());
+                                    String randomS = Integer.toString(random);
+                                    System.out.println(texts.getLength());
+                                   // displayText = textsElement.getElementsByTagName("opt"+randomS).item(0).getTextContent();
                                 }
                             }
                         }
@@ -627,7 +600,10 @@ public class FightHandler {
                                 if(hmElement.getNodeName().equals("Kill")){
                                     NodeList texts = hmElement.getChildNodes();
                                     Element textsElement = (Element) texts;
-                                    displayText = textsElement.getElementsByTagName("opt"+dice(texts.getLength())).item(0).getTextContent();
+                                    int random = dice(texts.getLength());
+                                    String randomS = Integer.toString(random);
+                                    System.out.println(texts.getLength());
+                                    //displayText = textsElement.getElementsByTagName("opt"+randomS).item(0).getTextContent();
                                 }
                             }
                         }
@@ -677,7 +653,10 @@ public class FightHandler {
                                 if(hmElement.getNodeName().equals("Kill")){
                                     NodeList texts = hmElement.getChildNodes();
                                     Element textsElement = (Element) texts;
-                                    displayText = textsElement.getElementsByTagName("opt"+dice(texts.getLength())).item(0).getTextContent();
+                                    int random = dice(texts.getLength());
+                                    String randomS = Integer.toString(random);
+                                    System.out.println(texts.getLength());
+                                    //displayText = textsElement.getElementsByTagName("opt"+randomS).item(0).getTextContent();
                                 }
                             }
                         }

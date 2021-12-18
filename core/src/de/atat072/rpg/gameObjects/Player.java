@@ -8,7 +8,7 @@ public class Player extends Char {
     private Weapon melee,range;
     private HealingPotion p1,p2,p3,p4,p5;
 
-    public Player(String name, int str, int con, int dex, int ent, int wis, int chr,int armor,int reputation) {
+    public Player(String name, int str, int dex, int con, int ent, int wis, int chr,int armor,int reputation) {
         super(name, str, dex, con, ent, wis, chr,armor);
         this.reputation=reputation;
     }
