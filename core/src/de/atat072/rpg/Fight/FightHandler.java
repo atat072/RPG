@@ -38,6 +38,7 @@ public class FightHandler {
         System.out.println(introText);
         refreshButtons();
         sort();
+        missR();
         act();
     }
 
@@ -197,6 +198,7 @@ public class FightHandler {
                     boolean isDead = p.takeDmg(dmg);
                     if(isDead){
                         endFight(false);
+                        return;
                     }
                 }
             }else{
@@ -209,6 +211,7 @@ public class FightHandler {
                     boolean isDead = p.takeDmg(dmg);
                     if(isDead){
                         endFight(false);
+                        return;
                     }
                 }
             }
@@ -216,6 +219,7 @@ public class FightHandler {
         }
         if (chars.size()<2){
             endFight(true);
+            return;
         }else {
             act();
         }
@@ -388,12 +392,17 @@ public class FightHandler {
                             if(m.getNodeType() == Node.ELEMENT_NODE){
                                 Element hmElement = (Element) m;
                                 if(hmElement.getNodeName().equals("Miss")){
-                                    NodeList texts = hmElement.getChildNodes();
-                                    Element textsElement = (Element) texts;
-                                    int random = dice(texts.getLength());
-                                    String randomS = Integer.toString(random);
-                                    System.out.println(texts.getLength());
-                                    //displayText = textsElement.getElementsByTagName("opt"+randomS).item(0).getTextContent();
+                                    NodeList textList = hmElement.getChildNodes();
+                                    ArrayList<String> texts = new ArrayList<>();
+                                    for (int k = 0; k < textList.getLength(); k++) {
+                                        Node f = textList.item(k);
+                                        if(f.getNodeType() == Node.ELEMENT_NODE){
+                                            Element xElement = (Element) f;
+                                            texts.add(xElement.getTextContent());
+                                        }
+                                    }
+                                    int random = dice(texts.size())-1;
+                                    displayText = texts.get(random);
                                 }
                             }
                         }
@@ -440,12 +449,17 @@ public class FightHandler {
                             if(m.getNodeType() == Node.ELEMENT_NODE){
                                 Element hmElement = (Element) m;
                                 if(hmElement.getNodeName().equals("Miss")){
-                                    NodeList texts = hmElement.getChildNodes();
-                                    Element textsElement = (Element) texts;
-                                    int random = dice(texts.getLength());
-                                    String randomS = Integer.toString(random);
-                                    System.out.println(texts.getLength());
-                                    //displayText = textsElement.getElementsByTagName("opt"+randomS).item(0).getTextContent();
+                                    NodeList textList = hmElement.getChildNodes();
+                                    ArrayList<String> texts = new ArrayList<>();
+                                    for (int k = 0; k < textList.getLength(); k++) {
+                                        Node f = textList.item(k);
+                                        if(f.getNodeType() == Node.ELEMENT_NODE){
+                                            Element xElement = (Element) f;
+                                            texts.add(xElement.getTextContent());
+                                        }
+                                    }
+                                    int random = dice(texts.size())-1;
+                                    displayText = texts.get(random);
                                 }
                             }
                         }
@@ -492,12 +506,17 @@ public class FightHandler {
                             if(m.getNodeType() == Node.ELEMENT_NODE){
                                 Element hmElement = (Element) m;
                                 if(hmElement.getNodeName().equals("Hit")){
-                                    NodeList texts = hmElement.getChildNodes();
-                                    Element textsElement = (Element) texts;
-                                    int random = dice(texts.getLength());
-                                    String randomS = Integer.toString(random);
-                                    System.out.println(texts.getLength());
-                                    //displayText = textsElement.getElementsByTagName("opt"+randomS).item(0).getTextContent();
+                                    NodeList textList = hmElement.getChildNodes();
+                                    ArrayList<String> texts = new ArrayList<>();
+                                    for (int k = 0; k < textList.getLength(); k++) {
+                                        Node f = textList.item(k);
+                                        if(f.getNodeType() == Node.ELEMENT_NODE){
+                                            Element xElement = (Element) f;
+                                            texts.add(xElement.getTextContent());
+                                        }
+                                    }
+                                    int random = dice(texts.size())-1;
+                                    displayText = texts.get(random);
                                 }
                             }
                         }
@@ -545,12 +564,17 @@ public class FightHandler {
                             if(m.getNodeType() == Node.ELEMENT_NODE){
                                 Element hmElement = (Element) m;
                                 if(hmElement.getNodeName().equals("Hit")){
-                                    NodeList texts = hmElement.getChildNodes();
-                                    Element textsElement = (Element) texts;
-                                    int random = dice(texts.getLength());
-                                    String randomS = Integer.toString(random);
-                                    System.out.println(texts.getLength());
-                                   // displayText = textsElement.getElementsByTagName("opt"+randomS).item(0).getTextContent();
+                                    NodeList textList = hmElement.getChildNodes();
+                                    ArrayList<String> texts = new ArrayList<>();
+                                    for (int k = 0; k < textList.getLength(); k++) {
+                                        Node f = textList.item(k);
+                                        if(f.getNodeType() == Node.ELEMENT_NODE){
+                                            Element xElement = (Element) f;
+                                            texts.add(xElement.getTextContent());
+                                        }
+                                    }
+                                    int random = dice(texts.size())-1;
+                                    displayText = texts.get(random);
                                 }
                             }
                         }
@@ -598,12 +622,17 @@ public class FightHandler {
                             if(m.getNodeType() == Node.ELEMENT_NODE){
                                 Element hmElement = (Element) m;
                                 if(hmElement.getNodeName().equals("Kill")){
-                                    NodeList texts = hmElement.getChildNodes();
-                                    Element textsElement = (Element) texts;
-                                    int random = dice(texts.getLength());
-                                    String randomS = Integer.toString(random);
-                                    System.out.println(texts.getLength());
-                                    //displayText = textsElement.getElementsByTagName("opt"+randomS).item(0).getTextContent();
+                                    NodeList textList = hmElement.getChildNodes();
+                                    ArrayList<String> texts = new ArrayList<>();
+                                    for (int k = 0; k < textList.getLength(); k++) {
+                                        Node f = textList.item(k);
+                                        if(f.getNodeType() == Node.ELEMENT_NODE){
+                                            Element xElement = (Element) f;
+                                            texts.add(xElement.getTextContent());
+                                        }
+                                    }
+                                    int random = dice(texts.size())-1;
+                                    displayText = texts.get(random);
                                 }
                             }
                         }
@@ -651,12 +680,17 @@ public class FightHandler {
                             if(m.getNodeType() == Node.ELEMENT_NODE){
                                 Element hmElement = (Element) m;
                                 if(hmElement.getNodeName().equals("Kill")){
-                                    NodeList texts = hmElement.getChildNodes();
-                                    Element textsElement = (Element) texts;
-                                    int random = dice(texts.getLength());
-                                    String randomS = Integer.toString(random);
-                                    System.out.println(texts.getLength());
-                                    //displayText = textsElement.getElementsByTagName("opt"+randomS).item(0).getTextContent();
+                                    NodeList textList = hmElement.getChildNodes();
+                                    ArrayList<String> texts = new ArrayList<>();
+                                    for (int k = 0; k < textList.getLength(); k++) {
+                                        Node f = textList.item(k);
+                                        if(f.getNodeType() == Node.ELEMENT_NODE){
+                                            Element xElement = (Element) f;
+                                            texts.add(xElement.getTextContent());
+                                        }
+                                    }
+                                    int random = dice(texts.size())-1;
+                                    displayText = texts.get(random);
                                 }
                             }
                         }
