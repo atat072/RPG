@@ -1,6 +1,8 @@
 package de.atat072.rpg.gameObjects;
 
-public class Weapon {
+import java.io.Serializable;
+
+public class Weapon implements Serializable {
 
     private int dice;
     private int diceCount;

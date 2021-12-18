@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Texts>
+    <Ranged>
+        <Miss>
+            <opt1>
+                Text1
+            </opt1>
+        </Miss>
+        <Hit>
+            <opt1>
+                Text2
+            </opt1>
+        </Hit>
+        <Kill>
+            <opt1>
+                Text5
+            </opt1>
+        </Kill>
+    </Ranged>
+    <Meele>
+        <Miss>
+          <opt1>
+              Text3
+          </opt1>
+        </Miss>
+        <Hit>
+            <opt1>
+                Text4
+            </opt1>
+        </Hit>
+        <Kill>
+            <opt1>
+                Text6
+            </opt1>
+        </Kill>
+    </Meele>
+</Texts>
