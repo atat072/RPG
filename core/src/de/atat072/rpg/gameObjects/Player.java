@@ -11,6 +11,8 @@ public class Player extends Char {
     public Player(String name, int str, int dex, int con, int ent, int wis, int chr,int armor,int reputation) {
         super(name, str, dex, con, ent, wis, chr,armor);
         this.reputation=reputation;
+        setMelee(new Weapon("Kurtzschwert",6,1));
+        setRange(new Weapon("Kurtzbogen",6,1));
     }
     //uses the potion in the slot given if existent
     public void usePotion(int i){

@@ -24,4 +24,8 @@ public class CharQueue {
     public int size(){
         return chars.size();
     }
+
+    public void remove(Char c){
+        chars.remove(c);
+    }
 }

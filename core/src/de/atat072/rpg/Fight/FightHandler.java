@@ -1,6 +1,8 @@
 package de.atat072.rpg.Fight;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import de.atat072.rpg.gameObjects.*;
 import de.atat072.rpg.screens.GameScreen;
 import org.w3c.dom.Document;
@@ -36,13 +38,12 @@ public class FightHandler {
         this.fightName = fightName;
         charList = readStoryFights(fightName);
         System.out.println(introText);
-        refreshButtons();
+        refreshScreen();
         sort();
-        missR();
         act();
     }
 
-    public void refreshButtons() {
+    public void refreshScreen() {
         //Remove the Buttons and add them again to delete the old listeners
         GameScreen.refreshButtons();
 
@@ -169,19 +170,31 @@ public class FightHandler {
     }
 
     public void act(){
+        refreshButtons();
         Char c = chars.retrieve();
         Player player =(Player) SAVE.getCharsWithIndex(0);
         if(c == player){
             String healOption = "Heilen ["+player.getHp()+"/"+player.getMAXHP()+"]";
             changeOptions("Nahkampf","Fernkampf",healOption,"");
-            if(option1Btn.isChecked()){
-                melee();
-            }else if(option2Btn.isChecked()){
-                ranged();
-            }else if(option3Btn.isChecked()&&!player.getPotions().isEmpty()){
-                heal();
-            }
-            chars.add(c);
+            System.out.println(option1Btn.getListeners().size);
+            option1Btn.addListener(new ChangeListener() {
+                @Override
+                public void changed(ChangeEvent event, Actor actor) {
+                    melee();
+                }
+            });
+            option2Btn.addListener(new ChangeListener() {
+                @Override
+                public void changed(ChangeEvent event, Actor actor) {
+                    ranged();
+                }
+            });
+            option3Btn.addListener(new ChangeListener() {
+                @Override
+                public void changed(ChangeEvent event, Actor actor) {
+                    heal();
+                }
+            });
         }else{
             NPC enemy = (NPC) c;
             Player p = (Player) SAVE.getCharsWithIndex(0);
@@ -216,12 +229,12 @@ public class FightHandler {
                 }
             }
             chars.add(enemy);
-        }
-        if (chars.size()<2){
-            endFight(true);
-            return;
-        }else {
-            act();
+            if (chars.size()<2){
+                endFight(true);
+                return;
+            }else {
+                act();
+            }
         }
     }
 
@@ -253,12 +266,19 @@ public class FightHandler {
             Boolean isKilled = target.takeDmg(dmg);
             if(isKilled){
                 killM(dmg);
+                chars.remove(target);
+                charList.remove(target);
             }else{hitM(dmg);}
         }else{
             missM();
         }
         chars.add(p);
-        act();
+        if (chars.size()<2){
+            endFight(true);
+            return;
+        }else {
+            act();
+        }
     }
 
     private void ranged(){
@@ -289,12 +309,19 @@ public class FightHandler {
             Boolean isKilled = target.takeDmg(dmg);
             if(isKilled){
                 killR(dmg);
+                chars.remove(target);
+                charList.remove(target);
             }else{hitR(dmg);}
         }else{
             missR();
         }
         chars.add(p);
-        act();
+        if (chars.size()<2){
+            endFight(true);
+            return;
+        }else {
+            act();
+        }
     }
 
     private void heal(){
@@ -347,7 +374,13 @@ public class FightHandler {
                 p.usePotion(5);
             }
         }
-        act();
+        chars.add(p);
+        if (chars.size()<2){
+            endFight(true);
+            return;
+        }else {
+            act();
+        }
 
     }
 
