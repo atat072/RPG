@@ -115,6 +115,27 @@ dichten Eichenlaub verschwindet.
             <Decision3Decision1></Decision3Decision1> <Decision3Decision2></Decision3Decision2> <DecisionCheckTyp3></DecisionCheckTyp3>
             <Decision4Decision1></Decision4Decision1> <Decision4Decision2></Decision4Decision2> <DecisionCheckTyp4></DecisionCheckTyp4>
         </Opt9>
+        <Opt14>
+            <DecisionText>
+Nachdem du die Skellete Machtvoll dem Erdboden
+gleich gemacht hast, kehrst du zurück in den
+Wald.
+Im Wald suchst du nach Tiana und findest sie
+einige Zeit spaeter.
+Tiana: 'Oh du hast deine Meinung aber
+schnell geaendert.'
+            </DecisionText>
+            <Decision1>Die Daemonen haben mein Dorf zerstoert
+und alle getoetet, ich schliesse mich
+euch an!</Decision1>
+            <Decision2></Decision2>
+            <Decision3></Decision3>
+            <Decision4></Decision4>
+            <Decision1Decision1>Opt9</Decision1Decision1> <Decision1Decision2></Decision1Decision2> <DecisionCheckTyp1></DecisionCheckTyp1>
+            <Decision2Decision1></Decision2Decision1> <Decision2Decision2></Decision2Decision2> <DecisionCheckTyp2></DecisionCheckTyp2>
+            <Decision3Decision1></Decision3Decision1> <Decision3Decision2></Decision3Decision2> <DecisionCheckTyp3></DecisionCheckTyp3>
+            <Decision4Decision1></Decision4Decision1> <Decision4Decision2></Decision4Decision2> <DecisionCheckTyp4></DecisionCheckTyp4>
+        </Opt14>
         <Opt13>
             <DecisionText>
 Als du durch den Wald laeufst wird dir klar,

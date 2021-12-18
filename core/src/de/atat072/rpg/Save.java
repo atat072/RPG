@@ -25,7 +25,7 @@ public class Save implements Serializable {
     Creates the Player and NPC when a new Game is created
      */
     private void createChars(String charName, ArrayList<Integer> scores){
-        chars.add(new Player(charName, scores.get(0), scores.get(1),scores.get(2) ,scores.get(3), scores.get(4), scores.get(5),4,0));
+        chars.add(new Player("dich", charName, charName, scores.get(0), scores.get(1),scores.get(2) ,scores.get(3), scores.get(4), scores.get(5),4,0));
         //todo add all NPC when story is finished
     }
 
@@ -61,7 +61,7 @@ public class Save implements Serializable {
     //Get Chars with name
     public Char getCharsWithName(String name) {
         for (Char c : chars) {
-            if (c.getName().equals(name)) {
+            if (c.getNameArtikel1().equals(name)) {
                 return c;
             }
         }

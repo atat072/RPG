@@ -8,8 +8,8 @@ public class Player extends Char {
     private Weapon melee,range;
     private HealingPotion p1,p2,p3,p4,p5;
 
-    public Player(String name, int str, int dex, int con, int ent, int wis, int chr,int armor,int reputation) {
-        super(name, str, dex, con, ent, wis, chr,armor);
+    public Player(String anrede, String nameArtikel1, String nameArtikel2, int str, int dex, int con, int ent, int wis, int chr,int armor,int reputation) {
+        super(anrede, nameArtikel1, nameArtikel2, str, dex, con, ent, wis, chr, armor);
         this.reputation=reputation;
         setMelee(new Weapon("Kurtzschwert",6,1));
         setRange(new Weapon("Kurtzbogen",6,1));

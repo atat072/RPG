@@ -3,34 +3,40 @@
     <Ranged>
         <Miss>
             <opt1>
-                Text1
+Dein projectiel schießt aus deiner Waffe und
+verfehlt _FeindNameArtikel1_.
             </opt1>
         </Miss>
         <Hit>
             <opt1>
-                Text2
+Das Projectiel schießt aus deiner Waffe und
+durchbort _FeindNameArtikel1_.
             </opt1>
         </Hit>
         <Kill>
             <opt1>
-                Text5
+Du spaltest _FeindNameArtikel1_ in zwei und _FeindNameAnrede_ faellt
+tod um.
             </opt1>
         </Kill>
     </Ranged>
     <Meele>
         <Miss>
           <opt1>
-              Text3
+Du holst mit deiner Waffe aus, doch _FeindNameArtikel1_ Weicht
+geschmeidig aus.
           </opt1>
         </Miss>
         <Hit>
             <opt1>
-                Text4
+Du erwischt _FeindNameArtikel1_ mit einem Kraeftigen
+stoss in die Magenkuhle.
             </opt1>
         </Hit>
         <Kill>
             <opt1>
-                Text6
+Du durchborst den Schaedel von _FeindNameArtikel2_ und
+_FeindNameAnrede_ faellt Tod zu Boden.
             </opt1>
         </Kill>
     </Meele>

@@ -28,10 +28,13 @@ public class GameScreen extends ScreenAdapter implements Serializable {
 
     public static StoryCollection storyCollection;
 
+    public static GameScreen screenInstance;
+
     public GameScreen(String name){
         this.name = name;
         initialise();
         setLayout();
+        screenInstance = this;
         //test();
     }
 
@@ -82,8 +85,6 @@ public class GameScreen extends ScreenAdapter implements Serializable {
         batch.end();
     }
 
-    //disposes the UI Elements when the screen gets closed to reduce ram usage
-    //TODO Causing Errors on reopen the screen
     @Override
     public void dispose(){
         stage.dispose();

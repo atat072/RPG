@@ -39,7 +39,9 @@ Kampf vor.
         </Intro>
         <Enemies>
             <Skelett1>
-                <name>Skelett1</name>
+                <anrede>es</anrede>
+                <nameArtikel1>das Skellet</nameArtikel1>
+                <nameArtikel2>dem Skellet</nameArtikel2>
                 <str>20</str>
                 <con>20</con>
                 <dex>20</dex>
