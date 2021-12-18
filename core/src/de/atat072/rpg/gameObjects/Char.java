@@ -96,4 +96,8 @@ public abstract class Char implements Serializable{
     public int getChr() {
         return chr;
     }
+
+    public int getMAXHP() {
+        return MAXHP;
+    }
 }
