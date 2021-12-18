@@ -189,28 +189,51 @@ public class CreateScreen extends ScreenAdapter {
     }
 
     private void setZero(){
-        if (Objects.equals(str.getText(), "0")){
-            str.setText("1");
+        //str
+        if (!String.valueOf(str.getText().charAt(0)).equals("0") && str.getText().length() < 2){
             str.setCursorPosition(1);
         }
-        if (Objects.equals(dex.getText(), "0")){
-            dex.setText("1");
+        else if (str.getText().equals("0")) {
+            str.setCursorPosition(1);
+        }
+
+        //dex
+        if (!String.valueOf(dex.getText().charAt(0)).equals("0") && dex.getText().length() < 2){
             dex.setCursorPosition(1);
         }
-        if (Objects.equals(con.getText(), "0")){
-            con.setText("1");
+        else if (dex.getText().equals("0")) {
+            dex.setCursorPosition(1);
+        }
+
+        //con
+        if (!String.valueOf(con.getText().charAt(0)).equals("0") && con.getText().length() < 2){
+            dex.setCursorPosition(1);
+        }
+        else if (con.getText().equals("0")) {
             con.setCursorPosition(1);
         }
-        if (Objects.equals(ent.getText(), "0")){
-            ent.setText("1");
+
+        //ent
+        if (!String.valueOf(ent.getText().charAt(0)).equals("0") && ent.getText().length() < 2){
             ent.setCursorPosition(1);
         }
-        if (Objects.equals(wis.getText(), "0")){
-            wis.setText("1");
+        else if (ent.getText().equals("0")) {
+            ent.setCursorPosition(1);
+        }
+
+        //wis
+        if (!String.valueOf(wis.getText().charAt(0)).equals("0") && wis.getText().length() < 2){
             wis.setCursorPosition(1);
         }
-        if (Objects.equals(chr.getText(), "0")){
-            chr.setText("1");
+        else if (wis.getText().equals("0")) {
+            wis.setCursorPosition(1);
+        }
+
+        //chr
+        if (!String.valueOf(chr.getText().charAt(0)).equals("0") && chr.getText().length() < 2){
+            chr.setCursorPosition(1);
+        }
+        else if (chr.getText().equals("0")) {
             chr.setCursorPosition(1);
         }
     }

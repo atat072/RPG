@@ -10,28 +10,66 @@ import de.atat072.rpg.screens.GameScreen;
 import static de.atat072.rpg.RPG.SAVE;
 
 public class Decision {
+    //Class which include all possible decision types
+    public static class PassedValue {
+
+        public FightDecision fightDecision;
+        public String storyName;
+        public Decision decision;
+
+        public PassedValue(FightDecision fightDecision, String storyName, Decision decision) {
+            this.fightDecision = fightDecision;
+            this.storyName = storyName;
+            this.decision = decision;
+        }
+    }
+
+    //Class that executes the right command depending on which decision type is set
+    public class ExecuteCommand {
+
+        public ExecuteCommand(PassedValue passedValue) {
+            if (passedValue.decision != null && passedValue.fightDecision == null && passedValue.storyName == null) {
+                startDecision(passedValue.decision);
+            }
+            else if (passedValue.decision == null && passedValue.fightDecision != null && passedValue.storyName == null) {
+                startFightDecision(passedValue.fightDecision);
+            }
+            else if (passedValue.decision == null && passedValue.fightDecision == null && passedValue.storyName != null) {
+                startStory(passedValue.storyName);
+            }
+        }
+
+        public void startDecision(Decision decision) {
+            decision.loadDecision();
+        }
+
+        public void startFightDecision(FightDecision fightDecision) {
+            fightDecision.loadDecision();
+        }
+
+        public void startStory(String storyName) {
+            GameScreen.storyCollection.startStory(storyName);
+        }
+    }
+
     String decisionName;
     String decisionText;
 
     String decision1;
     TextButton decision1Btn;
-    Decision decision1decision;
-    public FightDecision fightDecision1;
+    PassedValue decision1decision;
 
     String decision2;
     TextButton decision2Btn;
-    Decision decision2decision;
-    public FightDecision fightDecision2;
+    PassedValue decision2decision;
 
     String decision3;
     TextButton decision3Btn;
-    Decision decision3decision;
-    public FightDecision fightDecision3;
+    PassedValue decision3decision;
 
     String decision4;
     TextButton decision4Btn;
-    Decision decision4decision;
-    public FightDecision fightDecision4;
+    PassedValue decision4decision;
 
     //CheckDecision Values
     Decision trueCheck;
@@ -40,7 +78,7 @@ public class Decision {
     String checkTyp;
     boolean checkResult;
 
-    public Decision(String decisionName, String decisionText, String decision1, Decision decision1decision, String decision2, Decision decision2decision, String decision3, Decision decision3decision, String decision4, Decision decision4decision) {
+    public Decision(String decisionName, String decisionText, String decision1, PassedValue decision1decision, String decision2, PassedValue decision2decision, String decision3, PassedValue decision3decision, String decision4, PassedValue decision4decision) {
         this.decisionName = decisionName;
         this.decisionText = decisionText;
 
@@ -49,63 +87,6 @@ public class Decision {
 
         this.decision2 = decision2;
         this.decision2decision = decision2decision;
-
-        this.decision3 = decision3;
-        this.decision3decision = decision3decision;
-
-        this.decision4 = decision4;
-        this.decision4decision = decision4decision;
-
-        this.checkResult = false;
-    }
-
-    public Decision(String decisionName, String decisionText, String decision1, FightDecision fightDecision1, String decision2, Decision decision2decision, String decision3, Decision decision3decision, String decision4, Decision decision4decision) {
-        this.decisionName = decisionName;
-        this.decisionText = decisionText;
-
-        this.decision1 = decision1;
-        this.fightDecision1 = fightDecision1;
-
-        this.decision2 = decision2;
-        this.decision2decision = decision2decision;
-
-        this.decision3 = decision3;
-        this.decision3decision = decision3decision;
-
-        this.decision4 = decision4;
-        this.decision4decision = decision4decision;
-
-        this.checkResult = false;
-    }
-
-    public Decision(String decisionName, String decisionText, String decision1, Decision decision1decision, String decision2, FightDecision fightDecision2, String decision3, Decision decision3decision, String decision4, Decision decision4decision) {
-        this.decisionName = decisionName;
-        this.decisionText = decisionText;
-
-        this.decision1 = decision1;
-        this.decision1decision = decision1decision;
-
-        this.decision2 = decision2;
-        this.fightDecision2 = fightDecision2;
-
-        this.decision3 = decision3;
-        this.decision3decision = decision3decision;
-
-        this.decision4 = decision4;
-        this.decision4decision = decision4decision;
-
-        this.checkResult = false;
-    }
-
-    public Decision(String decisionName, String decisionText, String decision1, FightDecision fightDecision1, String decision2, FightDecision fightDecision2, String decision3, Decision decision3decision, String decision4, Decision decision4decision) {
-        this.decisionName = decisionName;
-        this.decisionText = decisionText;
-
-        this.decision1 = decision1;
-        this.fightDecision1 = fightDecision1;
-
-        this.decision2 = decision2;
-        this.fightDecision2 = fightDecision2;
 
         this.decision3 = decision3;
         this.decision3decision = decision3decision;
@@ -122,65 +103,39 @@ public class Decision {
         //<editor-fold desc="Set next Decision">
         //Set Option for Button 1 of this Screen
         decision1Btn = GameScreen.option1Btn;
-
-        if (decision1decision != null) {
-            decision1Btn.addListener(new ChangeListener() {
-                @Override
-                public void changed(ChangeEvent event, Actor actor) {
-                    decision1decision.loadDecision();
-                }
-            });
-        } else if (fightDecision1 != null){
-            decision1Btn.addListener(new ChangeListener() {
-                @Override
-                public void changed(ChangeEvent event, Actor actor) {
-                    fightDecision1.loadDecision();
-                }
-            });
-        }
+        decision1Btn.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                new ExecuteCommand(decision1decision);
+            }
+        });
 
         //Set Option for Button 2 of this Screen
         decision2Btn = GameScreen.option2Btn;
-        if (decision2decision != null) {
-            decision2Btn.addListener(new ChangeListener() {
-                @Override
-                public void changed(ChangeEvent event, Actor actor) {
-                    decision2decision.loadDecision();
-                }
-            });
-        } else if (fightDecision2 != null){
-            decision2Btn.addListener(new ChangeListener() {
-                @Override
-                public void changed(ChangeEvent event, Actor actor) {
-                    //DecisionRAM.fightDecisions.get()
-                    fightDecision2.loadDecision();
-                }
-            });
-        }
+        decision2Btn.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                new ExecuteCommand(decision2decision);
+            }
+        });
 
         //Set Option for Button 3 of this Screen
         decision3Btn = GameScreen.option3Btn;
-
-        if (decision3decision != null) {
-            decision3Btn.addListener(new ChangeListener() {
-                @Override
-                public void changed(ChangeEvent event, Actor actor) {
-                    decision3decision.loadDecision();
-                }
-            });
-        }
+        decision3Btn.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                new ExecuteCommand(decision3decision);
+            }
+        });
 
         //Set Option for Button 4 of this Screen
         decision4Btn = GameScreen.option4Btn;
-
-        if (decision4decision != null) {
-            decision4Btn.addListener(new ChangeListener() {
-                @Override
-                public void changed(ChangeEvent event, Actor actor) {
-                    decision4decision.loadDecision();
-                }
-            });
-        }
+        decision4Btn.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                new ExecuteCommand(decision4decision);
+            }
+        });
         //</editor-fold>
 
         //Edit Texts on GameScreen
@@ -226,175 +181,5 @@ public class Decision {
 
             return falseCheck;
         }
-    }
-
-    //<editor-fold desc="Getter and Setter">
-    public String getDecisionName() {
-        return decisionName;
-    }
-
-    public void setDecisionName(String decisionName) {
-        this.decisionName = decisionName;
-    }
-
-    public String getDecisionText() {
-        return decisionText;
-    }
-
-    public void setDecisionText(String decisionText) {
-        this.decisionText = decisionText;
-    }
-
-    public String getDecision1() {
-        return decision1;
-    }
-
-    public void setDecision1(String decision1) {
-        this.decision1 = decision1;
-    }
-
-    public TextButton getDecision1Btn() {
-        return decision1Btn;
-    }
-
-    public void setDecision1Btn(TextButton decision1Btn) {
-        this.decision1Btn = decision1Btn;
-    }
-
-    public Decision getDecision1decision() {
-        return decision1decision;
-    }
-
-    public void setDecision1decision(Decision decision1decision) {
-        this.decision1decision = decision1decision;
-    }
-
-    public String getDecision2() {
-        return decision2;
-    }
-
-    public void setDecision2(String decision2) {
-        this.decision2 = decision2;
-    }
-
-    public TextButton getDecision2Btn() {
-        return decision2Btn;
-    }
-
-    public void setDecision2Btn(TextButton decision2Btn) {
-        this.decision2Btn = decision2Btn;
-    }
-
-    public Decision getDecision2decision() {
-        return decision2decision;
-    }
-
-    public void setDecision2decision(Decision decision2decision) {
-        this.decision2decision = decision2decision;
-    }
-
-    public String getDecision3() {
-        return decision3;
-    }
-
-    public void setDecision3(String decision3) {
-        this.decision3 = decision3;
-    }
-
-    public TextButton getDecision3Btn() {
-        return decision3Btn;
-    }
-
-    public void setDecision3Btn(TextButton decision3Btn) {
-        this.decision3Btn = decision3Btn;
-    }
-
-    public Decision getDecision3decision() {
-        return decision3decision;
-    }
-
-    public void setDecision3decision(Decision decision3decision) {
-        this.decision3decision = decision3decision;
-    }
-
-    public String getDecision4() {
-        return decision4;
-    }
-
-    public void setDecision4(String decision4) {
-        this.decision4 = decision4;
-    }
-
-    public TextButton getDecision4Btn() {
-        return decision4Btn;
-    }
-
-    public void setDecision4Btn(TextButton decision4Btn) {
-        this.decision4Btn = decision4Btn;
-    }
-
-    public Decision getDecision4decision() {
-        return decision4decision;
-    }
-
-    public void setDecision4decision(Decision decision4decision) {
-        this.decision4decision = decision4decision;
-    }
-
-    public Decision getTrueCheck() {
-        return trueCheck;
-    }
-
-    public void setTrueCheck(Decision trueCheck) {
-        this.trueCheck = trueCheck;
-    }
-
-    public Decision getFalseCheck() {
-        return falseCheck;
-    }
-
-    public void setFalseCheck(Decision falseCheck) {
-        this.falseCheck = falseCheck;
-    }
-
-    public String getCheckTyp() {
-        return checkTyp;
-    }
-
-    public void setCheckTyp(String checkTyp) {
-        this.checkTyp = checkTyp;
-    }
-
-    public boolean isCheckResult() {
-        return checkResult;
-    }
-
-    public void setCheckResult(boolean checkResult) {
-        this.checkResult = checkResult;
-    }
-    //</editor-fold>
-
-    @Override
-    public String toString() {
-        return "Decision{" +
-                "decisionName='" + decisionName + '\'' +
-                ", decisionText='" + decisionText + '\'' +
-                ", decision1='" + decision1 + '\'' +
-                ", decision1Btn=" + decision1Btn +
-                ", decision1decision=" + decision1decision +
-                ", decision2='" + decision2 + '\'' +
-                ", decision2Btn=" + decision2Btn +
-                ", decision2decision=" + decision2decision +
-                ", decision3='" + decision3 + '\'' +
-                ", decision3Btn=" + decision3Btn +
-                ", decision3decision=" + decision3decision +
-                ", decision4='" + decision4 + '\'' +
-                ", decision4Btn=" + decision4Btn +
-                ", decision4decision=" + decision4decision +
-                ", trueCheck=" + trueCheck +
-                ", falseCheck=" + falseCheck +
-                ", checkTyp='" + checkTyp + '\'' +
-                ", checkResult=" + checkResult +
-                '}';
     }
 }

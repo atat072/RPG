@@ -12,7 +12,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 import static de.atat072.rpg.RPG.*;
-import static de.atat072.rpg.gameObjects.Methods.dice;
 
 public class GameScreen extends ScreenAdapter implements Serializable {
     
@@ -27,10 +26,13 @@ public class GameScreen extends ScreenAdapter implements Serializable {
     public static TextButton option3Btn;
     public static TextButton option4Btn;
 
+    public static StoryCollection storyCollection;
+
     public GameScreen(String name){
         this.name = name;
         initialise();
         setLayout();
+        //test();
     }
 
     //creates all UI Elements
@@ -52,7 +54,7 @@ public class GameScreen extends ScreenAdapter implements Serializable {
         scrollPaneText.setScrollbarsVisible(true);
         storyText = new ArrayList<>();
 
-        StoryCollection storyCollection = new StoryCollection();
+        storyCollection = new StoryCollection();
         storyCollection.startStory("Story-0.1");
     }
 
@@ -158,5 +160,12 @@ public class GameScreen extends ScreenAdapter implements Serializable {
     }
 
     private void test(){
+        System.out.println(SAVE.getCharsWithIndex(0).getStr());
+        System.out.println(SAVE.getCharsWithIndex(0).getDex());
+        System.out.println(SAVE.getCharsWithIndex(0).getCon());
+        System.out.println(SAVE.getCharsWithIndex(0).getEnt());
+        System.out.println(SAVE.getCharsWithIndex(0).getWis());
+        System.out.println(SAVE.getCharsWithIndex(0).getChr());
+
     }
 }
