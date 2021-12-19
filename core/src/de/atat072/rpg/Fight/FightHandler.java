@@ -1,10 +1,8 @@
 package de.atat072.rpg.Fight;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.ai.btree.leaf.Wait;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
-import de.atat072.rpg.Save;
 import de.atat072.rpg.gameObjects.*;
 import de.atat072.rpg.screens.GameScreen;
 import de.atat072.rpg.screens.MainScreen;
@@ -46,13 +44,12 @@ public class FightHandler {
     public FightHandler(String fightName) {
         this.fightName = fightName;
         charList = readStoryFights(fightName);
-        System.out.println(introText);
-        refreshScreen();
+        startFightScreenSetUp();
         sort();
         act();
     }
 
-    public void refreshScreen() {
+    public void startFightScreenSetUp() {
         //Remove the Buttons and add them again to delete the old listeners
         GameScreen.refreshButtons();
 
@@ -269,19 +266,19 @@ public class FightHandler {
             option2Btn.addListener(new ChangeListener() {
                 @Override
                 public void changed(ChangeEvent event, Actor actor) {
-                    target= charList.get(0);
+                    target= charList.get(1);
                 }
             });
             option3Btn.addListener(new ChangeListener() {
                 @Override
                 public void changed(ChangeEvent event, Actor actor) {
-                    target = charList.get(0);
+                    target = charList.get(2);
                 }
             });
             option4Btn.addListener(new ChangeListener() {
                 @Override
                 public void changed(ChangeEvent event, Actor actor) {
-                    target = charList.get(0);
+                    target = charList.get(3);
                 }
             });
 
@@ -356,9 +353,10 @@ public class FightHandler {
                                     }
                                     int random = dice(texts.size())-1;
                                     displayText = texts.get(random);
-                                    displayText = displayText.replaceAll("\\b_FeindNameAnrede_\\b", "target.getAnrede()");
-                                    displayText = displayText.replaceAll("\\b_FeindNameArtikel1_\\b", "LLLLLLLLLLLLLLLLL");
-                                    displayText = displayText.replaceAll("\\b_FeindNameArtikel2_\\b", "target.getNameArtikel2()");
+                                    displayText = displayText.replaceAll("\\b_FeindNameAnrede_\\b", target.getAnrede());
+                                    displayText = displayText.replaceAll("\\b_FeindNameArtikel1_\\b", target.getNameArtikel1());
+                                    displayText = displayText.replaceAll("\\b_FeindNameArtikel2_\\b", target.getNameArtikel2());
+                                    //TODO Find Name of player
                                 }
                             }
                         }
