@@ -4,12 +4,14 @@ import java.io.Serializable;
 
 public abstract class Char implements Serializable{
 
-    private String name;
+    private String anrede, nameArtikel1, nameArtikel2;
     private int hp,MAXHP,ac,str,con,dex,ent,wis,chr,armor;
 
     //sets all Scores for the Char
-    public Char(String name, int str, int dex, int con, int ent, int wis, int chr, int armor) {
-        this.name = name;
+    public Char(String anrede, String nameArtikel1, String nameArtikel2, int str, int dex, int con, int ent, int wis, int chr, int armor) {
+        this.anrede = anrede;
+        this.nameArtikel1 = nameArtikel1;
+        this.nameArtikel2 = nameArtikel2;
         this.str = str;
         this.con = con;
         this.dex = dex;
@@ -61,8 +63,16 @@ public abstract class Char implements Serializable{
         hp = MAXHP;
     }
 
-    public String getName() {
-        return name;
+    public String getAnrede() {
+        return anrede;
+    }
+
+    public String getNameArtikel1() {
+        return nameArtikel1;
+    }
+
+    public String getNameArtikel2() {
+        return nameArtikel2;
     }
 
     public int getHp() {

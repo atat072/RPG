@@ -39,7 +39,9 @@ Kampf vor.
         </Intro>
         <Enemies>
             <Skelett1>
-                <name>Skelett1</name>
+                <anrede>es</anrede>
+                <nameArtikel1>das 1. Skellet</nameArtikel1>
+                <nameArtikel2>dem 1. Skellet</nameArtikel2>
                 <str>20</str>
                 <con>20</con>
                 <dex>20</dex>
@@ -53,6 +55,23 @@ Kampf vor.
                 <wdiceCount>1</wdiceCount>
                 <ranged>false</ranged>
             </Skelett1>
+            <Skelett2>
+                <anrede>es</anrede>
+                <nameArtikel1>das 2. Skellet</nameArtikel1>
+                <nameArtikel2>dem 2. Skellet</nameArtikel2>
+                <str>20</str>
+                <con>20</con>
+                <dex>20</dex>
+                <ent>20</ent>
+                <wis>20</wis>
+                <chr>20</chr>
+                <armor>3</armor>
+                <relation>0</relation>
+                <wname>Sword</wname>
+                <wdice>6</wdice>
+                <wdiceCount>1</wdiceCount>
+                <ranged>true</ranged>
+            </Skelett2>
         </Enemies>
         <Loot>
             <Potions>
@@ -61,5 +80,6 @@ Kampf vor.
             </Potions>
             <Coin>10</Coin>
         </Loot>
+        <WinnDecision>Opt14</WinnDecision>
     </Dorf-Fight>
 </Stories>

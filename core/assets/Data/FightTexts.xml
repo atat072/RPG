@@ -1,37 +1,104 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+
+<!-- Help -->
+<!-- FightText Structure
+- In this document you can find the randomly selected texts for the fight
+- There are textes for the Enemy and for the Palyer
+- To add a new Text you have to go to the desired typ (Player, Enemy)
+- In there you can choose between Missed, Hited and Kill Attacks of
+  meele or ranged attacks
+- When you want to add a text just create a new Option and called "opt(Number)"
+- To display the text of the current attacked Enemy, or attacking Enemy use
+  following phrases:
+    - _NameArtikel1_
+    - _NameArtikel2_
+    - _NameAnrede_
+- You can define the corresponding phrases of the NPC at the constructor of them
+-->
 <Texts>
-    <Ranged>
-        <Miss>
-            <opt1>
-                Text1
-            </opt1>
-        </Miss>
-        <Hit>
-            <opt1>
-                Text2
-            </opt1>
-        </Hit>
-        <Kill>
-            <opt1>
-                Text5
-            </opt1>
-        </Kill>
-    </Ranged>
-    <Meele>
-        <Miss>
-          <opt1>
-              Text3
-          </opt1>
-        </Miss>
-        <Hit>
-            <opt1>
-                Text4
-            </opt1>
-        </Hit>
-        <Kill>
-            <opt1>
-                Text6
-            </opt1>
-        </Kill>
-    </Meele>
+    <Player>
+        <Ranged>
+            <Miss>
+                <opt1>
+Dein projectiel schießt aus deiner Waffe und
+verfehlt _NameArtikel1_.
+                </opt1>
+            </Miss>
+            <Hit>
+                <opt1>
+Das Projectiel schießt aus deiner Waffe und
+durchbort _NameArtikel1_.
+                </opt1>
+            </Hit>
+            <Kill>
+                <opt1>
+Du spaltest _NameArtikel1_ in zwei und _NameAnrede_
+faellt tod um.
+                </opt1>
+            </Kill>
+        </Ranged>
+        <Meele>
+            <Miss>
+                <opt1>
+Du holst mit deiner Waffe aus, doch _NameArtikel1_
+Weicht geschmeidig aus.
+                </opt1>
+            </Miss>
+            <Hit>
+                <opt1>
+Du erwischt _NameArtikel1_ mit einem Kraeftigen
+stoss in die Magenkuhle.
+                </opt1>
+            </Hit>
+            <Kill>
+                <opt1>
+Du durchborst den Schaedel von _NameArtikel2_ und
+_NameAnrede_ faellt Tod zu Boden.
+                </opt1>
+            </Kill>
+        </Meele>
+    </Player>
+    <Enemy>
+        <Ranged>
+            <Miss>
+                <opt1>
+Das projectiel von _NameArtikel2_ schiesst
+aus dessen Waffe und verfehlt dich.
+                </opt1>
+            </Miss>
+            <Hit>
+                <opt1>
+Das projectiel von _NameArtikel2_ schiesst
+aus dessen Waffe und Durchbort deine Schulter.
+                </opt1>
+            </Hit>
+            <Kill>
+                <opt1>
+Das Projectil von _NameArtikel2_ bort
+sich durch deinen Brustkorb unf du faellst
+tod um.
+                </opt1>
+            </Kill>
+        </Ranged>
+        <Meele>
+            <Miss>
+                <opt1>
+_NameArtikel1_ holt mit seiner Waffe aus,
+doch du Weicht geschmeidig aus.
+                </opt1>
+            </Miss>
+            <Hit>
+                <opt1>
+_NameArtikel1_ erwischt dich mit einem
+Kraeftigen stoss in dein Bein.
+                </opt1>
+            </Hit>
+            <Kill>
+                <opt1>
+_NameArtikel1_ spaltet deinen Schädel
+in zwei und du faellst tod um.
+                </opt1>
+            </Kill>
+        </Meele>
+    </Enemy>
 </Texts>

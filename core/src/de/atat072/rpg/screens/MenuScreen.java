@@ -34,7 +34,7 @@ public class MenuScreen extends ScreenAdapter {
         table = new Table(SKIN);
         table.background("window");
         table.setFillParent(true);
-        back =new TextButton("Zuruek zu Spliel",SKIN);
+        back = new TextButton("Zuruek zu Spiel",SKIN);
         save = new TextButton("Spiel speichern", SKIN);
         saveAndExit = new TextButton("Speichern und Beenden",SKIN);
     }
@@ -71,7 +71,7 @@ public class MenuScreen extends ScreenAdapter {
     //go back to the GameScreen
     private void backToGame(){
         if(back.isChecked()){
-            INSTANCE.setScreen(gameScreen);
+            INSTANCE.setScreen(new GameScreen(gameScreen.getName()));
             this.dispose();
         }
     }
@@ -85,7 +85,7 @@ public class MenuScreen extends ScreenAdapter {
     private void saveButton(){
         if(save.isChecked()) {
             save();
-            INSTANCE.setScreen(gameScreen);
+            INSTANCE.setScreen(new GameScreen(gameScreen.getName()));
             this.dispose();
         }
     }
@@ -94,9 +94,11 @@ public class MenuScreen extends ScreenAdapter {
     private void saveAndExit(){
         if(saveAndExit.isChecked()) {
             save();
+
+            System.out.println(SAVE.getDecisionPath());
+
             SAVE.closeSave();
             INSTANCE.setScreen(new MainScreen());
-            gameScreen.dispose();
             this.dispose();
         }
     }

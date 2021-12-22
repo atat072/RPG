@@ -6,11 +6,13 @@ import de.atat072.rpg.gameObjects.Player;
 import static de.atat072.rpg.RPG.SAVE;
 import java.io.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Save implements Serializable {
 
     private String name;
     private ArrayList<Char> chars;
+    HashMap<String, String> decisionPath = new HashMap<>();
     private boolean mission1, mission2;
 
     public Save(String gameName, String charName, ArrayList<Integer> scores){
@@ -25,7 +27,7 @@ public class Save implements Serializable {
     Creates the Player and NPC when a new Game is created
      */
     private void createChars(String charName, ArrayList<Integer> scores){
-        chars.add(new Player(charName, scores.get(0), scores.get(1),scores.get(2) ,scores.get(3), scores.get(4), scores.get(5),4,0));
+        chars.add(new Player("dich", charName, charName, scores.get(0), scores.get(1),scores.get(2) ,scores.get(3), scores.get(4), scores.get(5),4,0));
         //todo add all NPC when story is finished
     }
 
@@ -61,12 +63,24 @@ public class Save implements Serializable {
     //Get Chars with name
     public Char getCharsWithName(String name) {
         for (Char c : chars) {
-            if (c.getName().equals(name)) {
+            if (c.getNameArtikel1().equals(name)) {
                 return c;
             }
         }
 
         return null;
+    }
+
+    public void addDecisionToDecisionPath(String story, String takenDecision) {
+        decisionPath.put(story, (decisionPath.get(story) + takenDecision + ", "));
+        if (decisionPath.get(story).contains("null")) {
+            decisionPath.put(story, decisionPath.get(story).replace("null", ""));
+        }
+    }
+
+    //Get the Path for the decisions to load
+    public HashMap<String, String> getDecisionPath() {
+        return decisionPath;
     }
 
     //Get Chars with index

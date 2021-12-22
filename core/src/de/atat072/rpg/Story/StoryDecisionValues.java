@@ -1,5 +1,6 @@
 package de.atat072.rpg.Story;
 
+//Is Used to store just the Decision corresponding texts in strings for the Hashmap in the story handler
 public class StoryDecisionValues {
     String decisionName;
     String decisionText;

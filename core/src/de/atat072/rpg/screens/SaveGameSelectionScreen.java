@@ -48,7 +48,7 @@ public class SaveGameSelectionScreen extends ScreenAdapter {
         saveGameSelector.setMinCheckCount(1);
         saveGames = new ArrayList<>();
         for(String g: getSaveGames()){
-            CheckBox b = new CheckBox(g,SKIN);
+            CheckBox b = new CheckBox(" " + g.replace(".ser", ""),SKIN);
             b.setName(g);
             saveGames.add(b);
         }

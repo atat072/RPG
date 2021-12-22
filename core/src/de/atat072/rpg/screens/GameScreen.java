@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import de.atat072.rpg.Story.StoryCollection;
@@ -28,10 +29,17 @@ public class GameScreen extends ScreenAdapter implements Serializable {
 
     public static StoryCollection storyCollection;
 
+    public static GameScreen screenInstance;
+
+    private static boolean scroll = false;
+    private float currentScrollTime = 0f;
+    private float maxScrollTime = 0.2f;
+
     public GameScreen(String name){
         this.name = name;
         initialise();
         setLayout();
+        screenInstance = this;
         //test();
     }
 
@@ -55,7 +63,14 @@ public class GameScreen extends ScreenAdapter implements Serializable {
         storyText = new ArrayList<>();
 
         storyCollection = new StoryCollection();
-        storyCollection.startStory("Story-0.1");
+
+        if (!SAVE.getDecisionPath().isEmpty()) {
+            for (String takenStories : SAVE.getDecisionPath().keySet()) {
+                storyCollection.startStory(takenStories);
+            }
+        } else {
+            storyCollection.startStory("Story-0.1");
+        }
     }
 
     //brings the UI Elements on the Screen with the desired layout
@@ -82,8 +97,6 @@ public class GameScreen extends ScreenAdapter implements Serializable {
         batch.end();
     }
 
-    //disposes the UI Elements when the screen gets closed to reduce ram usage
-    //TODO Causing Errors on reopen the screen
     @Override
     public void dispose(){
         stage.dispose();
@@ -98,12 +111,26 @@ public class GameScreen extends ScreenAdapter implements Serializable {
             tableText.row();
         }
 
+        if (scroll) {
+            tableText.layout();
+            scrollPaneText.setScrollY(tableText.getHeight());
+
+            currentScrollTime += Gdx.graphics.getDeltaTime();
+            if (currentScrollTime > maxScrollTime) {
+                currentScrollTime = 0;
+                scroll = false;
+            }
+        }
     }
 
     //allows getting to the inGameMenu via Escape to save and exit the Game
     private void goToIngameMenu(){
         if(Gdx.input.isKeyPressed(Input.Keys.ESCAPE)){
+            for (EventListener listener : scrollPaneText.getListeners()) {
+                scrollPaneText.removeListener(listener);
+            }
             INSTANCE.setScreen(new MenuScreen(this));
+            this.dispose();
         }
     }
 
@@ -115,11 +142,8 @@ public class GameScreen extends ScreenAdapter implements Serializable {
     public static void addStoryText(String newStoryText) {
         storyText.add(new Label(newStoryText, SKIN));
         tableText.row();
-    }
 
-    public static void scrollDown() {
-        scrollPaneText.layout();
-        scrollPaneText.setScrollY(scrollPaneText.getMaxY());
+        scroll = true;
     }
 
     //Chnage the Text of the Option buttons
