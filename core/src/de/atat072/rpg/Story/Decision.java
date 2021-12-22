@@ -4,6 +4,8 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import de.atat072.rpg.Fight.FightDecision;
+import de.atat072.rpg.RPG;
+import de.atat072.rpg.Save;
 import de.atat072.rpg.gameObjects.Methods;
 import de.atat072.rpg.screens.GameScreen;
 
@@ -36,6 +38,8 @@ public class Decision {
             }
             else if (passedValue.decision == null && passedValue.fightDecision == null && passedValue.storyName != null) {
                 startStory(passedValue.storyName);
+                SAVE.addDecisionToDecisionPath(passedValue.storyName, "Intro");
+                System.out.println(SAVE.getDecisionPath());
             }
         }
 
@@ -53,6 +57,7 @@ public class Decision {
     }
 
     String decisionName;
+    String decisionStory;
     String decisionText;
 
     String decision1;
@@ -71,15 +76,12 @@ public class Decision {
     TextButton decision4Btn;
     PassedValue decision4decision;
 
-    //CheckDecision Values
-    Decision trueCheck;
-    Decision falseCheck;
-
     String checkTyp;
     boolean checkResult;
 
-    public Decision(String decisionName, String decisionText, String decision1, PassedValue decision1decision, String decision2, PassedValue decision2decision, String decision3, PassedValue decision3decision, String decision4, PassedValue decision4decision) {
+    public Decision(String decisionName, String decisionStory, String decisionText, String decision1, PassedValue decision1decision, String decision2, PassedValue decision2decision, String decision3, PassedValue decision3decision, String decision4, PassedValue decision4decision) {
         this.decisionName = decisionName;
+        this.decisionStory = decisionStory;
         this.decisionText = decisionText;
 
         this.decision1 = decision1;
@@ -100,12 +102,19 @@ public class Decision {
     public void loadDecision() {
         GameScreen.refreshButtons();
 
+        //TODO overwork decision loading beause stories have to get loaden as well
+
         //<editor-fold desc="Set next Decision">
         //Set Option for Button 1 of this Screen
         decision1Btn = GameScreen.option1Btn;
         decision1Btn.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
+                //Save chosen decision
+                if (decision1decision.decision != null)
+                    SAVE.addDecisionToDecisionPath(decision1decision.decision.decisionStory, decision1decision.decision.decisionName);
+
+                //Do Decision
                 new ExecuteCommand(decision1decision);
             }
         });
@@ -115,6 +124,11 @@ public class Decision {
         decision2Btn.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
+                //Save chosen decision
+                if (decision2decision.decision != null)
+                    SAVE.addDecisionToDecisionPath(decision2decision.decision.decisionStory, decision2decision.decision.decisionName);
+
+                //Do Decision
                 new ExecuteCommand(decision2decision);
             }
         });
@@ -124,6 +138,11 @@ public class Decision {
         decision3Btn.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
+                //Save chosen decision
+                if (decision3decision.decision != null)
+                    SAVE.addDecisionToDecisionPath(decision3decision.decision.decisionStory, decision3decision.decision.decisionName);
+
+                //Do Decision
                 new ExecuteCommand(decision3decision);
             }
         });
@@ -133,6 +152,11 @@ public class Decision {
         decision4Btn.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
+                //Save chosen decision
+                if (decision4decision.decision != null)
+                    SAVE.addDecisionToDecisionPath(decision4decision.decision.decisionStory, decision4decision.decision.decisionName);
+
+                //Do Decision
                 new ExecuteCommand(decision4decision);
             }
         });
@@ -141,7 +165,6 @@ public class Decision {
         //Edit Texts on GameScreen
         GameScreen.addStoryText(decisionText);
         GameScreen.changeOptions(decision1, decision2, decision3, decision4);
-        GameScreen.scrollDown();
     }
 
     public static Decision checkDecision(Decision trueCheck, Decision falseCheck, String checkTyp) {

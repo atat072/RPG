@@ -53,7 +53,7 @@ public abstract class StoryHandler {
                 //region Set valid decision options
                 //Set first decision options
                 if (v.decision1Decision1.contains("Fight") && !v.decision1Decision1.contains("Story")) {
-                    fight1 = new FightDecision(v.decision1Decision1);
+                    fight1 = new FightDecision(storyName, v.decision1Decision1);
                 } else if (!v.decision1Decision1.contains("Fight") && v.decision1Decision1.contains("Story")) {
                     storyName1 = v.decision1Decision1;
                 } else if (!v.decision1Decision1.contains("Fight") && !v.decision1Decision1.contains("Story")) {
@@ -62,7 +62,7 @@ public abstract class StoryHandler {
 
                 //Set second decision options
                 if (v.decision2Decision1.contains("Fight") && !v.decision2Decision1.contains("Story")) {
-                    fight2 = new FightDecision(v.decision2Decision1);
+                    fight2 = new FightDecision(storyName, v.decision2Decision1);
                 } else if (!v.decision2Decision1.contains("Fight") && v.decision2Decision1.contains("Story")) {
                     storyName2 = v.decision2Decision1;
                 } else if (!v.decision2Decision1.contains("Fight") && !v.decision2Decision1.contains("Story")) {
@@ -71,7 +71,7 @@ public abstract class StoryHandler {
 
                 //Set third decision options
                 if (v.decision3Decision1.contains("Fight") && !v.decision3Decision1.contains("Story")) {
-                    fight3 = new FightDecision(v.decision3Decision1);
+                    fight3 = new FightDecision(storyName, v.decision3Decision1);
                 } else if (!v.decision3Decision1.contains("Fight") && v.decision3Decision1.contains("Story")) {
                     storyName3 = v.decision3Decision1;
                 } else if (!v.decision3Decision1.contains("Fight") && !v.decision3Decision1.contains("Story")) {
@@ -80,7 +80,7 @@ public abstract class StoryHandler {
 
                 //Set fourth decision options
                 if (v.decision4Decision1.contains("Fight") && !v.decision4Decision1.contains("Story")) {
-                    fight4 = new FightDecision(v.decision4Decision1);
+                    fight4 = new FightDecision(storyName, v.decision4Decision1);
                 } else if (!v.decision4Decision1.contains("Fight") && v.decision4Decision1.contains("Story")) {
                     storyName4 = v.decision4Decision1;
                 } else if (!v.decision4Decision1.contains("Fight") && !v.decision4Decision1.contains("Story")) {
@@ -91,6 +91,7 @@ public abstract class StoryHandler {
                 Decision storyDecision =
                         new Decision(
                                 v.decisionName,
+                                storyName,
                                 v.decisionText,
                                 v.decision1, new Decision.PassedValue(fight1, storyName1, decision1),
                                 v.decision2, new Decision.PassedValue(fight2, storyName2, decision2),
@@ -99,7 +100,7 @@ public abstract class StoryHandler {
                         );
                 storyDecisionMap.put(v.decisionName, storyDecision);
             }
-            Story story = new Story(storyName,null, storyDecisionMap);
+            Story story = new Story(storyName, storyDecisionMap);
             stories.add(story);
         }
         return stories;

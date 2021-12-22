@@ -1,8 +1,14 @@
 package de.atat072.rpg.gameObjects;
 
-import static de.atat072.rpg.gameObjects.Methods.dice;
+import de.atat072.rpg.RPG;
+import de.atat072.rpg.Save;
 
-public class HealingPotion {
+import java.io.Serializable;
+
+import static de.atat072.rpg.gameObjects.Methods.dice;
+import static de.atat072.rpg.screens.GameScreen.addStoryText;
+
+public class HealingPotion implements Serializable {
 
     private boolean greaterHealing;
 
@@ -18,9 +24,17 @@ public class HealingPotion {
 
     public int use(){
         if(greaterHealing){
-            return dice(8)+dice(8)+dice(8)+dice(8)+8;
+            int healValue = dice(8)+dice(8)+dice(8)+dice(8)+8;
+            int newHP = RPG.SAVE.getCharsWithIndex(0).getHp() + healValue;
+            addStoryText("Du nimmst einen grossen Heiltrank zu dir und heilst \ndich von " + RPG.SAVE.getCharsWithIndex(0).getHp() + " Leben auf " + ((newHP > RPG.SAVE.getCharsWithIndex(0).getMAXHP()) ? RPG.SAVE.getCharsWithIndex(0).getMAXHP() : newHP) + " Leben hoch");
+            RPG.SAVE.getCharsWithIndex(0).heal(healValue);
+            return healValue;
         }else{
-            return dice(8)+dice(8)+4;
+            int healValue = dice(8)+dice(8)+4;
+            int newHP = RPG.SAVE.getCharsWithIndex(0).getHp() + healValue;
+            addStoryText("Du nimmst einen kleinen Heiltrank zu dir und heilst \ndich von " + RPG.SAVE.getCharsWithIndex(0).getHp() + " Leben auf " + ((newHP > RPG.SAVE.getCharsWithIndex(0).getMAXHP()) ? RPG.SAVE.getCharsWithIndex(0).getMAXHP() : newHP) + " Leben hoch");
+            RPG.SAVE.getCharsWithIndex(0).heal(healValue);
+            return healValue;
         }
     }
 

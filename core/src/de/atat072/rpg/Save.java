@@ -6,11 +6,13 @@ import de.atat072.rpg.gameObjects.Player;
 import static de.atat072.rpg.RPG.SAVE;
 import java.io.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Save implements Serializable {
 
     private String name;
     private ArrayList<Char> chars;
+    HashMap<String, String> decisionPath = new HashMap<>();
     private boolean mission1, mission2;
 
     public Save(String gameName, String charName, ArrayList<Integer> scores){
@@ -67,6 +69,18 @@ public class Save implements Serializable {
         }
 
         return null;
+    }
+
+    public void addDecisionToDecisionPath(String story, String takenDecision) {
+        decisionPath.put(story, (decisionPath.get(story) + takenDecision + ", "));
+        if (decisionPath.get(story).contains("null")) {
+            decisionPath.put(story, decisionPath.get(story).replace("null", ""));
+        }
+    }
+
+    //Get the Path for the decisions to load
+    public HashMap<String, String> getDecisionPath() {
+        return decisionPath;
     }
 
     //Get Chars with index
